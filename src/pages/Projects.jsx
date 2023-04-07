@@ -63,7 +63,7 @@ export default function Project() {
           </h1>
           <img
             class="ProjectHeaderImage"
-            src="/images/project-head.png"
+            src={`${process.env.PUBLIC_URL}/images/project-head.png`}
             alt="Project-header"
           />
         </div>
