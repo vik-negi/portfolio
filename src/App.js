@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Experiences from "./pages/Experiences";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Contact from "./pages/Contact";
 
 function App() {
@@ -59,12 +59,18 @@ function App() {
       },
       {
         title: "App Development",
+        image:
+          "https://image.freepik.com/free-vector/app-development-illustration_81257-126.jpg",
       },
       {
         title: "Web Development",
+        image:
+          "https://th.bing.com/th/id/OIP.UQEsuePmIfWT-0pdBML27QHaE8?pid=ImgDet&rs=1",
       },
       {
         title: "Coding",
+        image:
+          "https://th.bing.com/th/id/OIP.NUFWhoVkOM5Q56G0uiJw0wHaE5?pid=ImgDet&rs=1",
       },
     ],
     languages: [
@@ -83,7 +89,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div class="loaderDiv">
         <div class="loading"></div>
         <p>Loading page</p>
@@ -112,7 +118,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/experiences" element={<Experiences />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
