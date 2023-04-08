@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { VscThreeBars } from "react-icons/vsc";
 
 export default function Navbar() {
   const toggleNav = () => {
@@ -85,16 +84,20 @@ export default function Navbar() {
         </ul>
         {/* <a class="contactBtn button" name="getInTouch" tabindex="10" href="https://www.gmail.com"
         target="_blank">Contact</a> */}
-        <ion-icon
+        <img
           tabindex="9"
           name="close-outline"
           class="mobile-nav-icon"
+          alt="icon"
+          src="https://res.cloudinary.com/drngfg58j/image/upload/v1680965118/media/portfolio/line_xz4sia.png"
           onClick={toggleNav}
-        ></ion-icon>
+        />
       </div>
-      <VscThreeBars
+      <img
         tabindex="3"
         name="menu-outline"
+        alt="icon"
+        src="https://res.cloudinary.com/drngfg58j/image/upload/v1680965118/media/portfolio/line_xz4sia.png"
         class="mobile-nav-icon"
         onClick={toggleNav}
       />
