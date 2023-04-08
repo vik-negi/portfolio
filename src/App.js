@@ -101,7 +101,6 @@ function App() {
       <div class="bg-div"></div>
       <Navbar />
       <Routes>
-        {/* Loader */}
         <Route
           path="/"
           element={
