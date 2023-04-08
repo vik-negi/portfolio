@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Experiences from "./pages/Experiences";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Contact from "./pages/Contact";
 
 function App() {
@@ -89,7 +89,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div class="loaderDiv">
         <div class="loading"></div>
         <p>Loading page</p>
@@ -118,7 +118,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/experiences" element={<Experiences />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
