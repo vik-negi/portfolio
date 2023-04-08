@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 import { VscThreeBars } from "react-icons/vsc";
 
 export default function Navbar() {
-  const header = document.querySelector(".header");
-
   const toggleNav = () => {
+    const header = document.querySelector(".header");
     const sections = document.querySelectorAll("section, footer");
 
     header.classList.toggle("active");
