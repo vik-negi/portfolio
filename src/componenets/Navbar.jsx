@@ -84,7 +84,8 @@ export default function Navbar() {
         </ul>
         {/* <a class="contactBtn button" name="getInTouch" tabindex="10" href="https://www.gmail.com"
         target="_blank">Contact</a> */}
-        <img
+        {/* <img */}
+        <icon-icon
           tabindex="9"
           name="close-outline"
           class="mobile-nav-icon"
@@ -93,7 +94,7 @@ export default function Navbar() {
           onClick={toggleNav}
         />
       </div>
-      <img
+      <icon-icon
         tabindex="3"
         name="menu-outline"
         alt="icon"
