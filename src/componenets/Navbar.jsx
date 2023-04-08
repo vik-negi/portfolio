@@ -89,16 +89,12 @@ export default function Navbar() {
           tabindex="9"
           name="close-outline"
           class="mobile-nav-icon"
-          alt="icon"
-          src="https://res.cloudinary.com/drngfg58j/image/upload/v1680965118/media/portfolio/line_xz4sia.png"
           onClick={toggleNav}
         />
       </div>
       <icon-icon
         tabindex="3"
         name="menu-outline"
-        alt="icon"
-        src="https://res.cloudinary.com/drngfg58j/image/upload/v1680965118/media/portfolio/line_xz4sia.png"
         class="mobile-nav-icon"
         onClick={toggleNav}
       />
