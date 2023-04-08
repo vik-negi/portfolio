@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   const toggleNav = () => {
     const header = document.querySelector(".header");
+
     const sections = document.querySelectorAll("section, footer");
 
     header.classList.toggle("active");
@@ -84,21 +85,19 @@ export default function Navbar() {
         </ul>
         {/* <a class="contactBtn button" name="getInTouch" tabindex="10" href="https://www.gmail.com"
         target="_blank">Contact</a> */}
-        {/* <img */}
-        <icon-icon
+        <ion-icon
           tabindex="9"
           name="close-outline"
           class="mobile-nav-icon"
           onClick={toggleNav}
-        />
+        ></ion-icon>
       </div>
-      <icon-icon
+      <ion-icon
         tabindex="3"
         name="menu-outline"
         class="mobile-nav-icon"
         onClick={toggleNav}
-      />
-
+      ></ion-icon>
       <ul class="extra-navbar-list">
         <li>
           {/* <a class="contactBtn" name="getInTouch" tabindex="10" href="contact"> */}
