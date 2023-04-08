@@ -23,7 +23,7 @@ export default function MainSection(props) {
       <div class="img_sec">
         <div class="imgDiv">
           <img
-            src={`${process.env.PUBLIC_URL}/images/about_t.png`}
+            src={`public/images/about_t.png`}
             class="profile-image"
             alt="ProfileImage"
           />
