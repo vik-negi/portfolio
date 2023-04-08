@@ -4,20 +4,6 @@
 
 const header = document.querySelector(".header");
 
-function toggleNav() {
-  const sections = document.querySelectorAll("section, footer");
-
-  header.classList.toggle("active");
-
-  header.classList.contains("active")
-    ? sections.forEach((section) => {
-        section.addEventListener("click", toggleNav);
-      })
-    : sections.forEach((section) => {
-        section.removeEventListener("click", toggleNav);
-      });
-}
-
 //HEADER ANIMATION FUNCTION
 
 const anchors = header.querySelectorAll("a");
