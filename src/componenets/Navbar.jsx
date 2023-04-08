@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -6,59 +7,64 @@ export default function Navbar() {
       {/* <div class="logo img"><img class=""
         src="https://res.cloudinary.com/dkezwrb3a/image/upload/v1678016307/Portfolio/Untitled_design_2_-PhotoRoom.png-PhotoRoom_atrult.png"
         alt="logo"/></div> */}
-      <p class="logo initials" tabindex="1" href=""></p>
+      <p class="logo initials" tabindex="1"></p>
       <div class="navbar">
         <ul class="navbar-list">
           <li>
-            <a
+            <Link
               class="navbar-link active"
               name="home"
+              to="/"
               onclick="scrollToSection(this),toggleNav()"
               tabindex="4"
             >
               Home
-            </a>
+            </Link>
           </li>
           {/* <li><a class="navbar-link" name="about" onclick="scrollToSection(this),toggleNav()" tabindex="5">About</a></li> */}
           <li>
-            <a
+            <Link
               class="navbar-link"
               name="skills"
               onclick="scrollToSection(this),toggleNav()"
               tabindex="6"
+              to="/skills"
             >
               Skills
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               class="navbar-link"
               name="projects"
               onclick="scrollToSection(this),toggleNav()"
               tabindex="7"
+              to="/projects"
             >
               Projects
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               class="navbar-link"
               name="education"
+              to="/education"
               onclick="scrollToSection(this),toggleNav()"
               tabindex="8"
             >
               Education
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               class="navbar-link"
               name="experience"
+              to="/experiences"
               onclick="scrollToSection(this),toggleNav()"
               tabindex="9"
             >
               Experience
-            </a>
+            </Link>
           </li>
         </ul>
         {/* <a class="contactBtn button" name="getInTouch" tabindex="10" href="https://www.gmail.com"
@@ -78,19 +84,26 @@ export default function Navbar() {
       ></ion-icon>
       <ul class="extra-navbar-list">
         <li>
-          <a class="contactBtn" name="getInTouch" tabindex="10" href="contact">
+          {/* <a class="contactBtn" name="getInTouch" tabindex="10" href="contact"> */}
+          <Link
+            class="contactBtn"
+            name="getInTouch"
+            tabindex="10"
+            to="/contact"
+          >
             Contact
-          </a>
+          </Link>
         </li>
         <li>
-          <a
+          <Link
             class="navbar-link"
             name="about"
+            to=""
             onclick="scrollToSection(this),toggleNav()"
             tabindex="5"
           >
             About
-          </a>
+          </Link>
         </li>
       </ul>
     </header>

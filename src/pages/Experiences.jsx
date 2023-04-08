@@ -58,7 +58,7 @@ export default function Experiences() {
           return (
             <div class="expContainer">
               <ul class="listOfExp">
-                <li class="companyName active" tabindex="${tabindex}">
+                <li class="companyName active" tabindex={24}>
                   {compaine.name}
                 </li>
               </ul>

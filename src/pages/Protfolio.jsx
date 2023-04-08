@@ -22,7 +22,7 @@ export default function Protfolio(props) {
           return (
             <div class="expContainer">
               <ul class="listOfExp">
-                <li class="companyName active" tabindex="${tabindex}">
+                <li class="companyName active" tabindex="24">
                   {compaine.name}
                 </li>
               </ul>

@@ -19,7 +19,6 @@ export default function Skills(props) {
           My Skills
           <p>
             These are some of mine major <span>Skills</span>
-            {/* These are some of mine <span>blue</span> are some of my major skills. */}
           </p>
         </h1>
         <div class="skill-container">
