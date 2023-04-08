@@ -46,7 +46,8 @@ function App() {
     email: "vikramnegi175@gmail.com",
     phone: "8178-945-004",
     address: "New Delhi, India",
-    image: "about_t.png",
+    image:
+      "https://res.cloudinary.com/drngfg58j/image/upload/v1680951338/media/portfolio/about_main_vpa9ed.png",
     profession: ["Web Developer", "Coder", "Machine Learning Enthusiast"],
   };
 

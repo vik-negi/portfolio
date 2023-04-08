@@ -8,7 +8,10 @@ import Skills from "./Skills";
 export default function Home(props) {
   return (
     <>
-      <MainSection name={props.profile.name.split(" ")[0]} />
+      <MainSection
+        name={props.profile.name.split(" ")[0]}
+        profile={props.profile}
+      />
       <About profile={props.profile} />
       <Skills skills={props.skills} />
       <Projects />

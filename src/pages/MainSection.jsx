@@ -23,7 +23,7 @@ export default function MainSection(props) {
       <div class="img_sec">
         <div class="imgDiv">
           <img
-            src={`public/images/about_t.png`}
+            src={props.profile.image}
             class="profile-image"
             alt="ProfileImage"
           />

@@ -4,7 +4,7 @@ export default function About(props) {
   return (
     <section id="about" class="section about-section" tabindex="11">
       <div class="about-ill">
-        <img src={`public/images/${props.profile.image}`} alt="VikramNegi" />
+        <img src={props.profile.image} alt="VikramNegi" />
       </div>
 
       <div

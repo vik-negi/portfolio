@@ -1,7 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { VscThreeBars } from "react-icons/vsc";
 
 export default function Navbar() {
+  const header = document.querySelector(".header");
+
+  const toggleNav = () => {
+    const sections = document.querySelectorAll("section, footer");
+
+    header.classList.toggle("active");
+
+    header.classList.contains("active")
+      ? sections.forEach((section) => {
+          section.addEventListener("click", toggleNav);
+        })
+      : sections.forEach((section) => {
+          section.removeEventListener("click", toggleNav);
+        });
+  };
+
   return (
     <header class="header" id="header">
       {/* <div class="logo img"><img class=""
@@ -73,15 +90,16 @@ export default function Navbar() {
           tabindex="9"
           name="close-outline"
           class="mobile-nav-icon"
-          onclick="toggleNav()"
+          onClick={toggleNav}
         ></ion-icon>
       </div>
-      <ion-icon
+      <VscThreeBars
         tabindex="3"
         name="menu-outline"
         class="mobile-nav-icon"
-        onclick="toggleNav()"
-      ></ion-icon>
+        onClick={toggleNav}
+      />
+
       <ul class="extra-navbar-list">
         <li>
           {/* <a class="contactBtn" name="getInTouch" tabindex="10" href="contact"> */}
