@@ -10,36 +10,36 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import Contact from "./pages/Contact";
 
 function App() {
-  const slowInternet = setTimeout(() => {
-    document.querySelector(".loaderDiv p").innerHTML = "Slow internet :(";
-  }, 3000);
+  // const slowInternet = setTimeout(() => {
+  //   document.querySelector(".loaderDiv p").innerHTML = "Slow internet :(";
+  // }, 3000);
 
-  const almostReady = setTimeout(() => {
-    document.querySelector(".loaderDiv p").innerHTML =
-      "Page is almost ready...";
-  }, 7000);
+  // const almostReady = setTimeout(() => {
+  //   document.querySelector(".loaderDiv p").innerHTML =
+  //     "Page is almost ready...";
+  // }, 7000);
 
-  document.onreadystatechange = () => {
-    if (document.readyState === "complete") {
-      // document ready
-      clearTimeout(slowInternet);
-      clearTimeout(almostReady);
+  // document.onreadystatechange = () => {
+  //   if (document.readyState === "complete") {
+  //     // document ready
+  //     clearTimeout(slowInternet);
+  //     clearTimeout(almostReady);
 
-      document.querySelector(".loaderDiv p").innerHTML =
-        "Page is almost ready!";
+  //     document.querySelector(".loaderDiv p").innerHTML =
+  //       "Page is almost ready!";
 
-      setTimeout(() => {
-        document.querySelector(".loaderDiv p").innerHTML = "Page is ready!";
-      }, 1000);
-      setTimeout(() => {
-        document.querySelector(".loaderDiv").classList.add("removeLoader");
-        document.querySelector("body").style.overflowY = "scroll";
-      }, 2500);
+  //     setTimeout(() => {
+  //       document.querySelector(".loaderDiv p").innerHTML = "Page is ready!";
+  //     }, 1000);
+  //     setTimeout(() => {
+  //       document.querySelector(".loaderDiv p").classList.add("removeLoader");
+  //       document.querySelector("body").style.overflowY = "scroll";
+  //     }, 2500);
 
-      window.scrollTo(0, 0);
-    }
-    window.scrollTo(0, 0);
-  };
+  //     window.scrollTo(0, 0);
+  //   }
+  //   window.scrollTo(0, 0);
+  // };
   const profile = {
     name: "Vikram Negi",
     age: 20,
@@ -91,13 +91,13 @@ function App() {
 
   return (
     <HashRouter base="/">
-      <div class="loaderDiv">
+      {/* <div class="loaderDiv">
         <div class="loading"></div>
         <p>Loading page</p>
-      </div>
+      </div> */}
 
       {/* Toaster */}
-      {/* <div class="toaster"></div> */}
+      <div class="toaster"></div>
       {/* Div for background */}
       <div class="bg-div"></div>
       <Navbar />

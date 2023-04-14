@@ -3,7 +3,11 @@ import React from "react";
 export default function Protfolio(props) {
   const compaines = [];
   return (
-    <section class="section experience-section" id="experience" tabindex="24">
+    <section
+      className="section experience-section"
+      id="experience"
+      tabIndex="24"
+    >
       <div
         style={{
           width: "100%",
@@ -15,20 +19,20 @@ export default function Protfolio(props) {
         data-aos-duration="700"
         data-aos-once="true"
       >
-        <h1 class="title">
+        <h1 className="title">
           Experience<p>These are the compaines where I've previously worked.</p>
         </h1>
         {compaines.map((compaine, index) => {
           return (
-            <div class="expContainer">
-              <ul class="listOfExp">
-                <li class="companyName active" tabindex="24">
+            <div className="expContainer">
+              <ul className="listOfExp">
+                <li className="companyName active" tabIndex="24">
                   {compaine.name}
                 </li>
               </ul>
-              <div class="expDesc">
-                <h4 class="expTitle">{compaine.jobTitle}</h4>
-                <p class="period">
+              <div className="expDesc">
+                <h4 className="expTitle">{compaine.jobTitle}</h4>
+                <p className="period">
                   From {compaine.joinDate} - to {compaine.leaveDate} Year
                 </p>
                 <br />
@@ -46,7 +50,7 @@ export default function Protfolio(props) {
                   {compaine.workedOn.map((work) => {
                     return (
                       <span
-                        class="tags"
+                        className="tags"
                         style={{
                           backgroundColor: "#a1a1a1",
                           padding: "5px 15px",
@@ -61,7 +65,7 @@ export default function Protfolio(props) {
                   })}
                 </div>
 
-                <p class="desc">{compaine.description}</p>
+                <p className="desc">{compaine.description}</p>
               </div>
             </div>
           );

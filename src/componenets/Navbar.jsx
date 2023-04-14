@@ -7,9 +7,9 @@ export default function Navbar() {
 
     const sections = document.querySelectorAll("section, footer");
 
-    header.classList.toggle("active");
+    header.classNameList.toggle("active");
 
-    header.classList.contains("active")
+    header.classNameList.contains("active")
       ? sections.forEach((section) => {
           section.addEventListener("click", toggleNav);
         })
@@ -19,31 +19,31 @@ export default function Navbar() {
   };
 
   return (
-    <header class="header" id="header">
-      {/* <div class="logo img"><img class=""
+    <header className="header" id="header">
+      {/* <div className="logo img"><img className=""
         src="https://res.cloudinary.com/dkezwrb3a/image/upload/v1678016307/Portfolio/Untitled_design_2_-PhotoRoom.png-PhotoRoom_atrult.png"
         alt="logo"/></div> */}
-      <p class="logo initials" tabindex="1"></p>
-      <div class="navbar">
-        <ul class="navbar-list">
+      <p className="logo initials" tabIndex="1"></p>
+      <div className="navbar">
+        <ul className="navbar-list">
           <li>
             <Link
-              class="navbar-link active"
+              className="navbar-link active"
               name="home"
               to="/"
               onclick="scrollToSection(this),toggleNav()"
-              tabindex="4"
+              tabIndex="4"
             >
               Home
             </Link>
           </li>
-          {/* <li><a class="navbar-link" name="about" onclick="scrollToSection(this),toggleNav()" tabindex="5">About</a></li> */}
+          {/* <li><a className="navbar-link" name="about" onclick="scrollToSection(this),toggleNav()" tabIndex="5">About</a></li> */}
           <li>
             <Link
-              class="navbar-link"
+              className="navbar-link"
               name="skills"
               onclick="scrollToSection(this),toggleNav()"
-              tabindex="6"
+              tabIndex="6"
               to="/skills"
             >
               Skills
@@ -51,10 +51,10 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              class="navbar-link"
+              className="navbar-link"
               name="projects"
               onclick="scrollToSection(this),toggleNav()"
-              tabindex="7"
+              tabIndex="7"
               to="/projects"
             >
               Projects
@@ -62,49 +62,49 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              class="navbar-link"
+              className="navbar-link"
               name="education"
               to="/"
               onclick="scrollToSection(this),toggleNav()"
-              tabindex="8"
+              tabIndex="8"
             >
               Education
             </Link>
           </li>
           <li>
             <Link
-              class="navbar-link"
+              className="navbar-link"
               name="experience"
               to="/experiences"
               onclick="scrollToSection(this),toggleNav()"
-              tabindex="9"
+              tabIndex="9"
             >
               Experience
             </Link>
           </li>
         </ul>
-        {/* <a class="contactBtn button" name="getInTouch" tabindex="10" href="https://www.gmail.com"
+        {/* <a className="contactBtn button" name="getInTouch" tabIndex="10" href="https://www.gmail.com"
         target="_blank">Contact</a> */}
         <ion-icon
-          tabindex="9"
+          tabIndex="9"
           name="close-outline"
-          class="mobile-nav-icon"
+          className="mobile-nav-icon"
           onClick={toggleNav}
         ></ion-icon>
       </div>
       <ion-icon
-        tabindex="3"
+        tabIndex="3"
         name="menu-outline"
-        class="mobile-nav-icon"
+        className="mobile-nav-icon"
         onClick={toggleNav}
       ></ion-icon>
-      <ul class="extra-navbar-list">
+      <ul className="extra-navbar-list">
         <li>
-          {/* <a class="contactBtn" name="getInTouch" tabindex="10" href="contact"> */}
+          {/* <a className="contactBtn" name="getInTouch" tabIndex="10" href="contact"> */}
           <Link
-            class="contactBtn"
+            className="contactBtn"
             name="getInTouch"
-            tabindex="10"
+            tabIndex="10"
             to="/contact"
           >
             Contact
@@ -112,11 +112,11 @@ export default function Navbar() {
         </li>
         <li>
           <Link
-            class="navbar-link"
+            className="navbar-link"
             name="about"
             to=""
             onclick="scrollToSection(this),toggleNav()"
-            tabindex="5"
+            tabIndex="5"
           >
             About
           </Link>

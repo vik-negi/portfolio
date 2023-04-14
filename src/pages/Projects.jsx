@@ -39,7 +39,11 @@ export default function Project() {
     },
   ];
   return (
-    <section class="section main project-section" id="projects" tabindex="18">
+    <section
+      className="section main project-section"
+      id="projects"
+      tabIndex="18"
+    >
       <div
         style={{
           width: "100%",
@@ -51,39 +55,39 @@ export default function Project() {
         data-aos-duration="700"
         data-aos-once="true"
       >
-        <div class="section-header">
-          <h1 class="title">
+        <div className="section-header">
+          <h1 className="title">
             My recent work
-            <p class="sectionDesc">
+            <p className="sectionDesc">
               Here are a few past projects I've worked on. Want to see more?
-              <a href="https://www.gmail.com" tabindex="22">
+              <a href="https://www.gmail.com" tabIndex="22">
                 Email me{" "}
               </a>
             </p>
           </h1>
           <img
-            class="ProjectHeaderImage"
+            className="ProjectHeaderImage"
             src={`/public/images/project-head.png`}
             alt="Project-header"
           />
         </div>
-        <div class="project card-cont-project">
+        <div className="project card-cont-project">
           {Projects.map((project) => {
             return (
-              <article class="card-p">
+              <article className="card-p">
                 <img
-                  class="card__background"
+                  className="card__background"
                   src={project.img}
                   alt="project-1"
                   width="1920"
                   height="2193"
                 />
-                <div class="card__content | flow">
-                  <div class="card__content--container | flow">
-                    <h2 class="card__title">{project.title}</h2>
-                    <p class="card__description">{project.description}</p>
+                <div className="card__content | flow">
+                  <div className="card__content--container | flow">
+                    <h2 className="card__title">{project.title}</h2>
+                    <p className="card__description">{project.description}</p>
                   </div>
-                  <button class="card__button">Read more</button>
+                  <button className="card__button">Read more</button>
                 </div>
               </article>
             );

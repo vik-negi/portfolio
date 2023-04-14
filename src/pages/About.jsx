@@ -2,29 +2,29 @@ import React from "react";
 
 export default function About(props) {
   return (
-    <section id="about" class="section about-section" tabindex="11">
-      <div class="about-ill">
+    <section id="about" className="section about-section" tabIndex="11">
+      <div className="about-ill">
         <img src={props.profile.image} alt="VikramNegi" />
       </div>
 
       <div
-        class="aboutMe"
+        className="aboutMe"
         // data-aos="fade-left"
         data-aos-duration="700"
         data-aos-once="true"
       >
-        <h2 class="name">{props.profile.name}</h2>
-        <div class="professionContainer">
+        <h2 className="name">{props.profile.name}</h2>
+        <div className="professionContainer">
           {props.profile.profession.map((profession, index) => {
             return (
-              <p key={index} class="profession">
+              <p key={index} className="profession">
                 {profession}
               </p>
             );
           })}
         </div>
         <br />
-        <p class="aboutLong">
+        <p className="aboutLong">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus fugiat
           quos assumenda nulla exercitationem est nisi odit quam amet corrupti
           officiis inventore aut impedit explicabo id distinctio ullam, libero
@@ -33,16 +33,16 @@ export default function About(props) {
         </p>
         <br />
         <a
-          class="button"
+          className="button"
           href="https://novoresume.com"
           //   target="_blank"
-          tabindex="12"
+          tabIndex="12"
         >
           Resume<ion-icon name="document-outline"></ion-icon>
         </a>
       </div>
       <ul
-        class="social-menu"
+        className="social-menu"
         data-aos="fade-left"
         data-aos-duration="700"
         data-aos-delay="500"
@@ -52,40 +52,40 @@ export default function About(props) {
           <a
             href="https://www.linkedin.com"
             aria-label="linkedin"
-            class="linkedin"
-            tabindex="13"
+            className="linkedin"
+            tabIndex="13"
           >
-            <i class="fab fa-linkedin-in"></i>
+            <i className="fab fa-linkedin-in"></i>
           </a>
         </li>
         <li>
           <a
             href="https://www.github.com"
             aria-label="github"
-            class="github"
-            tabindex="14"
+            className="github"
+            tabIndex="14"
           >
-            <i class="fab fa-github"></i>
+            <i className="fab fa-github"></i>
           </a>
         </li>
         <li>
           <a
             href="https://www.instagram.com"
             aria-label="instagram"
-            class="instagram"
-            tabindex="15"
+            className="instagram"
+            tabIndex="15"
           >
-            <i class="fab fa-instagram"></i>
+            <i className="fab fa-instagram"></i>
           </a>
         </li>
         <li>
           <a
             href="https://www.twitter.com"
             aria-label="twitter"
-            class="twitter"
-            tabindex="16"
+            className="twitter"
+            tabIndex="16"
           >
-            <i class="fab fa-twitter"></i>
+            <i className="fab fa-twitter"></i>
           </a>
         </li>
       </ul>

@@ -57,7 +57,11 @@ const Contact = () => {
   };
 
   return (
-    <section class="section main project-section" id="projects" tabindex="18">
+    <section
+      className="section main project-section"
+      id="projects"
+      tabIndex="18"
+    >
       <h2>Contact Us</h2>
       <div className="contact-container">
         <form className="contact-form" onSubmit={handleSubmit}>
