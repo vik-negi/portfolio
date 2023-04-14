@@ -90,14 +90,14 @@ function App() {
   };
 
   return (
-    <HashRouter>
+    <HashRouter base="/">
       <div class="loaderDiv">
         <div class="loading"></div>
         <p>Loading page</p>
       </div>
 
       {/* Toaster */}
-      <div class="toaster"></div>
+      {/* <div class="toaster"></div> */}
       {/* Div for background */}
       <div class="bg-div"></div>
       <Navbar />

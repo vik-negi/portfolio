@@ -64,7 +64,7 @@ export default function Navbar() {
             <Link
               class="navbar-link"
               name="education"
-              to="/education"
+              to="/"
               onclick="scrollToSection(this),toggleNav()"
               tabindex="8"
             >
