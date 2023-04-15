@@ -60,7 +60,7 @@ export default function Experiences() {
         </h1>
         {compaines.map((compaine, index) => {
           return (
-            <div className="expContainer">
+            <div key={index} className="expContainer">
               <ul className="listOfExp">
                 <li className="companyName active" tabIndex={24}>
                   {compaine.name}
@@ -83,9 +83,10 @@ export default function Experiences() {
                     alignContent: "center",
                   }}
                 >
-                  {compaine.workedOn.map((work) => {
+                  {compaine.workedOn.map((work, i) => {
                     return (
                       <span
+                        key={i}
                         className="tags"
                         style={{
                           backgroundColor: "#a1a1a1",

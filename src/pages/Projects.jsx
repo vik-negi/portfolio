@@ -72,9 +72,9 @@ export default function Project() {
           />
         </div>
         <div className="project card-cont-project">
-          {Projects.map((project) => {
+          {Projects.map((project, i) => {
             return (
-              <article className="card-p">
+              <article key={i} className="card-p">
                 <img
                   className="card__background"
                   src={project.img}

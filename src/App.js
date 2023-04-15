@@ -54,21 +54,25 @@ function App() {
   const skills = {
     major: [
       {
+        key: "1",
         title: "Machine Learning",
         image:
           "https://static.vecteezy.com/system/resources/previews/002/596/426/large_2x/machine-learning-artificial-neural-network-ai-illustration-vector.jpg",
       },
       {
+        key: "2",
         title: "App Development",
         image:
           "https://image.freepik.com/free-vector/app-development-illustration_81257-126.jpg",
       },
       {
+        key: "3",
         title: "Web Development",
         image:
           "https://th.bing.com/th/id/OIP.UQEsuePmIfWT-0pdBML27QHaE8?pid=ImgDet&rs=1",
       },
       {
+        key: "4",
         title: "Coding",
         image:
           "https://th.bing.com/th/id/OIP.NUFWhoVkOM5Q56G0uiJw0wHaE5?pid=ImgDet&rs=1",
@@ -97,9 +101,9 @@ function App() {
       </div> */}
 
       {/* Toaster */}
-      <div class="toaster"></div>
+      <div className="toaster"></div>
       {/* Div for background */}
-      <div class="bg-div"></div>
+      <div className="bg-div"></div>
       <Navbar />
       <Routes>
         <Route

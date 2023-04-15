@@ -14,7 +14,7 @@ export default function MainSection(props) {
         <button
           className="about-me-btn button"
           name="about"
-          onclick="scrollToSection(this)"
+          // onClick="scrollToSection(this)"
           tabIndex="2"
         >
           About Me<ion-icon name="chevron-forward-outline"></ion-icon>

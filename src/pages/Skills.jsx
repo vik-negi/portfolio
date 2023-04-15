@@ -24,7 +24,7 @@ export default function Skills(props) {
         <div className="skill-container">
           {props.skills.major.map((major) => {
             return (
-              <div className="major">
+              <div key={major.key} className="major">
                 {/* <img src={major.image} alt="Skill-1" /> */}
                 <p>{major.title}</p>
               </div>

@@ -31,18 +31,18 @@ export default function Navbar() {
               className="navbar-link active"
               name="home"
               to="/"
-              onclick="scrollToSection(this),toggleNav()"
+              // onClick="scrollToSection(this),toggleNav()"
               tabIndex="4"
             >
               Home
             </Link>
           </li>
-          {/* <li><a className="navbar-link" name="about" onclick="scrollToSection(this),toggleNav()" tabIndex="5">About</a></li> */}
+          {/* <li><a className="navbar-link" name="about" onClick="scrollToSection(this),toggleNav()" tabIndex="5">About</a></li> */}
           <li>
             <Link
               className="navbar-link"
               name="skills"
-              onclick="scrollToSection(this),toggleNav()"
+              // onClick="scrollToSection(this),toggleNav()"
               tabIndex="6"
               to="/skills"
             >
@@ -53,7 +53,7 @@ export default function Navbar() {
             <Link
               className="navbar-link"
               name="projects"
-              onclick="scrollToSection(this),toggleNav()"
+              // onClick="scrollToSection(this),toggleNav()"
               tabIndex="7"
               to="/projects"
             >
@@ -65,7 +65,7 @@ export default function Navbar() {
               className="navbar-link"
               name="education"
               to="/"
-              onclick="scrollToSection(this),toggleNav()"
+              // onClick="scrollToSection(this),toggleNav()"
               tabIndex="8"
             >
               Education
@@ -76,7 +76,7 @@ export default function Navbar() {
               className="navbar-link"
               name="experience"
               to="/experiences"
-              onclick="scrollToSection(this),toggleNav()"
+              // onClick="scrollToSection(this),toggleNav()"
               tabIndex="9"
             >
               Experience
@@ -115,7 +115,7 @@ export default function Navbar() {
             className="navbar-link"
             name="about"
             to=""
-            onclick="scrollToSection(this),toggleNav()"
+            // onClick="scrollToSection(this),toggleNav()"
             tabIndex="5"
           >
             About
