@@ -46,6 +46,8 @@ function App() {
     email: "vikramnegi175@gmail.com",
     phone: "8178-945-004",
     address: "New Delhi, India",
+    shortAbout:
+      "I'm a skilled Software Engineer and Developer based in New Delhi, India. With expertise in Flutter, web development, databases, and machine learning, passionate about solving real-world problems through technology. Has practical experience as a Software Engineer Intern and as a freelancer.",
     image:
       "https://res.cloudinary.com/drngfg58j/image/upload/v1680951338/media/portfolio/about_main_vpa9ed.png",
     profession: ["Web Developer", "Coder", "Machine Learning Enthusiast"],

@@ -62,7 +62,7 @@ section {
   height: -moz-max-content;
   height: max-content;
   min-width: 100vw;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background-color: var(--light-gray);
   color: var(--text-gray);
   transition: all 0.7s;
@@ -444,15 +444,28 @@ a {
 .home-section {
   /* z-index: 5; */
   flex-direction: row;
+  
+  
   justify-content: space-between;
  
   padding-left: 12rem;
   padding-right: 12rem;
   background-color: rgba(255, 255, 255, 0.96);
+  /* make a gradient from top 0%  at height of 80vh 10%  and bottom 90% */
+  background: linear-gradient(
+    to bottom,
+    rgba(83, 91, 95, 0.96) 0%,
+    /* rgba(179, 179, 179, 0.96) 10%, */
+    rgba(83, 91, 95, 0.56) 60%,
+    rgba(255, 255, 255, 0.96) 100%
+  );
 }
 .home-section div {
   width: 50%;
   margin-top: 3rem;
+}
+.aboutShort{
+  color: #000;
 }
 .home-section .img_sec{
   display: flex;
@@ -976,9 +989,9 @@ a {
 }
 .experience-section .expDesc {
   width: 100%;
-  padding: 0 5rem;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
+  /* padding: 0 5rem; */
+  /* overflow-y: scroll; */
+  /* scroll-behavior: smooth; */
   height: 40vh;
 }
 .experience-section .expDesc .period {

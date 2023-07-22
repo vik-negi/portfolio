@@ -3,7 +3,7 @@ import Experiences from "./Experiences";
 import MainSection from "./MainSection";
 import Projects from "./Projects";
 import Protfolio from "./Protfolio";
-import Skills from "./Skills";
+import Skills from "../componenets/skills/skills";
 
 export default function Home(props) {
   return (

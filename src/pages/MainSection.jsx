@@ -7,12 +7,9 @@ export default function MainSection(props) {
         <h1>
           Hey, I'm <span className="name">{props.name}</span>
         </h1>
-        <p className="aboutShort">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta
-          accusamus.
-        </p>
+        <p className="aboutShort">{props.profile.shortAbout}</p>
         <button
-          className="about-me-btn button"
+          className="button"
           name="about"
           // onClick="scrollToSection(this)"
           tabIndex="2"

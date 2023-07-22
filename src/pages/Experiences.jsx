@@ -60,49 +60,46 @@ export default function Experiences() {
         </h1>
         {compaines.map((compaine, index) => {
           return (
-            <div key={index} className="expContainer">
-              <ul className="listOfExp">
+            // <div key={index} className="expContainer">
+            <div key={index} className="flex sm:flex-row flex-col mb-10">
+              <ul className="w-[50%] sm:mb-0 mb-10 h-[50px] pl-10 items-center text-[#0090dd] font-semibold hover:bg-gray-200 pt-6 border-l-2 border-gray-600">
                 <li className="companyName active" tabIndex={24}>
                   {compaine.name}
                 </li>
               </ul>
-              <div className="expDesc">
-                <h4 className="expTitle">{compaine.jobTitle}</h4>
-                <p className="period">
-                  From {compaine.joinDate} - to {compaine.leaveDate} Year
-                </p>
-                <br />
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                    justifyContent: "left",
-                    alignItems: "center",
-                    margin: "0 0 0 10px",
-                    alignContent: "center",
-                  }}
-                >
+              <div className="bg-[#d9d9df] rounded-[15px]">
+                <div className=" bg-[#28282e] rounded-t-3xl px-5">
+                  <h4 className="expTitle py-3  text-white ">
+                    {compaine.jobTitle}
+                  </h4>
+                  <p className="period text-gray-200 py-2">
+                    From {compaine.joinDate} - to {compaine.leaveDate} Year
+                  </p>
+                </div>
+
+                <div className="flex ml-10 gap-3 flex-row flex-wrap justify-start items-center my-3">
                   {compaine.workedOn.map((work, i) => {
                     return (
                       <span
                         key={i}
-                        className="tags"
+                        className="tags mt-5 text-white text-[16px] px-5 py-2 rounded-[5px]  mr-2 mb-2"
                         style={{
-                          backgroundColor: "#a1a1a1",
-                          padding: "5px 15px",
-                          borderRadius: "15px",
-                          display: "inline",
-                          margin: "5px",
+                          border: "1px solid #00d2ff",
+                          backgroundImage:
+                            "linear-gradient(to right, #0090dd, #00d2ff)",
+                          backgroundClip: "padding-box",
                         }}
                       >
+                        {/* bg-[#444444] */}
                         {work}
                       </span>
                     );
                   })}
                 </div>
 
-                <p className="desc">{compaine.description}</p>
+                <p className="px-10 py-5 sm:text-[16px] text-[14px]">
+                  {compaine.description}
+                </p>
               </div>
             </div>
           );
