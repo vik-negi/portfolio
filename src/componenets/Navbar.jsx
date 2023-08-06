@@ -1,21 +1,24 @@
-import React from "react";
+import { React, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default function Navbar() {
+  console.log("Navbar");
+  const [activeSection, setActiveSection] = useState("home");
+  const [smStyle, setSmStyle] = useState("right-0");
+
   const toggleNav = () => {
-    const header = document.querySelector(".header");
-
-    const sections = document.querySelectorAll("section, footer");
-
-    header.classNameList.toggle("active");
-
-    header.classNameList.contains("active")
-      ? sections.forEach((section) => {
-          section.addEventListener("click", toggleNav);
-        })
-      : sections.forEach((section) => {
-          section.removeEventListener("click", toggleNav);
-        });
+    console.log("toggleNav");
+    console.log(smStyle);
+    if (smStyle === "right-0") {
+      setSmStyle("right-[225px]");
+    } else {
+      setSmStyle("right-0");
+    }
+  };
+  const handleSectionClick = (section) => {
+    setActiveSection(section);
   };
 
   return (
@@ -24,25 +27,27 @@ export default function Navbar() {
         src="https://res.cloudinary.com/dkezwrb3a/image/upload/v1678016307/Portfolio/Untitled_design_2_-PhotoRoom.png-PhotoRoom_atrult.png"
         alt="logo"/></div> */}
       <p className="logo initials" tabIndex="1"></p>
-      <div className="navbar">
+      <div className={` navbar ${smStyle}`}>
         <ul className="navbar-list">
           <li>
             <Link
-              className="navbar-link active"
+              className={`${activeSection === "home" && "active"} navbar-link`}
               name="home"
               to="/"
-              // onClick="scrollToSection(this),toggleNav()"
+              onClick={() => handleSectionClick("home")}
               tabIndex="4"
             >
               Home
             </Link>
           </li>
-          {/* <li><a className="navbar-link" name="about" onClick="scrollToSection(this),toggleNav()" tabIndex="5">About</a></li> */}
+          {/* <li><a className={`${""} navbar-link`} name="about" onClick={toggleNav()} tabIndex="5">About</a></li> */}
           <li>
             <Link
-              className="navbar-link"
+              className={`${
+                activeSection === "skills" && "active"
+              } navbar-link`}
               name="skills"
-              // onClick="scrollToSection(this),toggleNav()"
+              onClick={() => handleSectionClick("skills")}
               tabIndex="6"
               to="/skills"
             >
@@ -51,9 +56,11 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              className="navbar-link"
+              className={`${
+                activeSection === "projects" && "active"
+              } navbar-link`}
               name="projects"
-              // onClick="scrollToSection(this),toggleNav()"
+              onClick={() => handleSectionClick("projects")}
               tabIndex="7"
               to="/projects"
             >
@@ -62,10 +69,12 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              className="navbar-link"
+              className={`${
+                activeSection === "education" && "active"
+              } navbar-link`}
               name="education"
               to="/"
-              // onClick="scrollToSection(this),toggleNav()"
+              onClick={() => handleSectionClick("education")}
               tabIndex="8"
             >
               Education
@@ -73,31 +82,34 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              className="navbar-link"
+              className={`${
+                activeSection === "experience" && "active"
+              } navbar-link`}
               name="experience"
               to="/experiences"
-              // onClick="scrollToSection(this),toggleNav()"
+              onClick={() => handleSectionClick("experience")}
               tabIndex="9"
             >
               Experience
             </Link>
           </li>
         </ul>
-        {/* <a className="contactBtn button" name="getInTouch" tabIndex="10" href="https://www.gmail.com"
-        target="_blank">Contact</a> */}
-        <ion-icon
+        {/* <ion-icon
           tabIndex="9"
           name="close-outline"
           className="mobile-nav-icon"
-          onClick={toggleNav}
-        ></ion-icon>
+          onClick={() => toggleNav()}
+        ></ion-icon> */}
       </div>
-      <ion-icon
-        tabIndex="3"
-        name="menu-outline"
-        className="mobile-nav-icon"
-        onClick={toggleNav}
-      ></ion-icon>
+      <button
+        onClick={() => toggleNav()}
+        className="hover:color-[#c2c2c2] z-500"
+      >
+        <FontAwesomeIcon
+          icon={smStyle === "right-0" ? `bars` : "times"}
+          className="mobile-nav-icon"
+        />
+      </button>
       <ul className="extra-navbar-list">
         <li>
           {/* <a className="contactBtn" name="getInTouch" tabIndex="10" href="contact"> */}
@@ -112,10 +124,10 @@ export default function Navbar() {
         </li>
         <li>
           <Link
-            className="navbar-link"
+            className={`${""} navbar-link`}
             name="about"
             to=""
-            // onClick="scrollToSection(this),toggleNav()"
+            // onClick={handleSectionClick}
             tabIndex="5"
           >
             About

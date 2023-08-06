@@ -1,6 +1,16 @@
 import React from "react";
+import { social } from "../assets/svg/social/index.js";
+import "../assets/svg/social/github.svg";
 
 export default function About(props) {
+  const socialLinks = [
+    social.github && social.github,
+    social.linkedin && social.linkedin,
+    social.twitter && social.twitter,
+    social.instagram && social.instagram,
+    social.facebook && social.facebook,
+  ];
+
   return (
     <section id="about" className="section about-section" tabIndex="11">
       <div className="about-ill">
@@ -41,54 +51,30 @@ export default function About(props) {
           Resume<ion-icon name="document-outline"></ion-icon>
         </a>
       </div>
-      <ul
-        className="social-menu"
-        data-aos="fade-left"
-        data-aos-duration="700"
-        data-aos-delay="500"
-        data-aos-once="true"
-      >
-        <li>
-          <a
-            href="https://www.linkedin.com"
-            aria-label="linkedin"
-            className="linkedin"
-            tabIndex="13"
-          >
-            <i className="fab fa-linkedin-in"></i>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.github.com"
-            aria-label="github"
-            className="github"
-            tabIndex="14"
-          >
-            <i className="fab fa-github"></i>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.instagram.com"
-            aria-label="instagram"
-            className="instagram"
-            tabIndex="15"
-          >
-            <i className="fab fa-instagram"></i>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.twitter.com"
-            aria-label="twitter"
-            className="twitter"
-            tabIndex="16"
-          >
-            <i className="fab fa-twitter"></i>
-          </a>
-        </li>
-      </ul>
+
+      {
+        <div className="socialMedia w-[100px]">
+          {socialLinks.map((socialLink, index) => {
+            return (
+              <a
+                key={index}
+                href={socialLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                tabIndex="13"
+              >
+                <img
+                  src={socialLink}
+                  width={45}
+                  height={45}
+                  alt="social_media_link"
+                  className="md:my-4 bg-[#2c2c2c] rounded-full p-2 hover:bg-[#1a1a1a] transition duration-300 ease-in-out content-center fit-content"
+                />
+              </a>
+            );
+          })}
+        </div>
+      }
     </section>
   );
 }

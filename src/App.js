@@ -8,6 +8,7 @@ import Skills from "./pages/Skills";
 import Experiences from "./pages/Experiences";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Contact from "./pages/Contact";
+import Portfolio from "./demo";
 
 function App() {
   // const slowInternet = setTimeout(() => {
@@ -103,7 +104,7 @@ function App() {
       </div> */}
 
       {/* Toaster */}
-      <div className="toaster"></div>
+      {/* <div className="toaster"></div> */}
       {/* Div for background */}
       <div className="bg-div"></div>
       <Navbar />
@@ -123,6 +124,7 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/experiences" element={<Experiences />} />
+        <Route path="/port" element={<Portfolio />} />
       </Routes>
     </HashRouter>
   );
