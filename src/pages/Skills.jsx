@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import create from "../utils/Theme";
 
 import SectionHeader from "../componenets/SectionHeader";
 const SkillTab = ({ title, skills, isActive }) => {
   if (!isActive) return null;
+  const theme = create();
 
   const tabTitleStyle = "text-5xl font-bold my-5 font-mono text-blue-500 px-10";
 
-  const skillCardStyle =
-    "my-5 p-5 w-[200px] h-[150px] bg-gray-300 rounded-lg shadow-lg flex flex-col justify-center items-center";
+  const skillCardStyle = `my-5 p-5 w-[200px] h-[150px] bg-[#100F22] rounded-lg shadow-lg flex flex-col justify-center items-center ${
+    theme.theme === "light" && "bg-[#E1EBF5]"
+  }`;
 
   return (
     <div>
@@ -18,7 +21,13 @@ const SkillTab = ({ title, skills, isActive }) => {
         {skills.map((skill) => (
           <div
             key={skill.name}
-            className={`${skillCardStyle} hover:bg-transparent hover:shadow-none transition duration-500 ease-in-out hover:border-2 hover:border-blue-500 rounded-lg hover:cursor-pointer`}
+            style={
+              {
+                // backgroundColor: "rgb(16 15 34)",
+              }
+            }
+            className={`${skillCardStyle} hover:bg-transparent hover:shadow-none transition duration-500 ease-in-out hover:border-2 hover:border-blue-500 rounded-lg hover:cursor-pointer 
+           `}
           >
             <img
               className="w-20 h-20 rounded-full"
@@ -28,7 +37,7 @@ const SkillTab = ({ title, skills, isActive }) => {
               }
               alt={skill.name}
             />
-            <h3 className="text-3xl text-semibold my-3">{skill.name}</h3>
+            <h3 className={`text-3xl text-semibold my-3 `}>{skill.name}</h3>
             <p className="text-[12px] text-bold my-1">{skill.title}</p>
           </div>
         ))}
@@ -259,7 +268,7 @@ const Skills = () => {
 
   return (
     <div
-      className="section lg:container mx-auto flex flex-col bg-[#F9F9F9]
+      className="section lg:container mx-auto flex flex-col 
     "
       id="skills"
       tabIndex="18"

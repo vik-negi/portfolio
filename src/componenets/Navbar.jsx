@@ -2,11 +2,26 @@ import { React, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useThemeMode } from "../context/ThemeContext";
+
+import { styled } from "styled-components";
+import create, { themes } from "../utils/Theme";
+// import useStore from "../store";
+
+const StyledThemeSelector = styled.select`
+  padding: 4px;
+  background: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+`;
 
 export default function Navbar() {
   console.log("Navbar");
   const [activeSection, setActiveSection] = useState("home");
   const [smStyle, setSmStyle] = useState("right-0");
+  const [lightMode, setLightMode] = useState(true);
+  const { themeMode, toggleThemeMode } = useThemeMode();
 
   const toggleNav = () => {
     console.log("toggleNav");
@@ -19,6 +34,14 @@ export default function Navbar() {
   };
   const handleSectionClick = (section) => {
     setActiveSection(section);
+  };
+
+  const store = create();
+
+  const switchTheme = (themeName) => {
+    console.log(themeName);
+    store.setTheme(themeName);
+    localStorage.setItem("theme", themeName);
   };
 
   return (
@@ -111,6 +134,17 @@ export default function Navbar() {
         />
       </button>
       <ul className="extra-navbar-list">
+        <i
+          onClick={(e) =>
+            switchTheme(store.theme === "light" ? "dark" : "light")
+          }
+          className={`${
+            store.theme == "light" ? "fas fa-moon" : "fas fa-sun"
+          } text-[28px] cursor-pointer mt-1
+        
+              `}
+        ></i>
+
         <li>
           {/* <a className="contactBtn" name="getInTouch" tabIndex="10" href="contact"> */}
           <Link
@@ -126,7 +160,7 @@ export default function Navbar() {
           <Link
             className={`${""} navbar-link`}
             name="about"
-            to=""
+            to="admin/login"
             // onClick={handleSectionClick}
             tabIndex="5"
           >

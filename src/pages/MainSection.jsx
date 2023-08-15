@@ -2,7 +2,7 @@ import React from "react";
 
 export default function MainSection(props) {
   return (
-    <section className="section home-section" id="home" tabIndex="42">
+    <section className="section home-section only-bg" id="home" tabIndex="42">
       <div>
         <h1>
           Hey, I'm <span className="name">{props.name}</span>

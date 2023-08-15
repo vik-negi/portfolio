@@ -57,50 +57,79 @@ const Contact = () => {
   };
 
   return (
-    <section
-      className="section main project-section"
-      id="projects"
-      tabIndex="18"
-    >
+    <section className="row col-12" id="projects" tabIndex="18">
       <h2>Contact Us</h2>
-      <div className="contact-container">
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <div className="form-group">
+      <div
+        className="container p-10 bg-[#fff]  rounded-[1rem] shadow-[0px 0px 10px rgba(0,0,0,0.2)]"
+        style={{
+          maxWidth: "700px",
+        }}
+      >
+        <form
+          className="contact-form 
+        "
+          onSubmit={handleSubmit}
+        >
+          <div className="flex flex-col mb-[3rem] text-[#000]  ">
             <input
               type="text"
               id="name"
               name="name"
               placeholder="Name"
+              className="border-none bg-[#f2f2f2] py-3 rounded-[0.5rem] p-[0.5rem] outline-none focus:border-[#000]"
               value={form.name}
               onChange={handleChange}
             />
 
-            {errors.name && <span className="error">{errors.name}</span>}
+            {errors.name && (
+              <span className="text-red-500 text-[12px] font-semibold">
+                {errors.name}
+              </span>
+            )}
           </div>
-          <div className="form-group">
+          <div
+            className="flex flex-col mb-[3rem] text-[#000]  
+          "
+          >
             <input
               type="email"
               id="email"
               placeholder="Email"
               name="email"
+              className="border-none bg-[#f2f2f2] py-3 rounded-[0.5rem] p-[0.5rem] outline-none focus:border-[#000]"
               value={form.email}
               onChange={handleChange}
             />
 
-            {errors.email && <span className="error">{errors.email}</span>}
+            {errors.email && (
+              <span
+                className="text-red-500 text-[12px] font-semibold
+            "
+              >
+                {errors.email}
+              </span>
+            )}
           </div>
-          <div className="form-group">
+          <div className="flex flex-col mb-[3rem] text-[#000]  ">
             <textarea
               id="message"
               placeholder="Message"
               name="message"
+              className="border-none bg-[#f2f2f2] py-3 rounded-[0.5rem] p-[0.5rem] outline-none focus:border-[#000]"
               value={form.message}
               onChange={handleChange}
             />
 
-            {errors.message && <span className="error">{errors.message}</span>}
+            {errors.message && (
+              <span className="text-red-500 text-[12px] font-semibold">
+                {errors.message}
+              </span>
+            )}
           </div>
-          <button className="contact-btn" type="submit">
+          <button
+            className="w-[200px] bg-[#16a34a] py-4 rounded-[10px] text-white font-bold text-[14px] hover:bg-[#1a4731] transition duration-300 ease-in-out"
+            type="submit"
+          >
             Send Message
           </button>
         </form>

@@ -6,9 +6,19 @@ import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Experiences from "./pages/Experiences";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import {
+  HashRouter,
+  Routes,
+  Route,
+  useLocation,
+  matchPath,
+} from "react-router-dom";
 import Contact from "./pages/Contact";
 import Portfolio from "./demo";
+import { ThemeModeProvider } from "./context/ThemeContext";
+import { themes, StyledComponent } from "./utils/Theme";
+import LayoutComponent from "./utils/TopLayerLayout";
+import Login from "./pages/admin/Login";
 
 function App() {
   // const slowInternet = setTimeout(() => {
@@ -96,38 +106,57 @@ function App() {
     tools: ["Git", "GitHub", "VS Code", "Jupyter Notebook"],
   };
 
+  const isAdminRoutes = window.location.pathname.startsWith("/admin");
+  console.log("path:", window.location.pathname);
+
   return (
     <HashRouter base="/">
-      {/* <div class="loaderDiv">
+      <ThemeModeProvider theme={themes}>
+        {/* <div class="loaderDiv">
         <div class="loading"></div>
         <p>Loading page</p>
       </div> */}
 
-      {/* Toaster */}
-      {/* <div className="toaster"></div> */}
-      {/* Div for background */}
-      <div className="bg-div"></div>
-      <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              name={profile.name.split(" ")[0]}
-              skills={skills}
-              profile={profile}
-            />
-          }
-        />
-        <Route path="/about" element={<About profile={profile} />} />
-        <Route path="/skills" element={<Skills skills={skills} />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/experiences" element={<Experiences />} />
-        <Route path="/port" element={<Portfolio />} />
-      </Routes>
+        {/* Toaster */}
+        {/* <div className="toaster"></div> */}
+        {/* Div for background */}
+        <div className="bg-div"></div>
+        {isAdminRoutes ? null : <Navbar />}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <LayoutComponent
+                children={
+                  <Home
+                    name={profile.name.split(" ")[0]}
+                    skills={skills}
+                    profile={profile}
+                  />
+                }
+              />
+            }
+          />
+          <Route path="/about" element={<About profile={profile} />} />
+          <Route path="/skills" element={<Skills skills={skills} />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/experiences" element={<Experiences />} />
+          <Route path="/port" element={<Portfolio />} />
+
+          <Route path="/admin/*" element={<AdminRoutes />} />
+        </Routes>
+      </ThemeModeProvider>
     </HashRouter>
   );
 }
 
+function AdminRoutes() {
+  return (
+    <Routes>
+      <Route path="login" element={<Login />} />
+      {/* Add other admin routes here */}
+    </Routes>
+  );
+}
 export default App;
