@@ -106,22 +106,19 @@ function App() {
     tools: ["Git", "GitHub", "VS Code", "Jupyter Notebook"],
   };
 
-  const isAdminRoutes = window.location.pathname.startsWith("/admin");
-  console.log("path:", window.location.pathname);
-
   return (
     <HashRouter base="/">
       <ThemeModeProvider theme={themes}>
-        {/* <div class="loaderDiv">
-        <div class="loading"></div>
+        {/* <div className="loaderDiv">
+        <div className="loading"></div>
         <p>Loading page</p>
       </div> */}
 
         {/* Toaster */}
         {/* <div className="toaster"></div> */}
         {/* Div for background */}
-        <div className="bg-div"></div>
-        {isAdminRoutes ? null : <Navbar />}
+        {/* <div className="bg-div"></div> */}
+
         <Routes>
           <Route
             path="/"
@@ -158,13 +155,27 @@ function App() {
             element={<LayoutComponent children={<Experiences />} />}
           />
           <Route
-            path="/port"
-            element={<LayoutComponent children={<Portfolio />} />}
-          />
-
-          <Route
             path="/admin/*"
-            element={<LayoutComponent children={<AdminRoutes />} />}
+            element={
+              <LayoutComponent
+                children={<AdminRoutes />}
+                notShowNavbar={true}
+              />
+            }
+          />
+          <Route
+            path="/:username"
+            element={
+              <LayoutComponent
+                children={
+                  <Home
+                    name={profile.name.split(" ")[0]}
+                    skills={skills}
+                    profile={profile}
+                  />
+                }
+              />
+            }
           />
         </Routes>
       </ThemeModeProvider>

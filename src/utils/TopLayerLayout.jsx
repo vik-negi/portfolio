@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { createGlobalStyle } from "styled-components";
 // import useStore from "../../store";
 import create, { themes } from "../utils/Theme";
+import Navbar from "../componenets/Navbar";
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -19,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const LayoutComponent = ({ children }) => {
+const LayoutComponent = ({ children, notShowNavbar }) => {
   const theme = create((s) => s.theme);
   const setTheme = create((s) => s.setTheme);
 
@@ -38,7 +39,10 @@ const LayoutComponent = ({ children }) => {
   return (
     <div>
       <GlobalStyle theme={themes[theme]} />
-      <div>{children}</div>
+      <div>
+        {!notShowNavbar && <Navbar />}
+        {children}
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useThemeMode } from "../context/ThemeContext";
-
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import create, { themes } from "../utils/Theme";
 import { Collapse, Dropdown, initTE } from "tw-elements";
@@ -43,11 +43,11 @@ const NotificationItems = () => {
       </div>
       <div className="flex items-center">
         <button className="text-[18px] text-neutral-700 dark:text-neutral-200 mx-3">
-          <i class="fas fa-check"></i>
+          <i className="fas fa-check"></i>
         </button>
 
         <button className="text-[18px] text-neutral-700 dark:text-neutral-200">
-          <i class="fas fa-times"></i>
+          <i className="fas fa-times"></i>
         </button>
       </div>
     </li>
@@ -56,6 +56,7 @@ const NotificationItems = () => {
 
 export default function Navbar() {
   initTE({ Collapse, Dropdown });
+  const navigate = useNavigate();
   console.log("Navbar");
   const [activeSection, setActiveSection] = useState("home");
   const [smStyle, setSmStyle] = useState("right-0");
@@ -196,20 +197,19 @@ export default function Navbar() {
           </Link>
         </li>
         <li className="li-item">
-          <Link
+          <button
             className={`${""} navbar-link text-white`}
             name="about"
-            to="admin/login"
-            // onClick={handleSectionClick}
+            onClick={() => navigate("/admin/login")}
             tabIndex="5"
           >
             Login
-          </Link>
+          </button>
         </li>
         <div className="relative flex items-center">
           <div className="relative" data-te-dropdown-ref>
             <a
-              class="hidden-arrow mr-4 flex items-center text-neutral-600 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+              className="hidden-arrow mr-4 flex items-center text-neutral-600 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
               href="#"
               id="dropdownMenuButton1"
               role="button"
@@ -221,12 +221,12 @@ export default function Navbar() {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  class="h-10 w-10"
+                  className="h-10 w-10"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
               </span>
