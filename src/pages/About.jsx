@@ -1,15 +1,20 @@
 import React from "react";
 import { social } from "../assets/svg/social/index.js";
 import "../assets/svg/social/github.svg";
+import create, { themes } from "../utils/Theme";
+import { Ripple, initTE } from "tw-elements";
 
 export default function About(props) {
+  initTE({ Ripple });
   const socialLinks = [
-    social.github && social.github,
+    social.github,
     social.linkedin && social.linkedin,
     social.twitter && social.twitter,
     social.instagram && social.instagram,
     social.facebook && social.facebook,
   ];
+
+  const store = create();
 
   return (
     <section id="about" className="section about-section" tabIndex="11">
@@ -23,7 +28,13 @@ export default function About(props) {
         data-aos-duration="700"
         data-aos-once="true"
       >
-        <h2 className="name">{props.profile.name}</h2>
+        <h2
+          className={`name ${
+            store.theme === "light" ? "text-[#121212]" : "text-[#fff]"
+          }`}
+        >
+          {props.profile.name}
+        </h2>
         <div className="professionContainer">
           {props.profile.profession.map((profession, index) => {
             return (
@@ -53,24 +64,17 @@ export default function About(props) {
       </div>
 
       {
-        <div className="socialMedia w-[100px]">
-          {socialLinks.map((socialLink, index) => {
+        <div className="socialMedia w-[80px]">
+          {Object.values(social).map((socialLink, index) => {
+            console.log(socialLink);
             return (
-              <a
+              <button
+                type="button"
                 key={index}
-                href={socialLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                tabIndex="13"
+                className="md:my-4 inline-block rounded-full text-xs font-medium uppercase leading-normal"
               >
-                <img
-                  src={socialLink}
-                  width={45}
-                  height={45}
-                  alt="social_media_link"
-                  className="md:my-4 bg-[#2c2c2c] rounded-full p-2 hover:bg-[#1a1a1a] transition duration-300 ease-in-out content-center fit-content"
-                />
-              </a>
+                <img className="h-45 w-45" src={socialLink} />
+              </button>
             );
           })}
         </div>
