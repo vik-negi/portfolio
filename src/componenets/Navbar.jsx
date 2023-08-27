@@ -6,6 +6,7 @@ import { useThemeMode } from "../context/ThemeContext";
 
 import { styled } from "styled-components";
 import create, { themes } from "../utils/Theme";
+import { Collapse, Dropdown, initTE } from "tw-elements";
 // import useStore from "../store";
 
 const StyledThemeSelector = styled.select`
@@ -16,7 +17,45 @@ const StyledThemeSelector = styled.select`
   cursor: pointer;
 `;
 
+const NotificationItems = () => {
+  const store = create();
+  return (
+    <li className="flex items-center justify-between mb-5">
+      <div className="flex items-center">
+        <img
+          src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+          className="rounded-full"
+          style={{ height: "35px", width: "35px" }}
+          alt=""
+          loading="lazy"
+        />
+        <div className="ml-5">
+          <p className="text-[13px] font-semibold text-neutral-700 dark:text-neutral-200">
+            Vikram Negi
+          </p>
+          <p className="text-[10px] text-neutral-500 dark:text-neutral-400">
+            2 hours ago
+          </p>
+          <p className="text-[10px] text-neutral-500 dark:text-neutral-400">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center">
+        <button className="text-[18px] text-neutral-700 dark:text-neutral-200 mx-3">
+          <i class="fas fa-check"></i>
+        </button>
+
+        <button className="text-[18px] text-neutral-700 dark:text-neutral-200">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </li>
+  );
+};
+
 export default function Navbar() {
+  initTE({ Collapse, Dropdown });
   console.log("Navbar");
   const [activeSection, setActiveSection] = useState("home");
   const [smStyle, setSmStyle] = useState("right-0");
@@ -133,22 +172,22 @@ export default function Navbar() {
           className="mobile-nav-icon"
         />
       </button>
-      <ul className="extra-navbar-list">
+      <ul className="extra-navbar-list items-center">
         <i
           onClick={(e) =>
             switchTheme(store.theme === "light" ? "dark" : "light")
           }
           className={`${
             store.theme == "light" ? "fas fa-moon" : "fas fa-sun"
-          } text-[28px] cursor-pointer mt-1
-        
+          } text-[28px] cursor-pointer text-white
+         
               `}
         ></i>
 
-        <li>
+        <li className="li-item">
           {/* <a className="contactBtn" name="getInTouch" tabIndex="10" href="contact"> */}
           <Link
-            className="contactBtn"
+            className="contactBtn text-white"
             name="getInTouch"
             tabIndex="10"
             to="/contact"
@@ -156,17 +195,107 @@ export default function Navbar() {
             Contact
           </Link>
         </li>
-        <li>
+        <li className="li-item">
           <Link
-            className={`${""} navbar-link`}
+            className={`${""} navbar-link text-white`}
             name="about"
             to="admin/login"
             // onClick={handleSectionClick}
             tabIndex="5"
           >
-            About
+            Login
           </Link>
         </li>
+        <div className="relative flex items-center">
+          <div className="relative" data-te-dropdown-ref>
+            <a
+              class="hidden-arrow mr-4 flex items-center text-neutral-600 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+              href="#"
+              id="dropdownMenuButton1"
+              role="button"
+              data-te-dropdown-toggle-ref
+              aria-expanded="false"
+            >
+              <span className="[&>svg]:w-15">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  class="h-10 w-10"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
+              <span className="absolute -mt-8 ml-6 rounded-full bg-danger px-2 py-1 text-[1rem] font-bold leading-none text-white">
+                1
+              </span>
+            </a>
+            <ul
+              className="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block p-4"
+              aria-labelledby="dropdownMenuButton1"
+              data-te-dropdown-menu-ref
+            >
+              <NotificationItems />
+              <NotificationItems />
+            </ul>
+          </div>
+
+          <div className="relative" data-te-dropdown-ref>
+            <a
+              className="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+              href="#"
+              id="dropdownMenuButton2"
+              role="button"
+              data-te-dropdown-toggle-ref
+              aria-expanded="false"
+            >
+              <img
+                src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+                className="rounded-full"
+                style={{ height: "25px", width: "25px" }}
+                alt=""
+                loading="lazy"
+              />
+            </a>
+            <ul
+              className="absolute left-auto w-[150px] right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
+              aria-labelledby="dropdownMenuButton2"
+              data-te-dropdown-menu-ref
+            >
+              <li>
+                <a
+                  className="block w-full whitespace-nowrap bg-transparent p-4 text-xl font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                  href="#"
+                  data-te-dropdown-item-ref
+                >
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a
+                  className="block w-full whitespace-nowrap bg-transparent p-4 text-xl font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+                  href="#"
+                  data-te-dropdown-item-ref
+                >
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a
+                  className="block w-full whitespace-nowrap bg-transparent p-4  text-xl font-normal text-neutral-700 hover:bg-red-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30 dark:hover:text-red-900"
+                  href="#"
+                  data-te-dropdown-item-ref
+                >
+                  logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </ul>
     </header>
   );

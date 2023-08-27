@@ -353,16 +353,13 @@ a {
   background-color: #000;
   border-bottom-left-radius: 5px;
 }
-.header .extra-navbar-list li {
+.header .extra-navbar-list .li-item {
   padding: 6px 10px;
-  /* gap: 1.2rem; */
-  border: 1 px solid transparent;
 }
-.header .extra-navbar-list li:hover {
+.header .extra-navbar-list .li-item:hover {
   border-radius: 15px;
   border: 1px solid;
   cursor: pointer;
-  /* gap: 1.2rem; */
 }
 
 .header-scroll-style {

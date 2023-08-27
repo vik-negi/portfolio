@@ -137,14 +137,35 @@ function App() {
               />
             }
           />
-          <Route path="/about" element={<About profile={profile} />} />
-          <Route path="/skills" element={<Skills skills={skills} />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/experiences" element={<Experiences />} />
-          <Route path="/port" element={<Portfolio />} />
+          <Route
+            path="/about"
+            element={<LayoutComponent children={<About profile={profile} />} />}
+          />
+          <Route
+            path="/skills"
+            element={<LayoutComponent children={<Skills skills={skills} />} />}
+          />
+          <Route
+            path="/projects"
+            element={<LayoutComponent children={<Projects />} />}
+          />
+          <Route
+            path="/contact"
+            element={<LayoutComponent children={<Contact />} />}
+          />
+          <Route
+            path="/experiences"
+            element={<LayoutComponent children={<Experiences />} />}
+          />
+          <Route
+            path="/port"
+            element={<LayoutComponent children={<Portfolio />} />}
+          />
 
-          <Route path="/admin/*" element={<AdminRoutes />} />
+          <Route
+            path="/admin/*"
+            element={<LayoutComponent children={<AdminRoutes />} />}
+          />
         </Routes>
       </ThemeModeProvider>
     </HashRouter>

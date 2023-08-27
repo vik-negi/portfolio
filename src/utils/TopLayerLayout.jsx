@@ -8,12 +8,14 @@ const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.text};
     transition: background-color 0.25s, color 0.25s;
-  }
-  h1,h2,h3,h4 {
-    color: ${({ theme }) => theme.headers};
-  }
+  },
+  p, h1{
+    color : ${({ theme }) => theme.text};
+
+  },
+ 
   a {
-    color: ${({ theme }) => theme.links};
+    color: ${({ theme }) => theme.text};
   }
 `;
 

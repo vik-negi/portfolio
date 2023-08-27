@@ -14,7 +14,7 @@ const SkillTab = ({ title, skills, isActive }) => {
 
   return (
     <div>
-      <div className={`${tabTitleStyle}`}>{title}</div>
+      {/* <div className={`${tabTitleStyle}`}>{title}</div> */}
       <div
         className={`grid mx-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:grid-cols-2 gap-2 justify-items-center transition-all overflow-hidden duration-5000 ease-in-out`}
       >

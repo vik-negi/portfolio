@@ -12,7 +12,7 @@ export const themes = {
   dark: {
     name: "🌒",
     background: "#0F0E17",
-    text: "#A7A9BE",
+    text: "#FFFFFF",
     headers: "#FFFFFE",
     links: "#FF8906",
   },

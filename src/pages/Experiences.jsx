@@ -97,7 +97,7 @@ export default function Experiences() {
                   })}
                 </div>
 
-                <p className="px-10 py-5 sm:text-[16px] text-[14px]">
+                <p className="px-10 py-5 sm:text-[16px] text-[#232323] text-[14px]">
                   {compaine.description}
                 </p>
               </div>
