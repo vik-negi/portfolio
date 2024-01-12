@@ -1,19 +1,27 @@
-import React, { createContext, useContext, useState } from "react";
+// import React, { createContext, useContext, useState } from "react";
 
-const ThemeContext = createContext();
+// const ThemeContext = createContext();
 
-export const ThemeModeProvider = ({ children }) => {
-  const [lightMode, setLightMode] = useState();
+// export const ThemeModeProvider = ({ children }) => {
+//   const [lightMode, setLightMode] = useState();
 
-  const toggleTheme = () => {
-    setLightMode((prevMode) => !prevMode);
-  };
+//   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
-  return (
-    <ThemeContext.Provider value={{ lightMode, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
+//   const toggleTheme = () => {
+//     setLightMode((prevMode) => !prevMode);
+//   };
 
-export const useThemeMode = () => useContext(ThemeContext);
+//   const toggleSideBar = () => {
+//     setIsSideBarOpen((prevMode) => !prevMode);
+//   };
+
+//   return (
+//     <ThemeContext.Provider
+//       value={{ lightMode, toggleTheme, isSideBarOpen, toggleSideBar }}
+//     >
+//       {children}
+//     </ThemeContext.Provider>
+//   );
+// };
+
+// export const useThemeMode = () => useContext(ThemeContext);

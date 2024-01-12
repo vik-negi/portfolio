@@ -7,34 +7,31 @@ import { useQuery } from "react-query";
 // Add these imports at the beginning of your file
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { dashboard } from "../axios/dashboard";
+import { dashboard, publicInfo } from "../axios/dashboard";
 
 import { useLocation, useParams } from "react-router-dom";
 
 library.add(faBars, faTimes);
 
 export default function Home(props) {
-  const { username } = useParams();
+  var { username } = useParams();
   console.log("username ", username);
 
-  // const { isLoading, isSuccess, isError, error, data } = useQuery(
-  //   ["data"],
-  //   dashboard
-  // );
+  if (username === undefined) {
+    username = "vikramnegi-9162604468";
+  }
 
-  // if (isError) {
-  //   console.log("error ", error);
-  // }
   return (
     <>
       <MainSection
         name={props.profile.name.split(" ")[0]}
         profile={props.profile}
+        username={username}
       />
-      <About id="about" profile={props.profile} />
-      <Skills id="skills" />
-      <Projects id="projects" />
-      <Experiences id="experience" />
+      <About id="about" profile={props.profile} username={username} />
+      <Skills id="skills" username={username} />
+      <Projects id="projects" username={username} />
+      <Experiences id="experience" username={username} />
     </>
   );
 }

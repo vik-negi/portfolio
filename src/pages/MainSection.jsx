@@ -1,26 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import StringUtils from "../utils/String";
+import { useQuery } from "react-query";
+import { publicInfo } from "../axios/dashboard";
 
-export default function MainSection(props) {
+export default function MainSection({ username, profile }) {
+  const [userInfo, setUserInfo] = useState();
+
+  if (username === undefined) {
+    username = "vikramnegi-9162604468";
+  }
+
+  const { isLoading } = useQuery(["data"], () => publicInfo(username), {
+    onSuccess: (data) => {
+      setUserInfo(data.data?.data);
+    },
+  });
+
   return (
     <section className="section home-section only-bg" id="home" tabIndex="42">
-      <div>
-        <h1>
-          Hey, I'm <span className="name">{props.name}</span>
-        </h1>
-        <p className="aboutShort">{props.profile.shortAbout}</p>
-        <button
-          className="button"
-          name="about"
-          // onClick="scrollToSection(this)"
-          tabIndex="2"
-        >
-          About Me<ion-icon name="chevron-forward-outline"></ion-icon>
-        </button>
-      </div>
+      {userInfo && (
+        <div>
+          <h1>
+            Hey, I'm{" "}
+            <span className="name">
+              {StringUtils.capitalizeString(userInfo?.user.firstName) +
+                " " +
+                StringUtils.capitalizeString(userInfo?.user.lastName)}
+            </span>
+          </h1>
+          <p className="aboutShort">{userInfo?.profileDescription}</p>
+          <button
+            className="button"
+            name="about"
+            // onClick="scrollToSection(this)"
+            tabIndex="2"
+          >
+            About Me<ion-icon name="chevron-forward-outline"></ion-icon>
+          </button>
+        </div>
+      )}
       <div className="img_sec">
         <div className="imgDiv">
           <img
-            src={props.profile.image}
+            src={profile.image}
             className="profile-image"
             alt="ProfileImage"
           />

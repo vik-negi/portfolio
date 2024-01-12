@@ -22,7 +22,9 @@ export const themes = {
 
 export default create((set) => ({
   theme: "light",
+  isSideBarOpen: true,
   setTheme: (theme) => set({ theme }),
+  setIsSideBarOpen: (open) => set(false),
 }));
 
 export const StyledComponent = styled.div`

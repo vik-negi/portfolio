@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import create, { themes } from "../utils/Theme";
 import { Collapse, Dropdown, initTE } from "tw-elements";
+import NavbarOptionsDropdown from "./NavbarOptionsDropdown";
+import { isAutheticated } from "../pages/admin/utils/auth";
 // import useStore from "../store";
 
 const StyledThemeSelector = styled.select`
@@ -57,14 +59,12 @@ const NotificationItems = () => {
 export default function Navbar() {
   initTE({ Collapse, Dropdown });
   const navigate = useNavigate();
+  const { token } = isAutheticated();
   console.log("Navbar");
   const [activeSection, setActiveSection] = useState("home");
   const [smStyle, setSmStyle] = useState("right-0");
-  const [lightMode, setLightMode] = useState(true);
-  const { themeMode, toggleThemeMode } = useThemeMode();
 
   const toggleNav = () => {
-    console.log("toggleNav");
     console.log(smStyle);
     if (smStyle === "right-0") {
       setSmStyle("right-[225px]");
@@ -200,10 +200,12 @@ export default function Navbar() {
           <button
             className={`${""} navbar-link text-white`}
             name="about"
-            onClick={() => navigate("/admin/login")}
+            onClick={() =>
+              navigate(token != null ? "/admin/dashboard" : "/admin/login")
+            }
             tabIndex="5"
           >
-            Login
+            {token != null ? "Dashboard" : "Login"}
           </button>
         </li>
         <div className="relative flex items-center">
@@ -244,57 +246,17 @@ export default function Navbar() {
             </ul>
           </div>
 
-          <div className="relative" data-te-dropdown-ref>
-            <a
-              className="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
-              href="#"
-              id="dropdownMenuButton2"
-              role="button"
-              data-te-dropdown-toggle-ref
-              aria-expanded="false"
-            >
-              <img
-                src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
-                className="rounded-full"
-                style={{ height: "25px", width: "25px" }}
-                alt=""
-                loading="lazy"
-              />
-            </a>
-            <ul
-              className="absolute left-auto w-[150px] right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block"
-              aria-labelledby="dropdownMenuButton2"
-              data-te-dropdown-menu-ref
-            >
-              <li>
-                <a
-                  className="block w-full whitespace-nowrap bg-transparent p-4 text-xl font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                  href="#"
-                  data-te-dropdown-item-ref
-                >
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  className="block w-full whitespace-nowrap bg-transparent p-4 text-xl font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
-                  href="#"
-                  data-te-dropdown-item-ref
-                >
-                  Profile
-                </a>
-              </li>
-              <li>
-                <a
-                  className="block w-full whitespace-nowrap bg-transparent p-4  text-xl font-normal text-neutral-700 hover:bg-red-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30 dark:hover:text-red-900"
-                  href="#"
-                  data-te-dropdown-item-ref
-                >
-                  logout
-                </a>
-              </li>
-            </ul>
-          </div>
+          <NavbarOptionsDropdown
+            itemsList={[
+              {
+                title: "Dashboard",
+              },
+              {
+                title: "Profile",
+              },
+            ]}
+            showLogout={true}
+          />
         </div>
       </ul>
     </header>

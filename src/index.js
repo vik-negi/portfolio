@@ -3,15 +3,31 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
+
+const setupAxios = () => {
+  // axios.defaults.baseURL = "https://analysis-react-backend-b84w.vercel.app/";
+  axios.defaults.baseURL = "http://localhost:5000/";
+
+  axios.defaults.headers = {
+    "Cache-Control": "no-cache,no-store",
+    Pragma: "no-cache",
+    Expires: "0",
+  };
+};
+setupAxios();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>
       <App />
+      <ToastContainer />
     </React.StrictMode>
   </QueryClientProvider>
 );

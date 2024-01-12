@@ -5,20 +5,32 @@ import About from "./pages/About";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
+import { isAutheticated } from "./pages/admin/utils/auth";
 import Experiences from "./pages/Experiences";
+import { useEffect, useCallback } from "react";
+import { AppProvider } from "./context/Context";
+
 import {
   HashRouter,
   Routes,
+  useNavigate,
   Route,
   useLocation,
   matchPath,
 } from "react-router-dom";
 import Contact from "./pages/Contact";
 import Portfolio from "./demo";
-import { ThemeModeProvider } from "./context/ThemeContext";
+// import { ThemeModeProvider } from "./context/ThemeContext";
 import { themes, StyledComponent } from "./utils/Theme";
 import LayoutComponent from "./utils/TopLayerLayout";
 import Login from "./pages/admin/Login";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
+import LoginWrapper from "./pages/admin/utils/LoginWrapper";
+import { AboutIndex } from "./pages/admin/about";
+import Register from "./pages/admin/Register";
+import VerifyOtp from "./pages/admin/VerifyOtp";
+import AdminExperience from "./pages/admin/experience/Experience";
+import AdminProject from "./pages/admin/project/AdminProjects";
 
 function App() {
   // const slowInternet = setTimeout(() => {
@@ -108,7 +120,7 @@ function App() {
 
   return (
     <HashRouter base="/">
-      <ThemeModeProvider theme={themes}>
+      <AppProvider>
         {/* <div className="loaderDiv">
         <div className="loading"></div>
         <p>Loading page</p>
@@ -154,12 +166,19 @@ function App() {
             path="/experiences"
             element={<LayoutComponent children={<Experiences />} />}
           />
+          <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin/register" element={<Register />} />
+          <Route path="/admin/verify" element={<VerifyOtp />} />
           <Route
             path="/admin/*"
             element={
-              <LayoutComponent
-                children={<AdminRoutes />}
-                notShowNavbar={true}
+              <LoginWrapper
+                childrens={
+                  <LayoutComponent
+                    children={<AdminRoutes />}
+                    notShowNavbar={true}
+                  />
+                }
               />
             }
           />
@@ -178,16 +197,39 @@ function App() {
             }
           />
         </Routes>
-      </ThemeModeProvider>
+      </AppProvider>
     </HashRouter>
   );
 }
 
 function AdminRoutes() {
+  const navigate = useNavigate();
+  const { token } = isAutheticated();
+  const HeaderLayout = useCallback(() => {
+    if (token && window.location.pathname === "/") {
+      navigate("/admin/dashboard");
+    } else if (!token && window.location.pathname === "/") {
+      navigate("/admin/login");
+    }
+    // else if (token && window.location.pathname === "/forgotPassword") {
+    // navigate("/branch");
+    // }
+    else {
+      return;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
+
+  useEffect(() => {
+    HeaderLayout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Routes>
-      <Route path="login" element={<Login />} />
-      {/* Add other admin routes here */}
+      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="about" element={<AboutIndex />} />
+      <Route path="experiences" element={<AdminExperience />} />
+      <Route path="projects" element={<AdminProject />} />
     </Routes>
   );
 }

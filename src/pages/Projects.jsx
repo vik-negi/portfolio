@@ -1,43 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
+import { getProjects } from "../axios/dashboard";
 
-export default function Project() {
-  const Projects = [
-    {
-      img: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-1.jpg",
-      title: "Evika - An Event Management Website",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
-      link: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-1.jpg",
+export default function Project({ username }) {
+  // const Projects = [
+  //   {
+  //     img: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-1.jpg",
+  //     title: "Evika - An Event Management Website",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
+  //     link: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-1.jpg",
+  //   },
+  //   {
+  //     img: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.png",
+  //     title: "Evika - An Event Management Website",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
+  //     link: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-3.jpg",
+  //   },
+  //   {
+  //     img: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-3.jpg",
+  //     title: "Evika - An Event Management Website",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
+  //     link: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.jpg",
+  //   },
+  //   {
+  //     img: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-4.png",
+  //     title: "Evika - An Event Management Website",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
+  //     link: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.jpg",
+  //   },
+  //   {
+  //     img: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-5.png",
+  //     title: "Evika - An Event Management Website",
+  //     description:
+  //       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
+  //     link: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.jpg",
+  //   },
+  // ];
+
+  const [Projects, setProjects] = useState();
+  useQuery("projects", () => getProjects(username), {
+    onSuccess: (data) => {
+      console.log(data.data?.data);
+      setProjects(data.data?.data);
     },
-    {
-      img: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.png",
-      title: "Evika - An Event Management Website",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
-      link: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-3.jpg",
-    },
-    {
-      img: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-3.jpg",
-      title: "Evika - An Event Management Website",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
-      link: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.jpg",
-    },
-    {
-      img: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-4.png",
-      title: "Evika - An Event Management Website",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
-      link: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.jpg",
-    },
-    {
-      img: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-5.png",
-      title: "Evika - An Event Management Website",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum in labore laudantium deserunt fugiat numquam.",
-      link: "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.jpg",
-    },
-  ];
+  });
+
   return (
     <section
       className="section main project-section"
@@ -65,33 +76,42 @@ export default function Project() {
               </a>
             </p>
           </h1>
-          <img
-            className="ProjectHeaderImage"
-            src={`/public/images/project-head.png`}
-            alt="Project-header"
-          />
         </div>
         <div className="project card-cont-project">
-          {Projects.map((project, i) => {
-            return (
-              <article key={i} className="card-p">
-                <img
-                  className="card__background"
-                  src={project.img}
-                  alt="project-1"
-                  width="1920"
-                  height="2193"
-                />
-                <div className="card__content | flow">
-                  <div className="card__content--container | flow">
-                    <h2 className="card__title">{project.title}</h2>
-                    <p className="card__description">{project.description}</p>
+          {Projects &&
+            Projects.map((project, i) => {
+              return (
+                <article
+                  key={i}
+                  style={{
+                    height: "200px",
+                  }}
+                  className="card-p"
+                >
+                  <img
+                    style={{
+                      width: "100%",
+                      objectFit: "cover",
+                    }}
+                    className="card__background"
+                    src={
+                      project.image[0]
+                      // "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.png"
+                    }
+                    alt="project-1"
+                    // width="1920"
+                    // height="2193"
+                  />
+                  <div className="card__content | flow">
+                    <div className="card__content--container | flow">
+                      <h2 className="card__title">{project.title}</h2>
+                      <p className="card__description">{project.description}</p>
+                    </div>
+                    <button className="card__button">Read more</button>
                   </div>
-                  <button className="card__button">Read more</button>
-                </div>
-              </article>
-            );
-          })}
+                </article>
+              );
+            })}
         </div>
       </div>
     </section>
