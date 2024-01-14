@@ -83,7 +83,10 @@ const ExperienceTimeline = ({ experience }) => {
 };
 
 export default function Experiences({ username }) {
-  if (username === "vikramnegi-9162604468") {
+  const [experiences, setExperiences] = useState();
+  const [isFirstTime, setIsFirstTime] = useState(true);
+  if (username === "vikramnegi-9162604468" && isFirstTime) {
+    setIsFirstTime(false);
     setExperiences(MyData.experience.experiences);
   }
   const { data } = useQuery(["experience"], () => getExperience(username), {
@@ -95,7 +98,6 @@ export default function Experiences({ username }) {
     },
   });
 
-  const [experiences, setExperiences] = useState();
   // const experiences = [
   //   {
   //     name: "NeonFlake",

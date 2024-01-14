@@ -6,9 +6,13 @@ import MyData from "../data/MyData";
 
 export default function MainSection({ username, profile }) {
   const [userInfo, setUserInfo] = useState();
-
-  if (username === undefined || username === "vikramnegi-9162604468") {
+  const [isFirstTime, setIsFirstTime] = useState(true);
+  if (
+    username === undefined ||
+    (username === "vikramnegi-9162604468" && isFirstTime)
+  ) {
     setUserInfo(MyData.publicInfo);
+    setIsFirstTime(false);
   }
 
   const { isLoading } = useQuery(["data"], () => publicInfo(username), {

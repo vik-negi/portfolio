@@ -43,7 +43,9 @@ export default function Project({ username }) {
   // ];
 
   const [Projects, setProjects] = useState();
-  if (username == "vikramnegi-9162604468") {
+  const [isFirstTime, setIsFirstTime] = useState(true);
+  if (username == "vikramnegi-9162604468" && isFirstTime) {
+    setIsFirstTime(false);
     setProjects(MyData.projects);
   }
   useQuery("projects", () => getProjects(username), {

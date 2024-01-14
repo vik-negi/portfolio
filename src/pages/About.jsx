@@ -31,29 +31,40 @@ const About = ({ username, profile }) => {
   // if (data) {
   //   console.log("about : ", data?.data?.data);
   // }
+  const [isFirstTime, setIsFirstTime] = useState(true);
 
-  if (username == "vikramnegi-9162604468") {
+  if (username == "vikramnegi-9162604468" && isFirstTime) {
+    setIsFirstTime(false);
     setAbout(MyData.about);
   }
 
-  const mutation = useMutation((id) => getAbout(username), {
-    onSuccess: () => {
+  const { data } = useQuery("about", () => getAbout(username), {
+    onSuccess: (data) => {
       queryClient.invalidateQueries("avatar");
+      setAbout(data?.data?.data);
     },
     onError: (error) => {
       setAbout(MyData.about);
     },
   });
-  var data = null;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await mutation.mutateAsync(); // Use mutateAsync to get data
-      setAbout(result?.data?.data);
-      console.log("about : ", result?.data?.data?.passion);
-    };
-    fetchData();
-  }, []);
+  // const mutation = useMutation((id) => getAbout(username), {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries("avatar");
+  //   },
+  //   onError: (error) => {
+  //     setAbout(MyData.about);
+  //   },
+  // });
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await mutation.mutateAsync(); // Use mutateAsync to get data
+  //     setAbout(result?.data?.data);
+  //     console.log("about : ", result?.data?.data?.passion);
+  //   };
+  //   fetchData();
+  // }, []);
 
   const store = create();
 
@@ -110,7 +121,6 @@ const About = ({ username, profile }) => {
       {about && (
         <div className="socialMedia w-[80px]">
           {Object.values(social).map((socialLink, index) => {
-            console.log(socialLink);
             return (
               <button
                 type="button"
