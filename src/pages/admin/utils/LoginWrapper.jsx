@@ -2,10 +2,16 @@ import React from "react";
 import SideHeader from "../SideHeader";
 import Footer from "../Footer";
 import MobileNavbar from "./Navbar";
+import create from "../../../utils/Theme";
 
 const LoginWrapper = ({ childrens }) => {
+  const theme = create();
   return (
-    <div className="relative sm:8 min-h-screen flex sm:flex-row flex-col">
+    <div
+      className={`relative sm:8 min-h-screen flex sm:flex-row flex-col ${
+        theme.theme === "light" && "bg-[#f0f0f4]"
+      }`}
+    >
       <div className="sm:flex hidden mr-10 relative">
         <SideHeader />
       </div>

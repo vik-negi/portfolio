@@ -11,10 +11,12 @@ export const updateAbout = async (data) => {
   const token = getToken();
 
   console.log("data about : ", token);
-  return await Axios.put(`/api/about/${data._id}`, data, {
+  const dataApi = await Axios.put(`/api/about/${data._id}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
       contentType: "application/json",
     },
   });
+  console.log("data after api ", dataApi);
+  return data;
 };

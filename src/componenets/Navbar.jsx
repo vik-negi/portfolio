@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
+import Brightness from "../assets/svg/brightness.svg";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useThemeMode } from "../context/ThemeContext";
@@ -63,6 +64,7 @@ export default function Navbar() {
   console.log("Navbar");
   const [activeSection, setActiveSection] = useState("home");
   const [smStyle, setSmStyle] = useState("right-0");
+  const [bgColor, setBgColor] = useState("");
 
   const toggleNav = () => {
     console.log(smStyle);
@@ -84,13 +86,30 @@ export default function Navbar() {
     localStorage.setItem("theme", themeName);
   };
 
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 120) {
+      setBgColor(`#1b1b1b`);
+    } else {
+      setBgColor(`transparent`);
+    }
+  });
+
   return (
     <header className="header" id="header">
-      {/* <div className="logo img"><img className=""
-        src="https://res.cloudinary.com/dkezwrb3a/image/upload/v1678016307/Portfolio/Untitled_design_2_-PhotoRoom.png-PhotoRoom_atrult.png"
-        alt="logo"/></div> */}
+      {/* <div className="logo img">
+        <img
+          className=""
+          src="https://res.cloudinary.com/dkezwrb3a/image/upload/v1678016307/Portfolio/Untitled_design_2_-PhotoRoom.png-PhotoRoom_atrult.png"
+          alt="logo"
+        />
+      </div> */}
       <p className="logo initials" tabIndex="1"></p>
-      <div className={` navbar ${smStyle}`}>
+      <div
+        style={{
+          backgroundColor: `${bgColor}`,
+        }}
+        className={` navbar ${smStyle}`}
+      >
         <ul className="navbar-list">
           <li>
             <Link
@@ -179,14 +198,17 @@ export default function Navbar() {
             switchTheme(store.theme === "light" ? "dark" : "light")
           }
           className={`${
-            store.theme == "light" ? "fas fa-moon" : "fas fa-sun"
-          } text-[28px] cursor-pointer text-white
+            store.theme == "light" && "fas fa-moon"
+          } text-[25px] cursor-pointer text-white
          
               `}
-        ></i>
+        >
+          {store.theme !== "light" && (
+            <img src={Brightness} color="white" alt="" />
+          )}
+        </i>
 
-        <li className="li-item">
-          {/* <a className="contactBtn" name="getInTouch" tabIndex="10" href="contact"> */}
+        {/* <li className="li-item">
           <Link
             className="contactBtn text-white"
             name="getInTouch"
@@ -195,8 +217,8 @@ export default function Navbar() {
           >
             Contact
           </Link>
-        </li>
-        <li className="li-item">
+        </li> */}
+        {/* <li className="li-item">
           <button
             className={`${""} navbar-link text-white`}
             name="about"
@@ -207,7 +229,7 @@ export default function Navbar() {
           >
             {token != null ? "Dashboard" : "Login"}
           </button>
-        </li>
+        </li> */}
         <div className="relative flex items-center">
           <div className="relative" data-te-dropdown-ref>
             <a
@@ -249,13 +271,19 @@ export default function Navbar() {
           <NavbarOptionsDropdown
             itemsList={[
               {
-                title: "Dashboard",
+                title: token != null ? "Dashboard" : "Login",
+                to: token != null ? "/admin/dashboard" : "/admin/login",
+              },
+              {
+                title: "Contact",
+                to: "/contact",
               },
               {
                 title: "Profile",
+                to: "/admin/profile",
               },
             ]}
-            showLogout={true}
+            showLogout={token != null}
           />
         </div>
       </ul>

@@ -26,7 +26,10 @@ function WrapperContent({ title, children, headerChild, isOpen }) {
               `}
             >
               <div className="flex">
-                <Link to="/dashboard" className="text-[12px] font-semibold">
+                <Link
+                  to="/admin/dashboard"
+                  className="text-[12px] font-semibold"
+                >
                   Dashboard{" "}
                 </Link>
 

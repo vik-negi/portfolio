@@ -69,7 +69,7 @@ const About = ({ username, profile }) => {
               store.theme === "light" ? "text-[#121212]" : "text-[#fff]"
             }`}
           >
-            {about?.title}
+            {/* {about?.title} */}
           </h2>
           <div className="professionContainer">
             {about?.passion.map((profession, index) => {
@@ -92,7 +92,7 @@ const About = ({ username, profile }) => {
           <a
             className="button"
             href={about?.resume}
-            //   target="_blank"
+            target="_blank"
             tabIndex="12"
           >
             Resume<ion-icon name="document-outline"></ion-icon>

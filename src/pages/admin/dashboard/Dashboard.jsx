@@ -4,7 +4,11 @@ import { errorMessage } from "../../../utils/Toast";
 import { useQuery } from "react-query";
 import { dashboard } from "../../../axios/dashboard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPhone,
+  faEye,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const DashboardDetails = ({
   icon,
@@ -17,7 +21,7 @@ export const DashboardDetails = ({
     <div
       className={`flex mr-6 flex-col ${
         primaryColor && primaryColor
-      } w-[250px] h-[65px] rounded-[5px] justify-start items-start`}
+      }  h-[65px] rounded-[5px] justify-start items-start`}
     >
       <div className="flex flex-row justify-start items-center">
         <div
@@ -27,7 +31,7 @@ export const DashboardDetails = ({
         >
           <FontAwesomeIcon icon={icon} className="text-white text-[25px]" />
         </div>
-        <div className="flex flex-col justify-start items-start">
+        <div className="flex flex-col justify-start items-start pr-5">
           <p className="text-[28px] text-white font-bold ml-[10px]">
             {title != null ? title : 0}
           </p>
@@ -59,14 +63,14 @@ function Dashboard() {
       <div className=" flex flex-col justify-start items-start"></div>
       <div className=" flex flex-wrap justify-start items-start">
         <DashboardDetails
-          icon={faPhone}
+          icon={faMagnifyingGlass}
           subTitle="Total Portfolio views"
           title={dashboardData?.totalUpdatesTillNow}
           primaryColor="bg-[#7266BA]"
           secondaryColor="bg-[#675CA8]"
         />
         <DashboardDetails
-          icon={faPhone}
+          icon={faEye}
           subTitle="Total Portfolio views, this week"
           title={dashboardData?.totalUpdatesThisWeek}
           primaryColor="bg-[#42A5F6]"

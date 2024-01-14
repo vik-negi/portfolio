@@ -1,214 +1,139 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { getAdminExperience } from "../../../axios/experience";
 import WrapperContent from "../utils/WrapperContent";
-import { errorMessage } from "../../../utils/Toast";
+import { errorMessage, successMessage } from "../../../utils/Toast";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faPlus } from "@fortawesome/free-solid-svg-icons";
-import create from "../../../utils/Theme";
+import {
+  faPhone,
+  faPlus,
+  faClose,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import DateTimeFormatter from "../../../utils/dateTime_functionality";
 import { useWindowWide } from "../utils/useWindowWide";
-import { getAdminProjects } from "../../../axios/project";
-import AddNewProject from "./components/AddNewProject";
+import {
+  addProject,
+  getAdminProjects,
+  deleteProject,
+} from "../../../axios/project";
+import AddNewProject, { AddProjectItem } from "./components/AddNewProject";
+import AddNew from "../utils/AddNew";
+import { useNavigate } from "react-router-dom";
+import AllTextFields from "../utils/AllTextFields";
+import create from "../../../utils/Theme";
 
 const lableTextStyle = "text-[#1e1e2f] font-semibold text-[14px]";
 
-const ExperienceItem = ({ project, handleEdit, handleDelete }) => {
-  const theme = create();
-  return (
-    <tr key={project._id}>
-      <td className="border px-4 py-2">
-        <input
-          type="text"
-          value={project.title}
-          onChange={(e) => handleEdit(project._id, "title", e.target.value)}
-          className="w-full"
-        />
-      </td>
-      <td className="border px-4 py-2">
-        <input
-          type="text"
-          value={project.company}
-          onChange={(e) => handleEdit(project._id, "company", e.target.value)}
-          className="w-full"
-        />
-      </td>
-      <td className="border px-4 py-2">
-        <input
-          type="text"
-          value={project.location}
-          onChange={(e) => handleEdit(project._id, "location", e.target.value)}
-          className="w-full"
-        />
-      </td>
-      <td className="border px-4 py-2">
-        <input
-          type="date"
-          value={project.from}
-          onChange={(e) => handleEdit(project._id, "from", e.target.value)}
-          className="w-full"
-        />
-      </td>
-      <td className="border px-4 py-2">
-        <input
-          type="date"
-          value={project.to}
-          onChange={(e) => handleEdit(project._id, "to", e.target.value)}
-          className="w-full"
-        />
-      </td>
-      <td className="border px-4 py-2">
-        <input
-          type="checkbox"
-          checked={project.current}
-          onChange={(e) => handleEdit(project._id, "current", e.target.checked)}
-        />
-      </td>
-      <td className="border px-4 py-2">
-        <textarea
-          value={project.description}
-          onChange={(e) =>
-            handleEdit(project._id, "description", e.target.value)
-          }
-          className="w-full"
-        />
-      </td>
-      <td className="border px-4 py-2">
-        <textarea
-          value={project.skills.join(", ")}
-          onChange={(e) =>
-            handleEdit(project._id, "skills", e.target.value.split(", "))
-          }
-          className="w-full"
-        />
-      </td>
-      <td className="border px-4 py-2">
-        <textarea
-          value={project.highlights.join(", ")}
-          onChange={(e) =>
-            handleEdit(project._id, "highlights", e.target.value.split(", "))
-          }
-          className="w-full"
-        />
-      </td>
-      <td className="border px-4 py-2">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => handleEdit(project._id)}
-        >
-          Save
-        </button>
-      </td>
-      <td className="border px-4 py-2">
-        <button
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => handleDelete(project._id)}
-        >
-          Delete
-        </button>
-      </td>
-    </tr>
-  );
-};
-
-export const AdmiProjectItem = ({
-  title,
-  value,
-  placeholder,
-  textArea,
-  lines,
-  classs,
-  isCheckBox = false,
-  isFullWidth = false,
-  isSelect = false,
-  size,
-}) => {
-  const theme = create();
-
-  const options = ["Bignner", "Intermediate", "Advanced", "Expert"];
-  return (
-    <div
-      className={`flex w-full ${
-        isCheckBox === true && isFullWidth === false ? "flex-row" : "flex-col"
-      } justify-start items-start mb-10 ${classs}`}
-    >
-      <label
-        className={` ${
-          theme.theme === "light" && "text-[#1e1e2f]"
-        } font-semibold text-[14px]`}
-      >
-        {title}
-      </label>
-
-      {isSelect && (
-        <select
-          className={`w-full h-[${
-            size != null ? size : "45px"
-          }] rounded-[10px] text-[13px] border-[1px]  border-[#e8e9fa] outline-none px-4 mt-2 ${
-            theme.theme !== "light" && "text-[#1e1e2f]"
-          } `}
-        >
-          {options.map((item, index) => (
-            <option value={item}>{item}</option>
-          ))}
-        </select>
-      )}
-
-      {(value || value == "") && !isSelect && (
-        <input
-          type={isCheckBox ? "checkbox" : "text"}
-          className={`w-full h-[${
-            size != null ? size : "45px"
-          }] rounded-[10px] text-[13px] border-[1px]  border-[#e8e9fa] outline-none px-4 mt-2 ${
-            theme.theme !== "light" && "text-[#1e1e2f]"
-          } `}
-          placeholder={placeholder}
-          value={value}
-        />
-      )}
-      {textArea && (
-        <textarea
-          type="text"
-          rows={lines || 6}
-          className={`w-full rounded-[10px] text-[13px] border-[1px]  border-[#e8e9fa] outline-none px-4 py-2 mt-2 ${
-            theme.theme !== "light" && "text-[#1e1e2f]"
-          } `}
-          placeholder={placeholder}
-          value={textArea}
-        />
-      )}
-    </div>
-  );
-};
-
 const AdminProject = () => {
-  const theme = create();
-  useQuery("projects", () => getAdminProjects(), {
-    retry: 1,
-    retryDelay: 1,
+  const { data: projectsData, refetch: refetchProjects } = useQuery(
+    "projects",
+    () => getAdminProjects(),
+    {
+      retry: 1,
+      retryDelay: 1,
+      onError: (error) => {
+        errorMessage(error?.response?.data?.message);
+      },
+      onSuccess: (data) => {
+        console.log(data.data?.data);
+        setProjects(data?.data?.data);
+      },
+    }
+  );
+  const navigate = useNavigate();
+
+  const addMutation = useMutation((data) => addProject(data), {
     onError: (error) => {
       errorMessage(error?.response?.data?.message);
     },
     onSuccess: (data) => {
       console.log(data.data?.data);
+      successMessage("Project Added Successfully");
+      goBack();
       setProjects(data?.data?.data);
     },
   });
 
+  const deleteMutation = useMutation((id) => deleteProject(id), {
+    onError: (error) => {
+      errorMessage(error?.response?.data?.message);
+    },
+    onSuccess: (data) => {
+      console.log(data.data?.data);
+
+      successMessage("Project deleted Successfully");
+      refetchProjects();
+    },
+  });
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const [openAddProjectModel, setOpenAddProjectModel] = useState(false);
+  const [skillList, setSkillList] = useState([]);
+  const [skill, setSkill] = useState("");
+  const [tagList, setTagList] = useState([]);
+  const [tag, setTag] = useState("");
+
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [link, setLink] = useState("");
+  const [level, setLevel] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState([]);
+
+  const theme = create();
+
+  const saveProject = () => {
+    var formData = new FormData();
+    formData.set("name", name);
+    formData.set("title", title);
+    formData.set("link", link);
+    formData.set("level", level);
+    formData.set("description", description);
+    formData.set("image", image);
+    formData.set("skillsUsed", skillList);
+    formData.set("tags", tagList);
+    formData.set("order", 3);
+
+    formData.forEach((item) => console.log(item));
+    addMutation.mutate(formData);
+  };
+  const addSkills = (skill) => {
+    setSkill("");
+    if (skillList.includes(skill) || skill === "") {
+      return;
+    }
+    setSkillList([...skillList, skill]);
+  };
+  const addtag = (tag) => {
+    setTag("");
+    if (tagList.includes(tag) || tag === "") {
+      return;
+    }
+    setTagList([...tagList, tag]);
+  };
+
+  const deleteProjectFunction = (id) => {
+    deleteMutation.mutate(id);
+  };
 
   const [projects, setProjects] = useState([]);
   const width425 = useWindowWide(425);
 
   return (
-    <WrapperContent title="Dashboard">
-      <div className="flex justify-between items-start w-full bg-black py-3 px-10">
-        <p className="px-10">Projects</p>
+    <WrapperContent title="Project">
+      <div
+        className={` mx-auto w-full max-w-[1100px] rounded-[5px] flex justify-between items-center w-full p-1`}
+      >
+        <p className="px-10 text-[20px]">Projects</p>
         <div className="border-4px bg-white-500">
           <button
-            className="flex justify-center
-           items-center bg-[#1e1e2f] hover:bg-[#e8e9fa] text-[#e8e9fa] hover:text-[#1e1e2f]  font-bold py-4 px-4 rounded"
+            className="flex justify-center sticky z-5 top-5
+           items-center bg-[#1e1e2f] hover:bg-[#e8e9fa] text-[#e8e9fa] hover:text-[#1e1e2f]  font-semiblod text-[12px] py-4 px-4 rounded-[4px]"
             onClick={() => {
               setOpenAddProjectModel(true);
             }}
@@ -222,42 +147,60 @@ const AdminProject = () => {
         projects.map((project, index) => (
           <div
             className={`flex flex-wrap flex-row justify-between items-start mx-auto w-full max-w-[1100px]  mt-10 rounded-[10px] p-10  ${
-              theme.theme === "light" ? "" : "bg-[#1e1e2f]"
+              theme.theme === "light" ? "bg-[#ffffff]" : "bg-[#1e1e2f]"
             }`}
           >
+            <div className="flex flex-row justify-start w-full items-center mt-5 gap-5">
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-[6px]"
+                onClick={() => {}}
+              >
+                Update
+              </button>
+              <div
+                className="items-center gap-5 hover:cursor-pointer
+               bg-red-500 hover:bg-red-700  transform hover:scale-2 transition-transform duration-300
+                text-white font-bold py-2 px-4 rounded-full "
+                onClick={() => {
+                  deleteProjectFunction(project._id);
+                }}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </div>
+            </div>
+
             <div
               className={`  ${
-                width425 ? "w-[400px]" : "w-full"
+                width425 ? "w-[450px]" : "w-full"
               } flex flex-col justify-start items-center mt-5`}
             >
-              <AdmiProjectItem
+              <AllTextFields
                 title="Name"
                 value={project?.name}
                 placeholder="Project Name"
               />
-              <AdmiProjectItem
+              <AllTextFields
                 title="Title"
                 value={project?.title}
                 placeholder="Project Title"
               />
-              <AdmiProjectItem
+              <AllTextFields
                 title="Link"
                 value={project?.link}
                 placeholder="Enter Site Link"
               />
-              <AdmiProjectItem
+              <AllTextFields
                 title="level"
                 value={project?.level}
                 isSelect={true}
                 placeholder="Enter Site Link"
               />
             </div>
-
-            <div className={`${width425 ? "w-[400px]" : "w-full"}`}>
+            <div className={`${width425 ? "w-[450px]" : "w-full"}`}>
               <div className="flex flex-col justify-start items-start">
                 <div className="flex flex-col w-full justify-start items-center mt-5">
                   {project.highlights?.map((item, index) => (
-                    <AdmiProjectItem
+                    <AllTextFields
                       lines={3}
                       title={`Highlights ${index + 1}`}
                       textArea={item}
@@ -266,7 +209,7 @@ const AdminProject = () => {
                   ))}
                 </div>
 
-                <AdmiProjectItem
+                <AllTextFields
                   title="Project Description"
                   lines={10}
                   textArea={project?.description}
@@ -317,12 +260,12 @@ const AdminProject = () => {
             <div className="flex flex-row justify-start items-center mt-5">
               {project.image.map((item, index) => (
                 <div
-                  className={`flex flex-col justify-start items-center mt-5 position-relative
+                  className={`flex flex-col justify-start items-center mt-5 relative
                    ${width425 ? "w-[300px] h-[300px]" : "w-full"}`}
                 >
-                  <div className="flex flex-row justify-center items-center position-absolute top-5 right-5 rounded-full p-2 w-[30px] h-[30px] bg-black opacity-50 bg-red-500 hover:bg-red-700 cursor-pointer">
+                  <div className="flex flex-row justify-center items-center absolute top-5 right-5 rounded-full p-2 w-[30px] h-[30px] bg-black bg-white-400 cursor-pointer">
                     <FontAwesomeIcon
-                      color="black"
+                      color="white"
                       size="lg"
                       icon="fa-solid fa-xmark"
                     />
@@ -337,11 +280,177 @@ const AdminProject = () => {
             </div>
           </div>
         ))}
-      <AddNewProject
+      <AddNew
         open={openAddProjectModel}
         cancel={() => {
           setOpenAddProjectModel(false);
         }}
+        title={"Add New Project"}
+        onSubmit={() => {
+          saveProject();
+        }}
+        body={
+          <div className="mt-2">
+            <AllTextFields
+              isFullWidth={true}
+              title="Name"
+              classs={"text-gray-500 flex-col w-full"}
+              value={name}
+              name="name"
+              onChange={(e) => {
+                console.log(e);
+                setName(e);
+              }}
+              placeholder="Name of project"
+            />
+            <AllTextFields
+              isFullWidth={true}
+              title="Title"
+              classs={"text-gray-500 flex-col w-full"}
+              value={title}
+              onChange={(e) => setTitle(e)}
+              placeholder="Enter project title"
+            />
+            <AllTextFields
+              isFullWidth={true}
+              title="Description"
+              classs={"text-gray-500 flex-col w-full"}
+              value={description}
+              onChange={(e) => setDescription(e)}
+              placeholder="Enter project description"
+            />
+            <AllTextFields
+              isFullWidth={true}
+              title="Link"
+              classs={"text-gray-500 flex-col w-full"}
+              value={link}
+              onChange={(e) => setLink(e)}
+              placeholder="Link of project"
+            />
+            <AllTextFields
+              isFullWidth={true}
+              title="Level"
+              classs={"text-gray-500 flex-col w-full"}
+              dropdownList={["Bignner", "Intermediate", "Advanced", "Expert"]}
+              value={level}
+              onChange={(e) => setLevel(e)}
+              placeholder="level of project"
+            />
+            <div className="flex w-full flex-col justify-start items-start mb-10">
+              <label
+                className={` ${
+                  theme.theme === "light" && "text-[#1e1e2f]"
+                } font-semibold text-[14px]`}
+              >
+                Skills
+              </label>
+              <div className="flex flex-row w-full justify-start items-center mt-5">
+                <input
+                  type="text"
+                  className={`h-[45px] rounded-[10px] text-[13px] border-[1px] border-[#e8e9fa] outline-none px-4 mt-2 ${
+                    theme.theme !== "light" && "text-[#1e1e2f]"
+                  }`}
+                  onChange={(e) => setSkill(e.target.value)}
+                  placeholder="Python"
+                  value={skill}
+                />
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+                  onClick={() => addSkills(skill)}
+                >
+                  Add
+                </button>
+              </div>
+              <div className="flex flex-wrap mt-4">
+                {skillList.length > 0 &&
+                  skillList.map((item, index) => (
+                    <div
+                      className="mr-2 flex mb-2 bg-[#e8e9fa] rounded-full px-6 py-3 text-[#1e1e2f] font-normal hover:bg-[#1e1e2f] hover:text-[#e8e9fa] cursor-pointer
+                        text-[13px]
+                        "
+                    >
+                      {item}
+                      <div
+                        className="w-[20px] h-[20px] ml-2 rounded-full hover:bg-red-500 hover:text-white flex justify-center items-center mx-auto justify-center"
+                        onClick={() => {
+                          setSkillList(
+                            skillList.filter((skill) => skill !== item)
+                          );
+                        }}
+                      >
+                        <FontAwesomeIcon className="" icon={faClose} />
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            <div className="flex w-full flex-col justify-start items-start mb-10">
+              <label
+                className={` ${
+                  theme.theme === "light" && "text-[#1e1e2f]"
+                } font-semibold text-[14px]`}
+              >
+                Tags
+              </label>
+              <div className="flex flex-row w-full justify-start items-center mt-5">
+                <input
+                  type="text"
+                  className={`h-[45px] rounded-[10px] text-[13px] border-[1px] border-[#e8e9fa] outline-none px-4 mt-2 ${
+                    theme.theme !== "light" && "text-[#1e1e2f]"
+                  }`}
+                  onChange={(e) => setTag(e.target.value)}
+                  placeholder="Python"
+                  value={tag}
+                />
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
+                  onClick={() => addtag(tag)}
+                >
+                  Add
+                </button>
+              </div>
+              <div className="flex flex-wrap mt-4">
+                {tagList.length > 0 &&
+                  tagList.map((item, index) => (
+                    <div
+                      className="mr-2 flex mb-2 bg-[#e8e9fa] rounded-full px-6 py-3 text-[#1e1e2f] font-normal hover:bg-[#1e1e2f] hover:text-[#e8e9fa] cursor-pointer
+                        text-[13px]
+                        "
+                    >
+                      {item}
+                      <div
+                        className="w-[20px] h-[20px] ml-2 rounded-full hover:bg-red-500 hover:text-white flex justify-center items-center mx-auto justify-center"
+                        onClick={() => {
+                          setTagList(tagList.filter((tag) => tag !== item));
+                        }}
+                      >
+                        <FontAwesomeIcon className="" icon={faClose} />
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+            <div className="flex w-full flex-col justify-start items-start mb-10">
+              <label
+                className={` ${
+                  theme.theme === "light" && "text-[#1e1e2f]"
+                } font-semibold text-[14px]`}
+              >
+                Image
+              </label>
+              <div className="flex flex-row w-full justify-start items-center mt-5">
+                <input
+                  onChange={(e) => setImage(e.target.files[0])}
+                  name="image"
+                  type="file"
+                  className={`h-[45px] rounded-[10px] text-[13px] border-[1px] border-[#e8e9fa] outline-none px-4 mt-2 ${
+                    theme.theme !== "light" && "text-[#1e1e2f]"
+                  }`}
+                />
+              </div>
+            </div>
+          </div>
+        }
       />
     </WrapperContent>
   );

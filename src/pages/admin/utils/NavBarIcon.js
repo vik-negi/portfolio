@@ -20,7 +20,7 @@ export const NavbarIcon = ({
       {logo2 && <img src={logo2} className="w-1/3 h-1/3" />}
       {icon && (
         <i
-          className={`${icon} text-[25px] text-white flex justify-center items-center flex-col`}
+          className={`${icon} text-[25px] flex justify-center items-center flex-col`}
           style={{ width: "50px", height: "45px" }}
         ></i>
       )}

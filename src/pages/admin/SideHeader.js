@@ -9,6 +9,7 @@ import { useWindowWide } from "./utils/useWindowWide";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ThemeModeProvider } from "../../context/ThemeContext";
 import { AppContext } from "../../context/Context";
+import { Button } from "@material-tailwind/react";
 
 export const SideBarItem = ({
   open,
@@ -16,12 +17,14 @@ export const SideBarItem = ({
   icon,
   image,
   lable,
+  customStyle = "",
   fontAweson,
 }) => {
   return (
     <Link
-      to={route || "/dashboard"}
-      className="logo-with-text flex justify-start items-center text-white hover:text-[#1e1e2f] hover:bg-[#e8e9fa] hover:cursor-pointer rounded-[10px] w-full"
+      to={route || "#"}
+      className={`logo-with-text flex justify-start items-center  hover:bg-[#e8e9fa] hover:bg-opacity-25 
+       hover:cursor-pointer rounded-[10px] w-full ${customStyle}`}
     >
       {image && (
         <div style={{ width: "50px", height: "45px" }}>
@@ -37,7 +40,7 @@ export const SideBarItem = ({
       )}
       {icon && (
         <i
-          className={`${icon} text-[25px] flex justify-center items-center flex-col`}
+          className={`${icon} text-[16px] flex justify-center items-center flex-col`}
           style={{ width: "50px", height: "45px" }}
         ></i>
       )}
@@ -49,7 +52,7 @@ export const SideBarItem = ({
         />
       )}
       {open ? (
-        <p className="text-[15px] font-semibold text-inherit ml-2 mb-0">
+        <p className="text-[14px] font-normal text-inherit ml-2 mb-0">
           {lable || ""}
         </p>
       ) : null}
@@ -59,9 +62,20 @@ export const SideBarItem = ({
 
 export const SideBarItemsContainer = ({ open, setOpen }) => {
   const { state, updateSideBarOpen } = useContext(AppContext);
+  const store = create();
+
+  const customStyle = `${
+    store.theme === "light" ? "text-black" : "text-white"
+  }`;
+
+  const switchTheme = (themeName) => {
+    console.log(themeName);
+    store.setTheme(themeName);
+    localStorage.setItem("theme", themeName);
+  };
   return (
     <div className="">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center ">
         {open ? (
           <Link
             to="/dashboard"
@@ -84,6 +98,7 @@ export const SideBarItemsContainer = ({ open, setOpen }) => {
         <NavbarIcon
           icon={"fa-solid fa-bars"}
           styles="w-[55px] h-[55px]"
+          customStyle={customStyle}
           handleClick={() => {
             setOpen(!open);
             console.log("side bar : ", state.sideBarOpen);
@@ -93,6 +108,7 @@ export const SideBarItemsContainer = ({ open, setOpen }) => {
       </div>
       <SideBarItem
         open={open}
+        customStyle={customStyle}
         icon={"fa-solid fa-house"}
         route="/admin/dashboard"
         lable="DASHBOARD"
@@ -100,6 +116,7 @@ export const SideBarItemsContainer = ({ open, setOpen }) => {
 
       <SideBarItem
         open={open}
+        customStyle={customStyle}
         route="/admin/about"
         icon="fa-regular fa-address-card"
         // image="/images/app_logo.png"
@@ -107,6 +124,7 @@ export const SideBarItemsContainer = ({ open, setOpen }) => {
       />
       <SideBarItem
         open={open}
+        customStyle={customStyle}
         route="/admin/experiences"
         icon="fa-solid fa-briefcase"
         // image="/images/app_logo.png"
@@ -114,11 +132,23 @@ export const SideBarItemsContainer = ({ open, setOpen }) => {
       />
       <SideBarItem
         open={open}
+        customStyle={customStyle}
         route="/admin/projects"
         icon="fa-solid fa-laptop-file"
         // image="/images/app_logo.png"
         lable="PROJECTS"
       />
+      <div
+        onClick={(e) => switchTheme(store.theme === "light" ? "dark" : "light")}
+      >
+        <SideBarItem
+          open={open}
+          customStyle={customStyle}
+          icon={`${store.theme == "light" ? "fas fa-moon" : "fas fa-sun"}`}
+          // image="/images/app_logo.png"
+          lable="APPERANCE"
+        />
+      </div>
 
       {/* <li>
               <NavLink to="/dashboard" className="sidebar-sub-toggle">
@@ -134,6 +164,7 @@ function SideHeader() {
   const [open, setOpen] = useState(true);
   const [drawerStyle, setDrawerStyle] = useState("");
   const [openUser, setOpenUser] = useState(false);
+  const theme = create();
 
   // const { isError, error, data } = useQuery("settings", getCompany);
 
@@ -145,9 +176,11 @@ function SideHeader() {
 
   return (
     <div
-      className={`sticky top-0 h-[100vh] ${drawerStyle} ml-[0px] px-2 bg-[#1e1e2f]`}
+      className={`sticky top-0 h-[100vh] ${drawerStyle} ml-[0px] px-2 ${
+        theme.theme === "light" ? "bg-[#ffffff]" : "bg-[#100F22]"
+      } ${theme.theme === "light" && "border-r-[1.5px] border-[#e8e9fa]"}`}
       style={{
-        width: open && isSmallScreen ? "250px" : "70px",
+        width: open && isSmallScreen ? "220px" : "70px",
       }}
     >
       <div className="h-[100%]">
@@ -156,7 +189,7 @@ function SideHeader() {
             open={isSmallScreen && open}
             setOpen={setOpen}
           />
-          <div className="mb-3 flex items-center justify-center bg-[#b23b3b] rounded-[5px] h-[45px]">
+          <div className="mb-3 mr-3 flex items-center justify-center bg-[#b23b3b] bg-opacity-50  rounded-[5px] h-[45px]">
             <a
               href="#1"
               onClick={() => signout()}
@@ -164,7 +197,7 @@ function SideHeader() {
             >
               <i className="ti-close"></i>
               {open && isSmallScreen && (
-                <p className="text-md mb-0 font-bold text-red ml-2">Logout</p>
+                <p className="text-md mb-0  text-red ml-2">Logout</p>
               )}
             </a>
           </div>

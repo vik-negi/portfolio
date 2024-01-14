@@ -310,8 +310,8 @@ const Skills = () => {
       {Object.keys(skills).map((skill, index) => {
         console.log("skills.length", skills[skill].length);
         const skillsToShow =
-          skill.length > 3 && !showMoreSkills
-            ? skills[skill].slice(0, 3)
+          skill.length > 10 && !showMoreSkills
+            ? skills[skill].slice(0, 10)
             : skills[skill];
         return (
           <>
@@ -324,7 +324,7 @@ const Skills = () => {
           </>
         );
       })}
-      {skills[activeTab].length > 3 && (
+      {skills[activeTab].length > 10 && (
         <button
           onClick={() => setShowMoreSkills(!showMoreSkills)}
           className={`bg-[#16a34a] hover:bg-[#1fd863] text-white font-bold py-2 my-10 px-4 rounded w-[125px] mx-auto`}
