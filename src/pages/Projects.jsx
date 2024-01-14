@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getProjects } from "../axios/dashboard";
+import MyData from "../data/MyData";
 
 export default function Project({ username }) {
   // const Projects = [
@@ -46,6 +47,9 @@ export default function Project({ username }) {
     onSuccess: (data) => {
       console.log(data.data?.data);
       setProjects(data.data?.data);
+    },
+    onError: (error) => {
+      setProjects(MyData.projects);
     },
   });
 

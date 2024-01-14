@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import DateTimeFormatter from "../utils/dateTime_functionality";
 import { Link } from "react-router-dom";
 import create from "../utils/Theme";
+import MyData from "../data/MyData";
 
 const ExperienceTimeline = ({ experience }) => {
   const theme = create();
@@ -85,6 +86,9 @@ export default function Experiences({ username }) {
   const { data } = useQuery(["experience"], () => getExperience(username), {
     onSuccess: (data) => {
       setExperiences(data?.data?.data?.experiences);
+    },
+    onError: (error) => {
+      setExperiences(MyData.experience.experiences);
     },
   });
 

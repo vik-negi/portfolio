@@ -5,6 +5,7 @@ import create, { themes } from "../utils/Theme";
 import { Ripple, initTE } from "tw-elements";
 import { getAbout } from "../axios/dashboard.js";
 import { useQuery, useQueryClient, useMutation } from "react-query";
+import MyData from "../data/MyData.jsx";
 
 const About = ({ username, profile }) => {
   const queryClient = useQueryClient();
@@ -34,6 +35,9 @@ const About = ({ username, profile }) => {
   const mutation = useMutation((id) => getAbout(username), {
     onSuccess: () => {
       queryClient.invalidateQueries("avatar");
+    },
+    onError: (error) => {
+      setAbout(MyData.about);
     },
   });
   var data = null;

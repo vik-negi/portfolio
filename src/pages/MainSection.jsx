@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import StringUtils from "../utils/String";
 import { useQuery } from "react-query";
 import { publicInfo } from "../axios/dashboard";
+import MyData from "../data/MyData";
 
 export default function MainSection({ username, profile }) {
   const [userInfo, setUserInfo] = useState();
@@ -13,6 +14,9 @@ export default function MainSection({ username, profile }) {
   const { isLoading } = useQuery(["data"], () => publicInfo(username), {
     onSuccess: (data) => {
       setUserInfo(data.data?.data);
+    },
+    onError: (error) => {
+      setUserInfo(MyData.publicInfo);
     },
   });
 
