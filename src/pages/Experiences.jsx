@@ -83,6 +83,9 @@ const ExperienceTimeline = ({ experience }) => {
 };
 
 export default function Experiences({ username }) {
+  if (username === "vikramnegi-9162604468") {
+    setExperiences(MyData.experience.experiences);
+  }
   const { data } = useQuery(["experience"], () => getExperience(username), {
     onSuccess: (data) => {
       setExperiences(data?.data?.data?.experiences);

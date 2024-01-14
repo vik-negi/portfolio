@@ -7,8 +7,8 @@ import MyData from "../data/MyData";
 export default function MainSection({ username, profile }) {
   const [userInfo, setUserInfo] = useState();
 
-  if (username === undefined) {
-    username = "vikramnegi-9162604468";
+  if (username === undefined || username === "vikramnegi-9162604468") {
+    setUserInfo(MyData.publicInfo);
   }
 
   const { isLoading } = useQuery(["data"], () => publicInfo(username), {

@@ -32,6 +32,10 @@ const About = ({ username, profile }) => {
   //   console.log("about : ", data?.data?.data);
   // }
 
+  if (username == "vikramnegi-9162604468") {
+    setAbout(MyData.about);
+  }
+
   const mutation = useMutation((id) => getAbout(username), {
     onSuccess: () => {
       queryClient.invalidateQueries("avatar");

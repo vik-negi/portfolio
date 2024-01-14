@@ -43,6 +43,9 @@ export default function Project({ username }) {
   // ];
 
   const [Projects, setProjects] = useState();
+  if (username == "vikramnegi-9162604468") {
+    setProjects(MyData.projects);
+  }
   useQuery("projects", () => getProjects(username), {
     onSuccess: (data) => {
       console.log(data.data?.data);
