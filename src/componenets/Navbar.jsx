@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 import Brightness from "../assets/svg/brightness.svg";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLaptop,
+  faBook,
+  faProjectDiagram,
+  faHome,
+  faSkiing,
+} from "@fortawesome/free-solid-svg-icons";
 import { useThemeMode } from "../context/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
@@ -110,7 +117,7 @@ export default function Navbar() {
         }}
         className={` navbar ${smStyle}`}
       >
-        <ul className="navbar-list">
+        <ul className={`navbar-list `}>
           <li>
             <Link
               className={`${activeSection === "home" && "active"} navbar-link`}
@@ -119,7 +126,21 @@ export default function Navbar() {
               onClick={() => handleSectionClick("home")}
               tabIndex="4"
             >
-              Home
+              <div
+                style={{
+                  color: `${
+                    bgColor === "transparent" && store.theme === "light"
+                      ? "black"
+                      : "white"
+                  }`,
+                }}
+                className="flex items-center gap-2 justify-center"
+              >
+                <div className="border-[1px] w-[28px] h-[28px] flex justify-center items-center border-white rounded-full">
+                  <FontAwesomeIcon icon={faHome} className="p-0 m-0" />
+                </div>
+                {activeSection === "home" ? "Home" : ""}
+              </div>
             </Link>
           </li>
           {/* <li><a className={`${""} navbar-link`} name="about" onClick={toggleNav()} tabIndex="5">About</a></li> */}
@@ -133,7 +154,21 @@ export default function Navbar() {
               tabIndex="6"
               to="/skills"
             >
-              Skills
+              <div
+                style={{
+                  color: `${
+                    bgColor === "transparent" && store.theme === "light"
+                      ? "black"
+                      : "white"
+                  }`,
+                }}
+                className="flex items-center gap-2 justify-center"
+              >
+                <div className="border-[1px] w-[28px] h-[28px] flex justify-center items-center border-white rounded-full">
+                  <FontAwesomeIcon icon={faSkiing} className="p-2" />
+                </div>
+                {activeSection === "skills" ? "Skills" : ""}
+              </div>
             </Link>
           </li>
           <li>
@@ -146,7 +181,21 @@ export default function Navbar() {
               tabIndex="7"
               to="/projects"
             >
-              Projects
+              <div
+                style={{
+                  color: `${
+                    bgColor === "transparent" && store.theme === "light"
+                      ? "black"
+                      : "white"
+                  }`,
+                }}
+                className="flex items-center gap-2 justify-center"
+              >
+                <div className="border-[1px] w-[28px] h-[28px]  flex justify-center items-center  border-white rounded-full">
+                  <FontAwesomeIcon icon={faProjectDiagram} className="p-2" />
+                </div>
+                {activeSection === "projects" ? "Projects" : ""}
+              </div>
             </Link>
           </li>
           <li>
@@ -159,7 +208,21 @@ export default function Navbar() {
               onClick={() => handleSectionClick("education")}
               tabIndex="8"
             >
-              Education
+              <div
+                style={{
+                  color: `${
+                    bgColor === "transparent" && store.theme === "light"
+                      ? "black"
+                      : "white"
+                  }`,
+                }}
+                className="flex items-center gap-2 justify-center"
+              >
+                <div className="border-[1px] w-[28px] h-[28px] flex justify-center items-center border-white rounded-full">
+                  <FontAwesomeIcon icon={faBook} className="" />
+                </div>
+                {activeSection === "education" ? "Education" : ""}
+              </div>
             </Link>
           </li>
           <li>
@@ -172,7 +235,21 @@ export default function Navbar() {
               onClick={() => handleSectionClick("experience")}
               tabIndex="9"
             >
-              Experience
+              <div
+                style={{
+                  color: `${
+                    bgColor === "transparent" && store.theme === "light"
+                      ? "black"
+                      : "white"
+                  }`,
+                }}
+                className="flex items-center gap-2 justify-center"
+              >
+                <div className="border-[1px] text-center mx-auto border-white rounded-full">
+                  <FontAwesomeIcon icon={faLaptop} className="p-2" />
+                </div>
+                {activeSection === "experience" ? "Experience" : ""}
+              </div>
             </Link>
           </li>
         </ul>
