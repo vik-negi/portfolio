@@ -1,44 +1,43 @@
 import { React, useState } from "react";
-import { SideBarItem } from "../SideHeader";
+import { SideBarItem, SideBarItemsContainer } from "../SideHeader";
 import { NavbarIcon } from "./NavBarIcon";
+import create from "../../../utils/Theme";
 
 const MobileNavbar = () => {
   const [open, setOpen] = useState(false);
+
+  const store = create();
+
+  const customStyle = `${
+    store.theme === "light" ? "text-black" : "text-white"
+  }`;
 
   return (
     <div className="sidebar w-[100%]">
       <div className="flex flex-row justify-between items-center w-[100%]">
         <SideBarItem open={true} route="/admin/dashboard" lable="ABC Company" />
-        <NavbarIcon
+        {/* <NavbarIcon
           styles="bg-[#2c2f32] text-[#ffffff] rounded-[10px] my-1"
           name="menu"
           icon="ti-layout-list-thumb"
           handleClick={() => setOpen(!open)}
+        /> */}
+
+        <NavbarIcon
+          icon={"fa-solid fa-bars"}
+          styles="w-[55px] h-[55px]"
+          customStyle={customStyle}
+          handleClick={() => {
+            setOpen(!open);
+          }}
         />
       </div>
       {open && (
-        <div className="bg-[#e2e2e2] rounded-[10px] my-1 mx-1">
-          <SideBarItem
-            open={open}
-            route="/dashboard"
-            image="/images/app_logo.png"
-            lable="Dashboard"
-          />
-          <SideBarItem
-            open={open}
-            route="/members"
-            icon="ti-layout-list-thumb"
-            // image="/images/app_logo.png"
-            lable="Members"
-          />
-          <SideBarItem
-            open={open}
-            route="/duty-manager"
-            icon="ti-layout-list-thumb"
-            // image="/images/app_logo.png"
-            lable="Duty Manager"
-          />
-        </div>
+        <SideBarItemsContainer
+          open={true && open}
+          setOpen={setOpen}
+          isMobileNavbar={true}
+        />
       )}
     </div>
   );

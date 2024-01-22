@@ -78,12 +78,12 @@ const Skills = () => {
         subtitle: "JavaScript library",
         image: "path/to/react-image.png",
       },
-      {
-        name: "Vue.js",
-        title: "Frontend Development",
-        subtitle: "JavaScript framework",
-        image: "path/to/vuejs-image.png",
-      },
+      // {
+      //   name: "Vue.js",
+      //   title: "Frontend Development",
+      //   subtitle: "JavaScript framework",
+      //   image: "path/to/vuejs-image.png",
+      // },
       {
         name: "Node.js",
         title: "Backend Development",
@@ -102,12 +102,12 @@ const Skills = () => {
         subtitle: "Programming language",
         image: "path/to/python-image.png",
       },
-      {
-        name: "Ruby on Rails",
-        title: "Backend Development",
-        subtitle: "Web application framework",
-        image: "path/to/ruby-on-rails-image.png",
-      },
+      // {
+      //   name: "Ruby on Rails",
+      //   title: "Backend Development",
+      //   subtitle: "Web application framework",
+      //   image: "path/to/ruby-on-rails-image.png",
+      // },
       {
         name: "MongoDB",
         title: "Database",
@@ -128,24 +128,24 @@ const Skills = () => {
         subtitle: "Cloud Computing",
         image: "path/to/aws-image.png",
       },
-      {
-        name: "Azure",
-        title: "Microsoft Azure",
-        subtitle: "Cloud Computing",
-        image: "path/to/azure-image.png",
-      },
-      {
-        name: "Google Cloud",
-        title: "Google Cloud Platform",
-        subtitle: "Cloud Computing",
-        image: "path/to/google-cloud-image.png",
-      },
-      {
-        name: "DigitalOcean",
-        title: "DigitalOcean",
-        subtitle: "Cloud Computing",
-        image: "path/to/digitalocean-image.png",
-      },
+      // {
+      //   name: "Azure",
+      //   title: "Microsoft Azure",
+      //   subtitle: "Cloud Computing",
+      //   image: "path/to/azure-image.png",
+      // },
+      // {
+      //   name: "Google Cloud",
+      //   title: "Google Cloud Platform",
+      //   subtitle: "Cloud Computing",
+      //   image: "path/to/google-cloud-image.png",
+      // },
+      // {
+      //   name: "DigitalOcean",
+      //   title: "DigitalOcean",
+      //   subtitle: "Cloud Computing",
+      //   image: "path/to/digitalocean-image.png",
+      // },
       {
         name: "Heroku",
         title: "Heroku",
@@ -158,12 +158,12 @@ const Skills = () => {
         subtitle: "Mobile and Web Application Platform",
         image: "path/to/firebase-image.png",
       },
-      {
-        name: "Kubernetes",
-        title: "Kubernetes",
-        subtitle: "Container Orchestration",
-        image: "path/to/kubernetes-image.png",
-      },
+      // {
+      //   name: "Kubernetes",
+      //   title: "Kubernetes",
+      //   subtitle: "Container Orchestration",
+      //   image: "path/to/kubernetes-image.png",
+      // },
       {
         name: "Docker",
         title: "Docker",
@@ -176,12 +176,12 @@ const Skills = () => {
         subtitle: "Software Development Process",
         image: "path/to/cicd-image.png",
       },
-      {
-        name: "Serverless",
-        title: "Serverless Architecture",
-        subtitle: "Cloud Computing",
-        image: "path/to/serverless-image.png",
-      },
+      // {
+      //   name: "Serverless",
+      //   title: "Serverless Architecture",
+      //   subtitle: "Cloud Computing",
+      //   image: "path/to/serverless-image.png",
+      // },
     ],
     "App Development": [
       {
@@ -196,54 +196,54 @@ const Skills = () => {
         subtitle: "Cross-platform apps",
         image: "path/to/flutter-image.png",
       },
-      {
-        name: "Swift",
-        title: "iOS App Development",
-        subtitle: "Apple's programming language",
-        image: "path/to/swift-image.png",
-      },
-      {
-        name: "Kotlin",
-        title: "Android App Development",
-        subtitle: "Android programming language",
-        image: "path/to/kotlin-image.png",
-      },
-      {
-        name: "Ionic",
-        title: "Hybrid App Development",
-        subtitle: "Mobile App Development",
-        image: "path/to/ionic-image.png",
-      },
-      {
-        name: "Electron",
-        title: "Desktop App Development",
-        subtitle: "Cross-platform framework",
-        image: "path/to/electron-image.png",
-      },
-      {
-        name: "React Desktop",
-        title: "Desktop App Development",
-        subtitle: "Cross-platform framework",
-        image: "path/to/react-desktop-image.png",
-      },
-      {
-        name: "JavaFX",
-        title: "Desktop App Development",
-        subtitle: "Java library for UI",
-        image: "path/to/javafx-image.png",
-      },
-      {
-        name: "C#",
-        title: "Windows App Development",
-        subtitle: "Microsoft's programming language",
-        image: "path/to/csharp-image.png",
-      },
-      {
-        name: "Unity",
-        title: "Game Development",
-        subtitle: "Game engine",
-        image: "path/to/unity-image.png",
-      },
+      // {
+      //   name: "Swift",
+      //   title: "iOS App Development",
+      //   subtitle: "Apple's programming language",
+      //   image: "path/to/swift-image.png",
+      // },
+      // {
+      //   name: "Kotlin",
+      //   title: "Android App Development",
+      //   subtitle: "Android programming language",
+      //   image: "path/to/kotlin-image.png",
+      // },
+      // {
+      //   name: "Ionic",
+      //   title: "Hybrid App Development",
+      //   subtitle: "Mobile App Development",
+      //   image: "path/to/ionic-image.png",
+      // },
+      // {
+      //   name: "Electron",
+      //   title: "Desktop App Development",
+      //   subtitle: "Cross-platform framework",
+      //   image: "path/to/electron-image.png",
+      // },
+      // {
+      //   name: "React Desktop",
+      //   title: "Desktop App Development",
+      //   subtitle: "Cross-platform framework",
+      //   image: "path/to/react-desktop-image.png",
+      // },
+      // {
+      //   name: "JavaFX",
+      //   title: "Desktop App Development",
+      //   subtitle: "Java library for UI",
+      //   image: "path/to/javafx-image.png",
+      // },
+      // {
+      //   name: "C#",
+      //   title: "Windows App Development",
+      //   subtitle: "Microsoft's programming language",
+      //   image: "path/to/csharp-image.png",
+      // },
+      // {
+      //   name: "Unity",
+      //   title: "Game Development",
+      //   subtitle: "Game engine",
+      //   image: "path/to/unity-image.png",
+      // },
     ],
 
     Blockchain: [

@@ -74,7 +74,6 @@ export default function Navbar() {
   const [bgColor, setBgColor] = useState("");
 
   const toggleNav = () => {
-    console.log(smStyle);
     if (smStyle === "right-0") {
       setSmStyle("right-[225px]");
     } else {

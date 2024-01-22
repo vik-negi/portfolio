@@ -60,7 +60,7 @@ export const SideBarItem = ({
   );
 };
 
-export const SideBarItemsContainer = ({ open, setOpen }) => {
+export const SideBarItemsContainer = ({ open, setOpen, isMobileNavbar }) => {
   const { state, updateSideBarOpen } = useContext(AppContext);
   const store = create();
 
@@ -76,7 +76,7 @@ export const SideBarItemsContainer = ({ open, setOpen }) => {
   return (
     <div className="">
       <div className="flex justify-between items-center ">
-        {open ? (
+        {open && isMobileNavbar == null ? (
           <Link
             to="/dashboard"
             className="logo-with-text flex justify-between items-center mx-3"
@@ -94,17 +94,18 @@ export const SideBarItemsContainer = ({ open, setOpen }) => {
           </Link>
         ) : null}
         {/* <span>{data?.data?.result[0]?.applicationName || "GYM"}</span> */}
-
-        <NavbarIcon
-          icon={"fa-solid fa-bars"}
-          styles="w-[55px] h-[55px]"
-          customStyle={customStyle}
-          handleClick={() => {
-            setOpen(!open);
-            console.log("side bar : ", state.sideBarOpen);
-            updateSideBarOpen({ sideBarOpen: !open });
-          }}
-        />
+        {isMobileNavbar == null && (
+          <NavbarIcon
+            icon={"fa-solid fa-bars"}
+            styles="w-[55px] h-[55px]"
+            customStyle={customStyle}
+            handleClick={() => {
+              setOpen(!open);
+              console.log("side bar : ", state.sideBarOpen);
+              updateSideBarOpen({ sideBarOpen: !open });
+            }}
+          />
+        )}
       </div>
       <SideBarItem
         open={open}
