@@ -33,9 +33,26 @@ class MyData {
     experiences: [
       {
         title: "Flutter Developer",
+        company: "Koshiqa",
+        location: "Remote",
+        from: "2024-01-01T00:00:00.000Z",
+        to: null,
+        current: true,
+        description:
+          "As a software developer at Koshiqa, my primary focus is on the Flutter-based Kosiqua app. I contribute to the app's development, implementing new features, optimizing code for performance, and collaborating with cross-functional teams. My role involves troubleshooting and resolving technical issues to ensure a seamless and reliable user experience. I actively stay informed about the latest Flutter and mobile development practices to contribute to the continuous improvement of the app.",
+        skills: ["Flutter", "Rest Api's", "Node.js"],
+        highlights: [
+          "Lead the design and implementation of new features based on business requirements and user feedback.",
+          "Debug and resolve software defects, ensuring a high-quality, bug-free application.",
+          "Facilitate seamless data retrieval and enhanced application functionality through integration with APIs and third-party services.",
+        ],
+        _id: "65197e8edf5bf9620c786819",
+      },
+      {
+        title: "Software Developer",
         company: "Employee Forums",
         location: "Mumbai, Maharashtra",
-        from: "2023-09-01T00:00:00.000Z",
+        from: "2023-07-01T00:00:00.000Z",
         to: null,
         current: true,
         description:
@@ -53,8 +70,8 @@ class MyData {
         company: "NeonFlake",
         location: "Remote",
         from: "2022-09-01T00:00:00.000Z",
-        to: null,
-        current: true,
+        to: "2023-12-01T00:00:00.000Z",
+        current: false,
         description:
           "<p>Built 5+ projects of cross-platform mobile applications and 3 projects of the web. Contributed to implementing features and functionalities as per design specifications and project requirements. Integrated and developed 500+ APIs, reducing API response time by 40%. Integrated third-party APIs and designed server-side logic and APIs using NodeJs to support web and mobile applications. Designed MongoDB schemas and wrote optimized queries.</p>",
         skills: ["Cross-platform development", "Web development", "Node.js"],

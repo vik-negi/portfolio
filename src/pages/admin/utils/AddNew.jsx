@@ -1,5 +1,7 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function AddNew({
   open = false,
@@ -7,6 +9,7 @@ export default function AddNew({
   title,
   body,
   onSubmit,
+  cross,
 }) {
   const cancelButtonRef = useRef(null);
 
@@ -16,7 +19,7 @@ export default function AddNew({
         as="div"
         className="relative z-50"
         initialFocus={cancelButtonRef}
-        onClose={cancel}
+        onClose={cancel ?? cross}
       >
         <Transition.Child
           as={Fragment}
@@ -56,30 +59,44 @@ export default function AddNew({
                   <div className="sm:items-start bg">
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                       <Dialog.Title
-                        as="h3"
-                        className="text-base font-semibold leading-6 text-gray-900"
+                        as="h2"
+                        className="text-base font-semibold leading-6 text-gray-900 flex justify-between mb-5"
                       >
-                        {title}
+                        <div className="flex items-center gap-2 text-[16px]">
+                          {title}
+                        </div>
+                        {cross && (
+                          <FontAwesomeIcon
+                            onClick={cross}
+                            icon={faXmark}
+                            className="h-12 w-12 :hover:text-red-500 cursor-pointer"
+                            aria-hidden="true"
+                          />
+                        )}
                       </Dialog.Title>
                       {body}
                     </div>
                   </div>
                   <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button
-                      type="button"
-                      className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                      onClick={onSubmit}
-                    >
-                      Submit
-                    </button>
-                    <button
-                      type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                      onClick={cancel}
-                      ref={cancelButtonRef}
-                    >
-                      Cancel
-                    </button>
+                    {onSubmit && (
+                      <button
+                        type="button"
+                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                        onClick={onSubmit}
+                      >
+                        Submit
+                      </button>
+                    )}
+                    {cancel && (
+                      <button
+                        type="button"
+                        className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                        onClick={cancel}
+                        ref={cancelButtonRef}
+                      >
+                        Cancel
+                      </button>
+                    )}
                   </div>
                 </div>
               </Dialog.Panel>

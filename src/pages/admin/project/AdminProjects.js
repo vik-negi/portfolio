@@ -94,10 +94,14 @@ const AdminProject = () => {
     formData.set("link", link);
     formData.set("level", level);
     formData.set("description", description);
-    formData.set("image", image);
+
     formData.set("skillsUsed", skillList);
     formData.set("tags", tagList);
     formData.set("order", 3);
+
+    image.forEach((img, index) => {
+      formData.append(`image${index}`, img);
+    });
 
     formData.forEach((item) => console.log(item));
     addMutation.mutate(formData);
@@ -257,11 +261,11 @@ const AdminProject = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row justify-start items-center mt-5">
+            <div className="flex flex-row justify-start items-center mt-5 flex-wrap gap-10">
               {project.image.map((item, index) => (
                 <div
                   className={`flex flex-col justify-start items-center mt-5 relative
-                   ${width425 ? "w-[300px] h-[300px]" : "w-full"}`}
+                   ${width425 ? "w-[300px] " : "w-full"}`}
                 >
                   <div className="flex flex-row justify-center items-center absolute top-5 right-5 rounded-full p-2 w-[30px] h-[30px] bg-black bg-white-400 cursor-pointer">
                     <FontAwesomeIcon
@@ -273,7 +277,7 @@ const AdminProject = () => {
                   <img
                     src={item}
                     alt="project"
-                    className="w-full h-[300px] object-cover rounded-[10px]"
+                    className="w-full  object-cover rounded-[10px]"
                   />
                 </div>
               ))}
@@ -436,17 +440,32 @@ const AdminProject = () => {
                   theme.theme === "light" && "text-[#1e1e2f]"
                 } font-semibold text-[14px]`}
               >
-                Image
+                Image {image != null && image.length > 0 && `(${image.length})`}
               </label>
               <div className="flex flex-row w-full justify-start items-center mt-5">
                 <input
-                  onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => setImage([...image, e.target.files[0]])}
                   name="image"
                   type="file"
                   className={`h-[45px] rounded-[10px] text-[13px] border-[1px] border-[#e8e9fa] outline-none px-4 mt-2 ${
                     theme.theme !== "light" && "text-[#1e1e2f]"
                   }`}
                 />
+              </div>
+              <div className="flex w-full justify-start items-center mt-5 flex-wrap">
+                {image.length > 0 &&
+                  image.map((img, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col justify-start items-center mt-5 mx-2"
+                    >
+                      <img
+                        src={URL.createObjectURL(img)}
+                        alt="project"
+                        className="w-[280px] h-[280px] object-cover rounded-[10px]"
+                      />
+                    </div>
+                  ))}
               </div>
             </div>
           </div>

@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { getProjects } from "../axios/dashboard";
 import MyData from "../data/MyData";
-import { CommonToolTip } from "../utils/CommonToolTip";
 import create, { themes } from "../utils/Theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Carousel, IconButton } from "@material-tailwind/react";
 import {
   faArrowRight,
   faGlobeAsia,
   faWifi,
 } from "@fortawesome/free-solid-svg-icons";
 import { social } from "../assets/svg/social/index.js";
+import CustomCarousel from "../utils/CustomCarousel.jsx";
 
 export default function Project({ username }) {
   // const Projects = [
@@ -100,14 +101,16 @@ export default function Project({ username }) {
                   className="max-w-xl mx-auto border-2 rounded-xl overflow-hidden"
                 >
                   <div className="flex flex-row gap-2 h-[200px] overflow-hidden">
-                    <img
+                    {/* <img
                       className="w-full h-full object-cover rounded-md hover:scale-125 transition-all duration-500 ease-in-out hover:shadow-2xl hover:cursor-pointer"
                       src={
                         project.image[0]
                         // "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.png"
                       }
                       alt="project-1"
-                    />
+                    /> */}
+
+                    <CustomCarousel images={project.image} />
                   </div>
                   <div className="m-4">
                     <div className="">
@@ -138,81 +141,13 @@ export default function Project({ username }) {
                         />
                         <FontAwesomeIcon
                           icon={faGlobeAsia}
+                          onClick={() => window.open(project.link, "_blank")}
                           className="text-[20px] hover:text-blue-500 hover:cursor-pointer hover:scale-125 transition-all duration-500 ease-in-out"
                         />
                       </div>
                     </div>
                   </div>
                 </article>
-                // <CommonToolTip
-                //   maxWidth={"w-[400px]"}
-                //   children={
-                //     <article key={i} className="">
-                //       <img
-                //         className="w-[300px] h-[300px] object-contain rounded-md"
-                //         src={
-                //           project.image[0]
-                //           // "https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/project-2.png"
-                //         }
-                //         alt="project-1"
-                //         // width="1920"
-                //         // height="2193"
-                //       />
-                //       <div className="">
-                //         <div className="">
-                //           <h2
-                //             className="text-2xl
-                //           "
-                //           >
-                //             {project.title}
-                //           </h2>
-                //           <p
-                //             className=" text-sm
-                //           "
-                //           >
-                //             {project.description}
-                //           </p>
-                //         </div>
-                //         <button className="card__button">Read more</button>
-                //       </div>
-                //     </article>
-                //   }
-                //   content={
-                //     <div
-                //       className={`flex flex-col gap-2 ${
-                //         theme.theme !== "light" ? "bg-blue-gray" : "bg-white"
-                //       }  z-10 w-full sm:w-[400px]`}
-                //     >
-                //       <img
-                //         src={project.image[0]}
-                //         alt="projetimg"
-                //         className="w-full h-[200px] object-cover rounded-md"
-                //       />
-                //       <h1 className="text-2xl text-left font-semibold">
-                //         {project.title}
-                //       </h1>
-                //       <p
-                //         className={`text-sm ${
-                //           theme.theme === "light" ? "text-black" : "text-white"
-                //         }`}
-                //       >
-                //         {project.description}
-                //       </p>
-                //       <div className="flex flex-row gap-2">
-                //         {project.tags.map((tag, i) => {
-                //           return (
-                //             <span
-                //               key={i}
-                //               className="text-xs px-2 py-1 rounded-md bg-gray-200 text-gray-700"
-                //             >
-                //               {tag}
-                //             </span>
-                //           );
-                //         })}
-                //       </div>
-                //     </div>
-                //   }
-                // />
               );
             })}
         </div>
