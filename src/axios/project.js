@@ -27,3 +27,14 @@ export const deleteProject = async (id) => {
   };
   return await Axios.delete(`/api/projects/${id}`, { headers: headers });
 };
+export const updateProject = async (data) => {
+  const { token } = isAutheticated();
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  };
+  return await Axios.put(`/api/projects/${data._id}`, data, {
+    headers: headers,
+  });
+};

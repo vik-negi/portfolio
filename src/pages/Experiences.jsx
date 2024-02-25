@@ -89,6 +89,9 @@ export default function Experiences({ username }) {
     setIsFirstTime(false);
     setExperiences(MyData.experience.experiences);
   }
+  if (username === undefined) {
+    username = "vikramnegi-9162604468";
+  }
   const { data } = useQuery(["experience"], () => getExperience(username), {
     onSuccess: (data) => {
       setExperiences(data?.data?.data?.experiences);

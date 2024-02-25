@@ -17,6 +17,7 @@ import {
   addProject,
   getAdminProjects,
   deleteProject,
+  updateProject,
 } from "../../../axios/project";
 import AddNewProject, { AddProjectItem } from "./components/AddNewProject";
 import AddNew from "../utils/AddNew";
@@ -57,6 +58,17 @@ const AdminProject = () => {
   });
 
   const deleteMutation = useMutation((id) => deleteProject(id), {
+    onError: (error) => {
+      errorMessage(error?.response?.data?.message);
+    },
+    onSuccess: (data) => {
+      console.log(data.data?.data);
+
+      successMessage("Project deleted Successfully");
+      refetchProjects();
+    },
+  });
+  const updateMutation = useMutation((data) => updateProject(data), {
     onError: (error) => {
       errorMessage(error?.response?.data?.message);
     },
@@ -125,13 +137,29 @@ const AdminProject = () => {
     deleteMutation.mutate(id);
   };
 
+  const updateProjectFunction = (idx) => {
+    updateMutation.mutate(projects[idx]);
+  };
+
   const [projects, setProjects] = useState([]);
   const width425 = useWindowWide(425);
+
+  const handleFieldChange = (value, name, index) => {
+    setProjects((prevProjects) => {
+      return prevProjects.map((item, i) => {
+        if (i === index) {
+          console.log("items ", item);
+          return { ...item, [name]: value };
+        }
+        return item;
+      });
+    });
+  };
 
   return (
     <WrapperContent title="Project">
       <div
-        className={` mx-auto w-full max-w-[1100px] rounded-[5px] flex justify-between items-center w-full p-1`}
+        className={` mx-auto max-w-[1100px] rounded-[5px] flex justify-between items-center w-full p-1`}
       >
         <p className="px-10 text-[20px]">Projects</p>
         <div className="border-4px bg-white-500">
@@ -157,7 +185,10 @@ const AdminProject = () => {
             <div className="flex flex-row justify-start w-full items-center mt-5 gap-5">
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-[6px]"
-                onClick={() => {}}
+                onClick={() => {
+                  console.log("update project");
+                  updateProjectFunction(index);
+                }}
               >
                 Update
               </button>
@@ -180,23 +211,31 @@ const AdminProject = () => {
             >
               <AllTextFields
                 title="Name"
+                name="name"
                 value={project?.name}
+                onChange={(e) => handleFieldChange(e, "name", index)}
                 placeholder="Project Name"
               />
               <AllTextFields
                 title="Title"
                 value={project?.title}
+                name="title"
+                onChange={(e) => handleFieldChange(e, "title", index)}
                 placeholder="Project Title"
               />
               <AllTextFields
                 title="Link"
                 value={project?.link}
+                name={"link"}
+                onChange={(e) => handleFieldChange(e, "link", index)}
                 placeholder="Enter Site Link"
               />
               <AllTextFields
                 title="level"
                 value={project?.level}
+                name={"level"}
                 isSelect={true}
+                onChange={(e) => handleFieldChange(e, "level", index)}
                 placeholder="Enter Site Link"
               />
             </div>
@@ -216,6 +255,8 @@ const AdminProject = () => {
                 <AllTextFields
                   title="Project Description"
                   lines={10}
+                  name={"description"}
+                  onChange={(e) => handleFieldChange(e, "description", index)}
                   textArea={project?.description}
                   placeholder="About Description"
                 />

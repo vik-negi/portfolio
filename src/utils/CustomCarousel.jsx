@@ -6,6 +6,7 @@ import AddNew from "../pages/admin/utils/AddNew";
 
 const CustomCarousel = ({ images }) => {
   const [outerActiveIndex, setOuterActiveIndex] = useState(0);
+  const [carouselIndex, setCarouselIndex] = useState(0);
 
   const [openImages, setOpenImages] = useState(false);
 
@@ -16,6 +17,15 @@ const CustomCarousel = ({ images }) => {
       setOuterActiveIndex(0);
     } else {
       setOuterActiveIndex(index);
+    }
+  };
+  const handleCarouselIndex = (index) => {
+    if (index < 0) {
+      setCarouselIndex(images.length - 1);
+    } else if (index >= images.length) {
+      setCarouselIndex(0);
+    } else {
+      setCarouselIndex(index);
     }
   };
   return (
@@ -30,6 +40,7 @@ const CustomCarousel = ({ images }) => {
               height={"100%"}
               alt={`carousel-${i}`}
               onClick={() => {
+                handleOuterActiveIndex(i);
                 setOpenImages(true);
               }}
               className="object-cover rounded-xl w-full transition-all duration-700 ease-in-out"
@@ -60,19 +71,34 @@ const CustomCarousel = ({ images }) => {
         body={
           <div className="flex flex-col gap-4">
             <div className="flex flex-row gap-4">
-              {images.map((image, i) => {
-                return (
-                  <img
-                    key={i}
-                    src={image}
-                    width={"100px"}
-                    height={"100px"}
-                    alt={`carousel-${i}`}
-                    className="object-cover rounded-xl w-full transition-all duration-700 ease-in-out"
-                  />
-                );
-              })}
+              {images.map(
+                (image, i) =>
+                  i === carouselIndex && (
+                    <img
+                      key={i}
+                      src={image}
+                      width={"100px"}
+                      height={"100px"}
+                      alt={`carousel-${i}`}
+                      className="object-cover rounded-xl w-full transition-all duration-700 ease-in-out"
+                    />
+                  )
+              )}
             </div>
+            {carouselIndex < images.length - 1 && (
+              <FontAwesomeIcon
+                icon={faArrowRight}
+                className="absolute top-1/2 right-2 text-white text-4xl cursor-pointer bg-slate-600 rounded-full px-[5px] py-[4px] hover:bg-slate-700 transition-all duration-300 ease-in-out"
+                onClick={() => handleCarouselIndex(carouselIndex + 1)}
+              />
+            )}
+            {carouselIndex > 0 && (
+              <FontAwesomeIcon
+                icon={faArrowLeft}
+                className="absolute top-1/2 left-4 text-white text-4xl cursor-pointer bg-slate-600 rounded-full px-[5px] py-[4px] hover:bg-slate-700 transition-all duration-300 ease-in-out"
+                onClick={() => handleCarouselIndex(carouselIndex - 1)}
+              />
+            )}
           </div>
         }
       />

@@ -31,6 +31,7 @@ import Register from "./pages/admin/Register";
 import VerifyOtp from "./pages/admin/VerifyOtp";
 import AdminExperience from "./pages/admin/experience/Experience";
 import AdminProject from "./pages/admin/project/AdminProjects";
+import AdminSkills from "./pages/admin/skills/components/AdminSkills";
 
 function App() {
   // const slowInternet = setTimeout(() => {
@@ -148,7 +149,7 @@ function App() {
           />
           <Route
             path="/about"
-            element={<LayoutComponent children={<About profile={profile} />} />}
+            element={<LayoutComponent children={<About />} />}
           />
           <Route
             path="/skills"
@@ -230,6 +231,7 @@ function AdminRoutes() {
       <Route path="about" element={<AboutIndex />} />
       <Route path="experiences" element={<AdminExperience />} />
       <Route path="projects" element={<AdminProject />} />
+      <Route path="skills" element={<AdminSkills />} />
     </Routes>
   );
 }

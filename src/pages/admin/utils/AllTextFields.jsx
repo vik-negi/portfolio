@@ -13,11 +13,13 @@ const AllTextFields = ({
   isFullWidth = false,
   isSelect = false,
   size,
+  options,
   onChange = () => {},
 }) => {
   const theme = create();
-
-  const options = ["Bignner", "Intermediate", "Advanced", "Expert"];
+  if (options === undefined || options === null) {
+    options = ["Beginner", "Intermediate", "Advanced", "Expert"];
+  }
   return (
     <div
       className={`flex w-full ${

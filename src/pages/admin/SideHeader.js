@@ -139,6 +139,14 @@ export const SideBarItemsContainer = ({ open, setOpen, isMobileNavbar }) => {
         // image="/images/app_logo.png"
         lable="PROJECTS"
       />
+      <SideBarItem
+        open={open}
+        customStyle={customStyle}
+        route="/admin/skills"
+        icon="fa-solid fa-laptop-code"
+        // image="/images/app_logo.png"
+        lable="Skills"
+      />
       <div
         onClick={(e) => switchTheme(store.theme === "light" ? "dark" : "light")}
       >
