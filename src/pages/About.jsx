@@ -6,6 +6,9 @@ import { Ripple, initTE } from "tw-elements";
 import { getAbout } from "../axios/dashboard.js";
 import { useQuery, useQueryClient, useMutation } from "react-query";
 import MyData from "../data/MyData.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 const About = ({ username, profile }) => {
   const queryClient = useQueryClient();
@@ -114,7 +117,8 @@ const About = ({ username, profile }) => {
             target="_blank"
             tabIndex="12"
           >
-            Resume<ion-icon name="document-outline"></ion-icon>
+            <FontAwesomeIcon icon={faDownload} />
+            Download Resume
           </a>
         </div>
       )}

@@ -282,7 +282,7 @@ function AdminExperience() {
   return (
     <WrapperContent title="Experience">
       <div
-        className={` mx-auto flex flex-wrap flex-row justify-between items-center mx-auto w-full max-w-[950px]   rounded-[8px] py-1`}
+        className={`flex flex-wrap flex-row justify-between items-center mx-auto w-full max-w-[950px]   rounded-[8px] py-1`}
       >
         <p className="px-10 text-[20px]">Experience</p>
         <div className="border-4px bg-white-500">

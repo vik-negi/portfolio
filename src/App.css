@@ -163,29 +163,29 @@ p {
 
 .button {
   display: flex;
-  width: -moz-max-content;
-  width: max-content;
-  height: -moz-max-content;
-  height: max-content;
   gap: 0.5rem;
+  /* width: -moz-max-content; */
+  width: max-content;
   align-items: center;
   text-align: center;
   border: none;
-  border-radius: 0.5rem;
-  padding: 0.7rem 2rem;
+  border-radius: 0.2rem;
+  padding: 0.9rem 3rem;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
-  font-size: 1.6rem;
+  font-size: 2.2rem;
   text-decoration: none;
-  color: var(--light-gray);
-  background-color: var(--slate-300);
+  color: white;
+  background-color: var(--light-blue);
+  border: 2px solid var(--light-blue);
   background-color: "#000";
 }
 
 .button:hover,
 .button:focus {
-  background-color: var(--slate-500);
-  color: white;
+  background-color: transparent;
+  border: 2px solid var(--light-blue);
+  color: var(--light-blue);
   cursor: pointer;
 }
 

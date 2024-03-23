@@ -2,6 +2,7 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import create from "../../../utils/Theme";
 
 export default function AddNew({
   open = false,
@@ -10,8 +11,11 @@ export default function AddNew({
   body,
   onSubmit,
   cross,
+  width,
+  showCancel = true,
 }) {
   const cancelButtonRef = useRef(null);
+  const theme = create();
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -54,8 +58,20 @@ export default function AddNew({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 lg:max-w-[500px] sm:max-w-[90%] flex-col sm:w-full sm:max-w-[90%] sm:mx-auto">
-                <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+              <Dialog.Panel
+                className={`relative transform overflow-hidden rounded-lg ${
+                  theme.theme !== "light" ? "bg-[#1e1e2f]" : "bg-white"
+                } text-left shadow-xl transition-all sm:my-8 ${
+                  width == null ? "lg:max-w-[500px]" : width
+                }  ${
+                  width == null ? "sm:max-w-[90%]" : width
+                }  flex-col sm:w-full  sm:mx-auto`}
+              >
+                <div
+                  className={` ${
+                    theme.theme !== "light" ? "bg-[#1e1e2f]" : "bg-white"
+                  } px-4 pb-4 pt-5 sm:p-6 sm:pb-4`}
+                >
                   <div className="sm:items-start bg">
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                       <Dialog.Title
@@ -77,7 +93,11 @@ export default function AddNew({
                       {body}
                     </div>
                   </div>
-                  <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                  <div
+                    className={` ${
+                      theme.theme !== "light" ? "bg-[#1e1e2f]" : "bg-gray-50"
+                    }  px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6`}
+                  >
                     {onSubmit && (
                       <button
                         type="button"
@@ -87,7 +107,7 @@ export default function AddNew({
                         Submit
                       </button>
                     )}
-                    {cancel && (
+                    {cancel && showCancel && (
                       <button
                         type="button"
                         className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
