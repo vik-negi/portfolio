@@ -161,6 +161,58 @@ class MyData {
       updatedAt: "2024-01-11T22:50:18.518Z",
       __v: 0,
     },
+    {
+      _id: "65c7de8df0a139be7e2f9972",
+      name: "Incandescents",
+      title: "Incandescents - A Flutter Bootcamp",
+      link: "https://incandescents.vercel.app/",
+      username: "vikramnegi-9162604468",
+      user: "64fc9c9c0bb5e126429858f7",
+      description:
+        "Incandescents: Empowering students with a Flutter bootcamp experience. Register, access assignments, share resources, and build portfolios. Join us to ignite your passion for app development!",
+      image: [
+        "http://res.cloudinary.com/dolqf9s3y/image/upload/v1707597444/rcqfaztlprzjhyzshaz8.png",
+        "http://res.cloudinary.com/dolqf9s3y/image/upload/v1707597446/dqyo2lglnpfi9rzwbpyq.png",
+        "http://res.cloudinary.com/dolqf9s3y/image/upload/v1707597449/kiaudbjpulylobyw84id.png",
+        "http://res.cloudinary.com/dolqf9s3y/image/upload/v1707597452/qpywxugdfi4jdtciq25l.png",
+      ],
+      level: "Advanced",
+      order: 3,
+      tags: ["Bootcamp", "Flutter"],
+      skillsUsed: [
+        "Flutter",
+        "Node js",
+        "Socket",
+        "Express",
+        "MongoDb",
+        "vercel",
+      ],
+      createdAt: "2024-02-10T20:37:33.954Z",
+      updatedAt: "2024-02-10T20:37:33.954Z",
+      __v: 0,
+    },
+    {
+      _id: "65db60c8ce1f845d7834dc19",
+      name: "Crowdfundings",
+      title:
+        "Blockchain Crowdfunding: Empowering Impact with Transparency and Security",
+      link: "https://crowdfundings.vercel.app",
+      username: "vikramnegi-9162604468",
+      user: "64fc9c9c0bb5e126429858f7",
+      description:
+        "Introducing a cutting-edge crowdfunding platform powered by React, Vite, Tailwind CSS, and integrated with Ethereum and Metamask blockchain technology. Our platform revolutionizes the way individuals support causes they believe in, offering a seamless and transparent donation experience.  Users can browse through various campaigns, each representing a specific cause or project, and contribute funds directly through their Ethereum wallet using Metamask integration. With the power of blockchain, every donation is securely recorded on the Ethereum network, ensuring transparency and accountability.  Once a campaign reaches its funding goal, the collection of funds automatically stops, providing a clear endpoint for donors and organizers alike. Users can track the progress of campaigns in real-time, seeing how much has been raised, who has contributed, and how close the campaign is to its goal.  Our platform empowers users to make a tangible impact on the causes they care about while providing full visibility into where their funds are going. Join us in revolutionizing the future of crowdfunding, where transparency, security, and efficiency meet to create meaningful change.",
+      image: [
+        "http://res.cloudinary.com/dolqf9s3y/image/upload/v1708875972/ychkmm87a6w5of13hqey.png",
+        "http://res.cloudinary.com/dolqf9s3y/image/upload/v1708875974/p2nnsb5u8upn1fb5fpar.png",
+      ],
+      level: "Advanced",
+      order: 3,
+      tags: ["Blockchain", "Tailwind", "React Js", "Vite", "Metamask"],
+      skillsUsed: ["Blockchain", "Tailwind", "React Js", "Vite", "Metamask"],
+      createdAt: "2024-02-25T15:46:16.142Z",
+      updatedAt: "2024-02-25T17:19:44.634Z",
+      __v: 0,
+    },
   ];
 
   static publicInfo = {

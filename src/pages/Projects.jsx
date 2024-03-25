@@ -14,6 +14,35 @@ import { social } from "../assets/svg/social/index.js";
 import CustomCarousel from "../utils/CustomCarousel.jsx";
 import AddNew from "./admin/utils/AddNew.jsx";
 
+import { Document, Page, pdfjs } from "react-pdf";
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
+
+const PDFViewer = ({ pdfURL }) => {
+  const [numPages, setNumPages] = useState(null);
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+  const link = `https://drive.google.com/uc?export=view&id=${
+    pdfURL.split("/")[5]
+  }`;
+  console.log("pdf ", link);
+  return (
+    <div>
+      <Document
+        file={{
+          url: link,
+        }}
+        onLoadSuccess={onDocumentLoadSuccess}
+      >
+        {/* {Array.from(new Array(numPages), (el, index) => (
+          <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+        ))} */}
+      </Document>
+    </div>
+  );
+};
+
 export default function Project({ username }) {
   // const Projects = [
   //   {
@@ -187,8 +216,11 @@ export default function Project({ username }) {
                       }
                       alt="project-1"
                     /> */}
-
-                <CustomCarousel images={selectedProject.image} />
+                {selectedProject?.projectDoc ? (
+                  <PDFViewer pdfURL={selectedProject.projectDoc} />
+                ) : (
+                  <CustomCarousel images={selectedProject.image} />
+                )}
               </div>
               <div className="m-4">
                 <div className="">

@@ -11,12 +11,12 @@ const ExperienceTimeline = ({ experience }) => {
   return (
     <li>
       <div class={`flex-start md:flex  `}>
-        <div class="-ml-[13px] flex h-[25px] w-[25px] items-center justify-center rounded-full bg-info-100 text-info-700">
+        <div class="-ml-[23px] flex h-[45px] w-[45px] items-center justify-center rounded-full bg-info-100 text-info-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            class="h-4 w-4"
+            class="h-10 w-10"
           >
             <path
               fill-rule="evenodd"
@@ -26,7 +26,7 @@ const ExperienceTimeline = ({ experience }) => {
           </svg>
         </div>
         <div
-          class={`mb-20 ml-6 block max-w-2xl rounded-lg bg-neutral-50 p-6 shadow-md shadow-black/5 dark:bg-[#1e1e2f] light:text-white dark:shadow-black/10 
+          class={`mb-20 ml-6 block max-w-5xl rounded-lg bg-neutral-50 p-6 shadow-md shadow-black/5 dark:bg-[#1e1e2f] light:text-white dark:shadow-black/10 
         `}
         >
           <div class="mb-4 flex justify-between items-center">

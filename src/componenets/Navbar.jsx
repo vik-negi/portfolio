@@ -68,7 +68,7 @@ export default function Navbar() {
   initTE({ Collapse, Dropdown });
   const navigate = useNavigate();
   const { token } = isAutheticated();
-  console.log("Navbar");
+
   const [activeSection, setActiveSection] = useState("home");
   const [smStyle, setSmStyle] = useState("right-0");
   const [bgColor, setBgColor] = useState("");

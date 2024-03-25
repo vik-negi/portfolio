@@ -36,7 +36,7 @@ export default function MainSection({ username, profile }) {
         <div>
           <h1>
             Hey, I'm{" "}
-            <span className="name">
+            <span className="name text-center">
               {StringUtils.capitalizeString(userInfo?.user.firstName) +
                 " " +
                 StringUtils.capitalizeString(userInfo?.user.lastName)}
@@ -53,15 +53,24 @@ export default function MainSection({ username, profile }) {
             About Me
             {/* <ion-icon name="chevron-forward-outline"></ion-icon> */}
           </button>
-          <div
-            className=" bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-2 px-4 border border-sky-500 hover:border-transparent rounded flex items-center justify-center cursor-pointer gap-2"
-            name=""
-            // onClick="scrollToSection(this)"
-            tabIndex="2"
+          <a
+            href={MyData.about.resume}
+            download={
+              StringUtils.capitalizeString(userInfo?.user.firstName) +
+              StringUtils.capitalizeString(userInfo?.user.lastName) +
+              "Resume"
+            }
           >
-            <FontAwesomeIcon icon={faDownload} />
-            Download Resume
-          </div>
+            <div
+              className=" bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-2 px-4 border border-sky-500 hover:border-transparent rounded flex items-center justify-center cursor-pointer gap-2"
+              name=""
+              // onClick="scrollToSection(this)"
+              tabIndex="2"
+            >
+              <FontAwesomeIcon icon={faDownload} />
+              Download Resume
+            </div>
+          </a>
         </div>
       )}
       <div className="img_sec">

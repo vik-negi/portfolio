@@ -460,21 +460,21 @@ export const skills = [
         image:
           "https://download.logo.wine/logo/Amazon_Web_Services/Amazon_Web_Services-Logo.wine.png",
       },
-      {
-        name: "Google Cloud",
-        image:
-          "https://static-00.iconduck.com/assets.00/google-cloud-platform-logo-icon-2048x1824-pg4wzspq.png",
-      },
+      // {
+      //   name: "Google Cloud",
+      //   image:
+      //     "https://static-00.iconduck.com/assets.00/google-cloud-platform-logo-icon-2048x1824-pg4wzspq.png",
+      // },
       {
         name: "Docker",
         image:
           "https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg",
       },
-      {
-        name: "Jenkins",
-        image:
-          "https://toppng.com/uploads/preview/jenkins-logo-11609365847mufysaivph.png",
-      },
+      // {
+      //   name: "Jenkins",
+      //   image:
+      //     "https://toppng.com/uploads/preview/jenkins-logo-11609365847mufysaivph.png",
+      // },
       // {
       //   name: "Nginx",
       //   image: "https://download.logo.wine/logo/Nginx/Nginx-Logo.wine.png",
@@ -549,11 +549,11 @@ export const skills = [
         image:
           "https://static-00.iconduck.com/assets.00/tensorflow-icon-1911x2048-1m2s54vn.png",
       },
-      {
-        name: "Keras",
-        image:
-          "https://miro.medium.com/v2/resize:fit:600/1*DKu_54iqz6C-p6ndo7rO3g.png",
-      },
+      // {
+      //   name: "Keras",
+      //   image:
+      //     "https://miro.medium.com/v2/resize:fit:600/1*DKu_54iqz6C-p6ndo7rO3g.png",
+      // },
       {
         name: "Jupyter",
         image:
