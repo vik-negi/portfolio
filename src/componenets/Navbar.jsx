@@ -17,6 +17,8 @@ import create, { themes } from "../utils/Theme";
 import { Collapse, Dropdown, initTE } from "tw-elements";
 import NavbarOptionsDropdown from "./NavbarOptionsDropdown";
 import { isAutheticated } from "../pages/admin/utils/auth";
+import { currentUser } from "../axios/auth";
+import { useQuery } from "react-query";
 // import useStore from "../store";
 
 const StyledThemeSelector = styled.select`
@@ -68,6 +70,18 @@ export default function Navbar() {
   initTE({ Collapse, Dropdown });
   const navigate = useNavigate();
   const { token } = isAutheticated();
+
+  const [user, setUser] = useState({});
+
+  useQuery("currentUser", () => currentUser(), {
+    retry: 1,
+    retryDelay: 1,
+    onError: (error) => {},
+    onSuccess: (data) => {
+      console.log("data", data?.data?.data);
+      setUser(data?.data?.data);
+    },
+  });
 
   const [activeSection, setActiveSection] = useState("home");
   const [smStyle, setSmStyle] = useState("right-0");
@@ -345,6 +359,7 @@ export default function Navbar() {
           </div>
 
           <NavbarOptionsDropdown
+            image={user?.profilePic}
             itemsList={[
               {
                 title: token != null ? "Dashboard" : "Login",
@@ -353,10 +368,6 @@ export default function Navbar() {
               {
                 title: "Contact",
                 to: "/contact",
-              },
-              {
-                title: "Profile",
-                to: "/admin/profile",
               },
             ]}
             showLogout={token != null}

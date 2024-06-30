@@ -228,7 +228,7 @@ class MyData {
       isVerified: false,
       isActive: true,
       profilePic:
-        "https://www.gravatar.com/avatar/47081f23cfdb0934232d3fa3b8c4d3ec?d=identicon",
+        "https://res.cloudinary.com/dolqf9s3y/image/upload/v1719730400/jy8avmdz8jxfvpgxhnbc.jpg",
       createdAt: "2023-09-09T16:26:04.493Z",
       updatedAt: "2023-09-09T16:26:04.493Z",
       __v: 0,

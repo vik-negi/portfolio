@@ -74,10 +74,14 @@ export default function MainSection({ username, profile }) {
         </div>
       )}
       <div className="img_sec">
-        <div className="imgDiv">
+        <div className={`${"imgDiv"}`}>
           <img
-            src={profile.image}
-            className="profile-image"
+            src={userInfo?.user?.profilePic ?? profile.image}
+            className={`profile-image ${
+              userInfo?.user?.profilePic !== null
+                ? "rounded-full w-[200px] h-[200px]"
+                : "rounded-lg"
+            }`}
             alt="ProfileImage"
           />
         </div>

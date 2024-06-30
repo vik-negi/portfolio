@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Catamaran:wght@400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Marcellus&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 :root {
   font-size: 62.5%;
   --primary-yellow: #efcf5e;
@@ -380,6 +380,8 @@ a {
 
   padding-left: 12rem;
   padding-right: 12rem;
+  min-height: 600px;
+  height: 90vh;
   /* background-color: rgba(255, 255, 255, 0.96); */
   /* make a gradient from top 0%  at height of 80vh 10%  and bottom 90% */
   /* background: linear-gradient(
@@ -751,6 +753,10 @@ a {
     background-color: #1b1b1b;
   }
 
+  .home-section {
+    height: 800px;
+  }
+
   .home-section h1 {
     align-items: center;
     /* flex-direction: column; */
@@ -779,9 +785,25 @@ a {
   }
 }
 
+@media (max-width: 600px) {
+  .home-section {
+    height: 700px;
+  }
+}
 @media (max-width: 500px) {
-  .home-section h1 {
+  .home-section {
+    height: 800px;
+  }
+  .home-section div h1 {
     /* font-size: 3rem; */
     flex-direction: column;
+    /* font-family: "Open Sans", sans-serif; */
+    font-size: 38px;
+    line-height: 1.5;
+  }
+  .home-section div p {
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
   }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavbarOptionsDropdown = ({ itemsList, showLogout, image }) => {
+const NavbarOptionsDropdown = ({ itemsList, showLogout, image, onClick }) => {
   return (
     <div className="relative" data-te-dropdown-ref>
       <a
@@ -27,7 +27,7 @@ const NavbarOptionsDropdown = ({ itemsList, showLogout, image }) => {
       >
         {itemsList.map((item, index) => {
           return (
-            <Link to={item.to}>
+            <Link to={item.to} onClick={onClick}>
               <a
                 className="block w-full whitespace-nowrap bg-transparent p-4 text-xl font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
                 href="#"
@@ -38,6 +38,18 @@ const NavbarOptionsDropdown = ({ itemsList, showLogout, image }) => {
             </Link>
           );
         })}
+        <div
+          onClick={onClick}
+          className="flex flex-row justify-start items-center cursor-pointer"
+        >
+          <div
+            className="block w-full whitespace-nowrap bg-transparent p-4 text-xl font-normal text-neutral-700 hover:bg-neutral-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30"
+            href="#"
+            data-te-dropdown-item-ref
+          >
+            Profile
+          </div>
+        </div>
 
         {/* <li>
                 <a
