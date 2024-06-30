@@ -15,7 +15,11 @@ const MobileNavbar = () => {
   return (
     <div className="sidebar w-[100%]">
       <div className="flex flex-row justify-between items-center w-[100%]">
-        <SideBarItem open={true} route="/admin/dashboard" lable="ABC Company" />
+        <SideBarItem
+          open={true}
+          route={"/admin/dashboard"}
+          lable="ABC Company"
+        />
         {/* <NavbarIcon
           styles="bg-[#2c2f32] text-[#ffffff] rounded-[10px] my-1"
           name="menu"

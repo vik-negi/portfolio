@@ -17,6 +17,7 @@ import { useWindowWide } from "../utils/useWindowWide";
 import AdminProject from "../project/AdminProjects";
 import AddNew from "../utils/AddNew";
 import AllTextFields from "../utils/AllTextFields";
+import LoadingComponent from "../../../utils/loader";
 
 const lableTextStyle = "text-[#1e1e2f] font-semibold text-[14px]";
 
@@ -178,6 +179,7 @@ export const AdmivExperienceItem = ({
 
 function AdminExperience() {
   const theme = create();
+  const [loading, setLoading] = useState(true);
   const { data, isLoading, isSuccess, isError, error } = useQuery(
     "exp",
     () => getAdminExperience(),
@@ -186,8 +188,10 @@ function AdminExperience() {
       retryDelay: 1,
       onError: (error) => {
         errorMessage(error?.response?.data?.message);
+        setLoading(false);
       },
       onSuccess: (data) => {
+        setLoading(false);
         console.log(data.data?.data?.experiences);
         setExperiences(data?.data?.data?.experiences);
       },
@@ -298,7 +302,14 @@ function AdminExperience() {
           </button>
         </div>
       </div>
-      {experiences.length > 0 &&
+      {loading && <LoadingComponent width={100} />}
+      {experiences?.length == 0 && !loading && (
+        <div>
+          <p>No Experience Found</p>
+        </div>
+      )}
+
+      {experiences?.length > 0 &&
         experiences.map((experience, index) => (
           <div
             className={`flex flex-wrap flex-row justify-between items-start mx-auto w-full max-w-[1000px] rounded-[10px] p-10 `}
@@ -468,7 +479,7 @@ function AdminExperience() {
                 </button>
               </div>
               <div className="flex flex-wrap mt-4">
-                {skillList.length > 0 &&
+                {skillList?.length > 0 &&
                   skillList.map((item, index) => (
                     <div
                       className="mr-2 flex mb-2 bg-[#e8e9fa] rounded-full px-6 py-3 text-[#1e1e2f] font-normal hover:bg-[#1e1e2f] hover:text-[#e8e9fa] cursor-pointer
@@ -516,7 +527,7 @@ function AdminExperience() {
                 </button>
               </div>
               <div className="flex flex-wrap mt-4">
-                {highlightList.length > 0 &&
+                {highlightList?.length > 0 &&
                   highlightList.map((item, index) => (
                     <div
                       className="mr-2 flex mb-2 bg-[#e8e9fa] rounded-full px-6 py-3 text-[#1e1e2f] font-normal hover:bg-[#1e1e2f] hover:text-[#e8e9fa] cursor-pointer

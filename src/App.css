@@ -35,6 +35,14 @@ body {
   overflow-x: hidden;
 }
 
+.fontOpenSans {
+  font-family: "Open Sans", sans-serif;
+}
+
+.fontCatamaran {
+  font-family: "Catamaran", sans-serif;
+}
+
 /* .bg-div  */
 .only-bg {
   /* position: absolute; */

@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { getProjects } from "../axios/dashboard";
 import MyData from "../data/MyData";
 import create, { themes } from "../utils/Theme";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Carousel, IconButton } from "@material-tailwind/react";
 import {
@@ -15,6 +16,9 @@ import CustomCarousel from "../utils/CustomCarousel.jsx";
 import AddNew from "./admin/utils/AddNew.jsx";
 
 import { Document, Page, pdfjs } from "react-pdf";
+import LoadingComponent from "../utils/loader.jsx";
+import { getUsername } from "./admin/utils/auth.jsx";
+import AddSectionDetailsBtn from "../utils/AddSectionDetailsBtn.jsx";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 const PDFViewer = ({ pdfURL }) => {
@@ -23,23 +27,38 @@ const PDFViewer = ({ pdfURL }) => {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
-  const link = `https://drive.google.com/uc?export=view&id=${
-    pdfURL.split("/")[5]
-  }`;
+  const link = pdfURL;
+  // `https://drive.google.com/uc?export=view&id=${
+  //   pdfURL.split("/")[5]
+  // }`;
+  const driveViewerUrl = pdfURL.split("view");
   console.log("pdf ", link);
+  const [loading, setLoading] = useState(true);
   return (
-    <div>
-      <Document
-        file={{
-          url: link,
-        }}
-        onLoadSuccess={onDocumentLoadSuccess}
-      >
-        {/* {Array.from(new Array(numPages), (el, index) => (
-          <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-        ))} */}
-      </Document>
-    </div>
+    <>
+      <iframe
+        src={driveViewerUrl[0] + "/preview"}
+        onLoad={() => setLoading(false)}
+        width={loading ? "0px" : "100%"}
+        height="500px"
+        allow="autoplay"
+      ></iframe>
+      {
+        loading && <LoadingComponent width={50} />
+        // (
+        //   <div className="w-full h-96 flex items-center justify-center">
+        //     <div
+        //       class="inline-block h-8 w-8 animate-[spinner-grow_0.75s_linear_infinite] rounded-full bg-current align-[-0.125em] text-surface opacity-0 motion-reduce:animate-[spinner-grow_1.5s_linear_infinite] dark:text-white"
+        //       role="status"
+        //     >
+        //       <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+        //         Loading...
+        //       </span>
+        //     </div>
+        //   </div>
+        // )
+      }
+    </>
   );
 };
 
@@ -104,6 +123,7 @@ export default function Project({ username }) {
   });
 
   const theme = create();
+  const navigate = useNavigate();
 
   return (
     <section className="section main project-section" id="projects">
@@ -127,9 +147,15 @@ export default function Project({ username }) {
             </p>
           </h1>
         </div>
+        {Projects?.length == 0 && getUsername() != null && (
+          <AddSectionDetailsBtn
+            title={"Add Projects"}
+            route="/admin/Projects/"
+          />
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {Projects &&
-            Projects.map((project, i) => {
+            Projects?.map((project, i) => {
               return (
                 <article
                   key={i}
@@ -206,8 +232,8 @@ export default function Project({ username }) {
           }}
           title={"Add New Project"}
           body={
-            <article className="mx-auto  border-2 rounded-xl overflow-hidden flex flex-col sm:flex-row">
-              <div className="sm:w-[100%] min-w-[700px] max-w-[900px] w-[100%] flex flex-row gap-2  overflow-hidden">
+            <article className="mx-auto  border-2 rounded-xl overflow-hidden flex flex-col md:flex-row">
+              <div className="sm:w-[100%] min-w: max-content; max-w-[900px] h-[500px] w-[100%] flex flex-row gap-2  overflow">
                 {/* <img
                       className="w-full h-full object-cover rounded-md hover:scale-125 transition-all duration-500 ease-in-out hover:shadow-2xl hover:cursor-pointer"
                       src={
@@ -222,10 +248,10 @@ export default function Project({ username }) {
                   <CustomCarousel images={selectedProject.image} />
                 )}
               </div>
-              <div className="m-4">
+              <div className="m-4 md:max-w-[50%] w-[100%]">
                 <div className="">
                   <h2
-                    className={`text-3xl  mb-2 ${
+                    className={`md:text-3xl text-[18px] mb-2 ${
                       theme.theme === "light" ? "text-black-200" : "text-white"
                     }`}
                   >
@@ -263,18 +289,18 @@ export default function Project({ username }) {
                     <p className="text-xl">{selectedProject.level}</p>
                   </div>
                   <p
-                    className=" text-xl mb-5
+                    className="md:text-[14px] text-xl mb-5 text-left
                     "
                   >
                     {selectedProject.description}
                   </p>
                 </div>
-                <div className="flex flex-row gap-2 justify-start ">
+                <div className="flex flex-row gap-2 justify-start flex-wrap">
                   {selectedProject.skillsUsed.map((skill, i) => {
                     return (
                       <button
                         key={i}
-                        className="bg-slate-300 px-4 py-2 text-black rounded-md flex items-center justify-center gap-2"
+                        className="bg-slate-300 md:text-xl text-[12px] md:px-4 px-2 py-2 text-black rounded-md flex items-center justify-center gap-2"
                       >
                         {skill}
                       </button>

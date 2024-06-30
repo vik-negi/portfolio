@@ -19,6 +19,7 @@ import {
 } from "@material-tailwind/react";
 import AddNew from "../utils/AddNew";
 import AllTextFields from "../utils/AllTextFields";
+import LoadingComponent from "../../../utils/loader";
 
 const lableTextStyle = "text-[#1e1e2f] font-semibold text-[20px]";
 
@@ -153,6 +154,7 @@ export function AddPassionDialog({ onSubmit }) {
 function AdminAbout() {
   const theme = create();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const { data: projectsData, refetch: refetchProjects } = useQuery(
     "getAdminAbout",
     () => getAdminAbout(),
@@ -161,6 +163,10 @@ function AdminAbout() {
       retryDelay: 1,
       onSuccess: (data) => {
         setAbout(data.data?.data);
+        setLoading(false);
+      },
+      onError: (error) => {
+        setLoading(false);
       },
     }
   );
@@ -205,27 +211,26 @@ function AdminAbout() {
   };
   return (
     <WrapperContent title="About">
-      <div className=" flex flex-col justify-center items-center w-full bg-black"></div>
-
       <div
-        className={`mt-10 flex flex-wrap flex-row justify-between items-start mx-auto w-full max-w-[980px] mb-10 `}
+        className={`mt-10 overflow-hidden flex flex-wrap flex-row justify-between items-start mx-auto w-full max-w-[980px] mb-10 `}
       >
-        <div>
+        {loading && <LoadingComponent width={100} />}
+        <div className="flex flex-col max-w-[100%]">
           <div
-            className={`mb-10 ${
+            className={`mb-10  ${
               theme.theme == "light" ? "bg-white" : "bg-[#1e1e2f]"
             } py-[38px] px-[25px] rounded-[8px]`}
           >
             <AllTextFields
               title="Title"
-              value={about?.title}
+              value={about?.title ?? ""}
               name="title"
               onChange={handleFieldChange}
               placeholder="About Title"
             />
             <AllTextFields
               title="About Description"
-              textArea={about?.description}
+              textArea={about?.description ?? ""}
               name="description"
               onChange={handleFieldChange}
               placeholder="About Description"
@@ -239,20 +244,21 @@ function AdminAbout() {
                 Passion
               </label>
             )}
-            {about?.passion && (
+            {
               <div className="flex flex-row flex-wrap w-[500px] justify-start items-center mt-5">
-                {about.passion?.map((item, index) => (
-                  <div
-                    className="mr-2 mb-2 bg-[#e8e9fa] rounded-full px-5 py-3 text-[#1e1e2f] font-normal hover:bg-[#1e1e2f] hover:text-[#e8e9fa] cursor-pointer 
+                {about?.passion &&
+                  about?.passion?.map((item, index) => (
+                    <div
+                      className="mr-2 mb-2 bg-[#e8e9fa] rounded-full px-5 py-3 text-[#1e1e2f] font-normal hover:bg-[#1e1e2f] hover:text-[#e8e9fa] cursor-pointer 
                  text-[14px]
               "
-                  >
-                    {item}
-                  </div>
-                ))}
+                    >
+                      {item}
+                    </div>
+                  ))}
                 <AddPassionDialog onSubmit={onPassionSubmit} />
               </div>
-            )}
+            }
           </div>
           <div className="flex flex-row justify-end items-center">
             <Button
@@ -283,46 +289,46 @@ function AdminAbout() {
                 title="Facebook"
                 name="facebook"
                 onChange={handleSocialMediaChange}
-                value={about.social_links?.facebook}
+                value={about?.social_links?.facebook}
                 placeholder="Facebook"
               />
               <SocialMediaItem
                 title="Twitter"
                 name="twitter"
                 onChange={handleSocialMediaChange}
-                value={about.social_links?.twitter}
+                value={about?.social_links?.twitter}
                 placeholder="Twitter"
               />
               <SocialMediaItem
                 title="Instagram"
                 name="instagram"
                 onChange={handleSocialMediaChange}
-                value={about.social_links?.instagram}
+                value={about?.social_links?.instagram}
                 placeholder="Instagram"
               />
               <SocialMediaItem
                 title="LinkedIn"
                 name="linkedin"
                 onChange={handleSocialMediaChange}
-                value={about.social_links?.linkedin}
+                value={about?.social_links?.linkedin}
                 placeholder="LinkedIn"
               />
               <SocialMediaItem
                 title="GitHub"
                 name="github"
                 onChange={handleSocialMediaChange}
-                value={about.social_links?.github}
+                value={about?.social_links?.github}
                 placeholder="GitHub"
               />
               <SocialMediaItem
                 title="StackOverflow"
                 name="stackoverflow"
                 onChange={handleSocialMediaChange}
-                value={about.social_links?.stackoverflow}
+                value={about?.social_links?.stackoverflow}
                 placeholder="StackOverflow"
               />
 
-              {about.social_links?.others?.map((item, index) => (
+              {about?.social_links?.others?.map((item, index) => (
                 <SocialMediaItem
                   title={item?.title}
                   name={item?.name}

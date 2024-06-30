@@ -65,7 +65,7 @@ const AllTextFields = ({
           placeholder={placeholder}
         />
       )}
-      {textArea && (
+      {textArea != null && (
         <textarea
           type="text"
           name={name}

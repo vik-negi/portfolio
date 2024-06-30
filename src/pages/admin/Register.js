@@ -111,115 +111,118 @@ const Register = () => {
   const store = create();
 
   return (
-    <div className="h-screen sm:px-[6rem]">
-      <div className="h-full">
-        <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-          <div className="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
-            <img
-              src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-              className="w-full"
-              alt="Sample image"
+    <div className="min-h-screen sm:px-[6rem] bg-[#f2f2f2]  items-center flex justify-center">
+      <div
+        className="g-6 sm:p-[20px] md:p-[65px] rounded-2xl  flex h-full flex-wrap items-center justify-center lg:justify-between bg-white border-[1px] border-neutral-200 
+         transition duration-150 ease-in-out"
+      >
+        <div className="shrink-1 mt-10 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
+          <img
+            src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            className="w-full"
+            alt="Sample image"
+          />
+        </div>
+
+        <div className="mb-12 pb-10 md:mb-0 md:w-8/12 lg:w-5/12 xl:w-5/12">
+          <form>
+            <div className="flex flex-row items-center justify-center lg:justify-start">
+              <p className="mb-0 mr-4  font-medium md:text-[28px] text-[20px]">
+                Register in with
+              </p>
+              <LoginWithSocial svgImage={social.facebook} />
+              <LoginWithSocial svgImage={social.twitter} />
+              <LoginWithSocial svgImage={social.linkedin} />
+            </div>
+
+            <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 mb-5">
+              <p className="mx-4 mb-0 text-center font-semibold dark:text-white">
+                Or
+              </p>
+            </div>
+
+            <TextField
+              name="email"
+              value={registerData.email}
+              onChange={(e) => {
+                setRegisterData({ ...registerData, email: e.target.value });
+              }}
+              a
+              label="Email address"
             />
-          </div>
+            <TextField
+              name="password"
+              value={registerData.password}
+              onChange={(e) => {
+                setRegisterData({
+                  ...registerData,
+                  password: e.target.value,
+                });
+              }}
+              label="Password"
+            />
+            <TextField
+              name="firstName"
+              value={registerData.firstName}
+              onChange={(e) => {
+                setRegisterData({
+                  ...registerData,
+                  firstName: e.target.value,
+                });
+              }}
+              label="FirstName"
+            />
+            <TextField
+              name="lastName"
+              value={registerData.lastName}
+              onChange={(e) => {
+                setRegisterData({
+                  ...registerData,
+                  lastName: e.target.value,
+                });
+              }}
+              label="LastName"
+            />
 
-          <div className="mb-12 pb-10 md:mb-0 md:w-8/12 lg:w-5/12 xl:w-5/12">
-            <form>
-              <div className="flex flex-row items-center justify-center lg:justify-start">
-                <p className="mb-0 mr-4 text-[20px]">Register in with</p>
-                <LoginWithSocial svgImage={social.facebook} />
-                <LoginWithSocial svgImage={social.twitter} />
-                <LoginWithSocial svgImage={social.linkedin} />
-              </div>
-
-              <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300 mb-5">
-                <p className="mx-4 mb-0 text-center font-semibold dark:text-white">
-                  Or
-                </p>
-              </div>
-
-              <TextField
-                name="email"
-                value={registerData.email}
-                onChange={(e) => {
-                  setRegisterData({ ...registerData, email: e.target.value });
-                }}
-                a
-                label="Email address"
-              />
-              <TextField
-                name="password"
-                value={registerData.password}
-                onChange={(e) => {
-                  setRegisterData({
-                    ...registerData,
-                    password: e.target.value,
-                  });
-                }}
-                label="Password"
-              />
-              <TextField
-                name="firstName"
-                value={registerData.firstName}
-                onChange={(e) => {
-                  setRegisterData({
-                    ...registerData,
-                    firstName: e.target.value,
-                  });
-                }}
-                label="FirstName"
-              />
-              <TextField
-                name="lastName"
-                value={registerData.lastName}
-                onChange={(e) => {
-                  setRegisterData({
-                    ...registerData,
-                    lastName: e.target.value,
-                  });
-                }}
-                label="LastName"
-              />
-
-              <div className="mb-6 flex items-center justify-between">
-                <div className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] flex items-center">
-                  <input type="checkbox" value="" />
-                  <label
-                    className="inline-block  ml-2 text-[12px] hover:cursor-pointer text-primary text-[12px] font-semibold hover:underline"
-                    for="exampleCheck2"
-                  >
-                    Agree to terms and conditions
-                  </label>
-                </div>
-              </div>
-
-              <div className="text-center lg:text-left">
-                <button
-                  type="button"
-                  className={`sm:w-[150px] w-full px-4 py-4 rounded-lg text-md font-medium ${
-                    store.theme !== "light"
-                      ? "bg-white text-[#232323]"
-                      : "bg-[#232323] text-white"
-                  }`}
-                  data-te-ripple-init
-                  data-te-ripple-color="light"
-                  onClick={handleSubmit}
-                  disabled={mutation.isLoading}
+            <div className=" flex items-center justify-between mb-10">
+              <div className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] flex items-center">
+                <input type="checkbox" value="" />
+                <label
+                  className="inline-block md:text-2xl  ml-2 text-[12px] hover:cursor-pointer text-primary font-semibold hover:underline"
+                  for="exampleCheck2"
                 >
-                  {mutation.isLoading ? " Loading..." : "Register"}
-                </button>
-
-                <p className="mb-0 mt-2 pt-1 text-[12px] font-semibold">
-                  Already have an account? &nbsp;
-                  <a
-                    href="/#/admin/login"
-                    className="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700"
-                  >
-                    Login
-                  </a>
-                </p>
+                  Agree to terms and conditions
+                </label>
               </div>
-            </form>
-          </div>
+            </div>
+
+            <div className="text-center lg:text-left mt-[50px]">
+              <button
+                type="button"
+                className={`sm:w-[150px] w-full px-4 py-4 rounded-lg text-md font-medium ${
+                  store.theme !== "light"
+                    ? "bg-white text-[#232323]"
+                    : "bg-[#232323] text-white"
+                }`}
+                data-te-ripple-init
+                data-te-ripple-color="light"
+                onClick={handleSubmit}
+                disabled={mutation.isLoading}
+              >
+                {mutation.isLoading ? " Loading..." : "Register"}
+              </button>
+
+              <p className="mb-0 text-xl font-semibold mt-2 pt-1 text-[12px] ">
+                Already have an account? &nbsp;
+                <a
+                  href="/#/admin/login"
+                  className="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700"
+                >
+                  Login
+                </a>
+              </p>
+            </div>
+          </form>
         </div>
       </div>
     </div>

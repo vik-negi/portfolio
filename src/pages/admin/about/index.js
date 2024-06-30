@@ -3,8 +3,9 @@ import AdminAbout from "./AdminAbout";
 
 export const AboutIndex = () => {
   return (
-    <Routes>
-      <Route path="/" element={<AdminAbout />} />
-    </Routes>
+    <AdminAbout />
+    // <Routes>
+    //   <Route path="/" element={<AdminAbout />} />
+    // </Routes>
   );
 };

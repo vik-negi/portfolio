@@ -210,7 +210,7 @@ function AdminRoutes() {
   const { token } = isAutheticated();
   const HeaderLayout = useCallback(() => {
     if (token && window.location.pathname === "/") {
-      navigate("/admin/dashboard");
+      // navigate("/admin/dashboard");
     } else if (!token && window.location.pathname === "/") {
       navigate("/admin/login");
     }

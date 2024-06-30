@@ -5,6 +5,10 @@ import DateTimeFormatter from "../utils/dateTime_functionality";
 import { Link } from "react-router-dom";
 import create from "../utils/Theme";
 import MyData from "../data/MyData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { getUsername } from "./admin/utils/auth";
+import AddSectionDetailsBtn from "../utils/AddSectionDetailsBtn";
 
 const ExperienceTimeline = ({ experience }) => {
   const theme = create();
@@ -160,12 +164,8 @@ export default function Experiences({ username }) {
           <p>These are the experiences where I've previously worked.</p>
         </h1>
         {
-          experiences == null ? (
-            <div className="flex justify-center items-center">
-              <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900">
-                No Experience
-              </div>
-            </div>
+          experiences == null && getUsername() != null ? (
+            <AddSectionDetailsBtn title={"Add Experience"} />
           ) : (
             <ol class="border-l-2 border-info-100">
               {experiences.map((experience, index) => {

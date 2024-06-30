@@ -18,7 +18,7 @@ class MyData {
     career: [],
     title: "Vikram Negi",
     resume:
-      "https://drive.google.com/file/d/1wuKBgTEErhH4Jg0XnhlbrT-6J9HzhxJM/view?usp=sharing",
+      "https://drive.google.com/file/d/1u_24BpiWK92aiXUO43i5Bv41Spt3nqRQ/view?usp=drive_link",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus fugiat quos assumenda nulla exercitationem est nisi odit quam amet corrupti officiis inventore aut impedit explicabo id distinctio ullam, libero error rem magni consequuntur provident voluptate! Odio numquam blanditiis fugit minus.",
     createdAt: "2023-09-10T04:29:09.948Z",

@@ -24,10 +24,12 @@ import AddNew from "../utils/AddNew";
 import { useNavigate } from "react-router-dom";
 import AllTextFields from "../utils/AllTextFields";
 import create from "../../../utils/Theme";
+import LoadingComponent from "../../../utils/loader";
 
 const lableTextStyle = "text-[#1e1e2f] font-semibold text-[14px]";
 
 const AdminProject = () => {
+  const [loading, setLoading] = useState(true);
   const { data: projectsData, refetch: refetchProjects } = useQuery(
     "projects",
     () => getAdminProjects(),
@@ -36,9 +38,11 @@ const AdminProject = () => {
       retryDelay: 1,
       onError: (error) => {
         errorMessage(error?.response?.data?.message);
+        setLoading(false);
       },
       onSuccess: (data) => {
         console.log(data.data?.data);
+        setLoading(false);
         setProjects(data?.data?.data);
       },
     }
@@ -175,6 +179,7 @@ const AdminProject = () => {
           </button>
         </div>
       </div>
+      {loading && <LoadingComponent width={100} />}
       {projects.length > 0 &&
         projects.map((project, index) => (
           <div

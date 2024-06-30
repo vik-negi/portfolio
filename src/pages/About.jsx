@@ -73,13 +73,13 @@ const About = ({ username, profile }) => {
 
   return (
     <section id="about" className="section about-section" tabIndex="11">
-      {about && (
+      {!about && (
         <div className="about-ill">
           <img src={profile.image} alt="VikramNegi" />
         </div>
       )}
 
-      {about && (
+      {
         <div
           className="aboutMe"
           // data-aos="fade-left"
@@ -94,6 +94,12 @@ const About = ({ username, profile }) => {
             {/* {about?.title} */}
           </h2>
           <div className="professionContainer">
+            {about?.passion == null && (
+              <>
+                <p className="profession">Your Passion</p>
+                <p className="profession">E.g., Singing</p>
+              </>
+            )}
             {about?.passion.map((profession, index) => {
               return (
                 <p key={index} className="profession">
@@ -121,8 +127,8 @@ const About = ({ username, profile }) => {
             Download Resume
           </a>
         </div>
-      )}
-      {about && (
+      }
+      {
         <div className="socialMedia w-[80px]">
           {Object.values(social).map((socialLink, index) => {
             return (
@@ -136,7 +142,7 @@ const About = ({ username, profile }) => {
             );
           })}
         </div>
-      )}
+      }
     </section>
   );
 };

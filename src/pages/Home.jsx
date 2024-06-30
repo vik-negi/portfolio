@@ -10,15 +10,21 @@ import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { dashboard, publicInfo } from "../axios/dashboard";
 
 import { useLocation, useParams } from "react-router-dom";
+import { getUsername } from "./admin/utils/auth";
 
 library.add(faBars, faTimes);
 
 export default function Home(props) {
   var { username } = useParams();
-  console.log("username ", username);
 
-  if (username === undefined) {
+  const savedUsername = getUsername();
+
+  if (username === undefined && savedUsername === undefined) {
     username = "vikramnegi-9162604468";
+  } else if (username != undefined) {
+    username = username;
+  } else if (savedUsername) {
+    username = savedUsername;
   }
 
   return (

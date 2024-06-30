@@ -54,6 +54,8 @@ export default function MainSection({ username, profile }) {
             {/* <ion-icon name="chevron-forward-outline"></ion-icon> */}
           </button>
           <a
+            // open in another tab
+            target="_blank"
             href={MyData.about.resume}
             download={
               StringUtils.capitalizeString(userInfo?.user.firstName) +

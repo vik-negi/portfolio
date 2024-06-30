@@ -13,7 +13,7 @@ function WrapperContent({ title, children, headerChild, isOpen }) {
   const { state, updateSideBarOpen } = useContext(AppContext);
   const [user, setUser] = useState({});
 
-  useQuery("currentUser", () => currentUser(), {
+  const {} = useQuery("currentUser", () => currentUser(), {
     retry: 1,
     retryDelay: 1,
     onError: (error) => {},

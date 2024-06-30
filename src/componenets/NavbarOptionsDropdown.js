@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { signout } from "../pages/admin/utils/auth";
 
 const NavbarOptionsDropdown = ({ itemsList, showLogout, image, onClick }) => {
   return (
@@ -61,7 +62,7 @@ const NavbarOptionsDropdown = ({ itemsList, showLogout, image, onClick }) => {
                 </a>
               </li> */}
         {showLogout && (
-          <li>
+          <li onClick={() => signout()}>
             <a
               className="block w-full whitespace-nowrap bg-transparent p-4  text-xl font-normal text-neutral-700 hover:bg-red-100 active:text-neutral-800 active:no-underline disabled:pointer-events-none disabled:bg-transparent disabled:text-neutral-400 dark:text-neutral-200 dark:hover:bg-white/30 dark:hover:text-red-900"
               href="#"
