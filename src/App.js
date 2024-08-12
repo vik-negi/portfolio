@@ -150,6 +150,34 @@ function App() {
             }
           />
           <Route
+            path="/:username"
+            element={
+              <LayoutComponent
+                children={
+                  <Home
+                    name={profile.name.split(" ")[0]}
+                    skills={skills}
+                    profile={profile}
+                  />
+                }
+              />
+            }
+          />
+          <Route
+            path="/#/:username"
+            element={
+              <LayoutComponent
+                children={
+                  <Home
+                    name={profile.name.split(" ")[0]}
+                    skills={skills}
+                    profile={profile}
+                  />
+                }
+              />
+            }
+          />
+          <Route
             path="/about"
             element={<LayoutComponent children={<About />} />}
           />
