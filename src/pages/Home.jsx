@@ -29,11 +29,6 @@ export default function Home(props) {
     username = savedUsername;
   }
 
-  const callToApi = async () => {
-    const { data } = await callApi();
-    console.log("data os call api : ", data);
-  };
-
   return (
     <>
       <MainSection
@@ -41,7 +36,6 @@ export default function Home(props) {
         profile={props.profile}
         username={username}
       />
-      <button onClick={callToApi}>Call api</button>
       <About id="about" profile={props.profile} username={username} />
       <Skills id="skills" username={username} />
       <Projects id="projects" username={username} />
