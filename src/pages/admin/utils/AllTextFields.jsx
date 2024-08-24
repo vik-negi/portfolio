@@ -1,5 +1,7 @@
 import React from "react";
 import create from "../../../utils/Theme";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const AllTextFields = ({
   title,
@@ -10,10 +12,12 @@ const AllTextFields = ({
   lines,
   classs,
   isCheckBox = false,
-  isFullWidth = false,
+  isFullWidth = true,
   isSelect = false,
+  isRequired = false,
   size,
   options,
+  onUseAI,
   onChange = () => {},
 }) => {
   const theme = create();
@@ -27,11 +31,20 @@ const AllTextFields = ({
       }  justify-start items-start mb-10 ${classs}`}
     >
       <label
-        className={` ${
+        className={`  ${
           theme.theme === "light" && "text-[#1e1e2f]"
         } font-semibold text-[14px]`}
       >
-        {title}
+        {title} {isRequired && <span className="text-[#ff0000]">*</span>}
+        {onUseAI && (
+          <button
+            onClick={onUseAI}
+            className="text-[12px] font-normal border-primary-500 border-[1px] rounded-[8px] px-4 py-1 ml-2 text-primary-500"
+          >
+            Use AI{" "}
+            <FontAwesomeIcon icon={faStar} className="text-primary-500 ml-2" />
+          </button>
+        )}
       </label>
 
       {isSelect && (
@@ -56,8 +69,11 @@ const AllTextFields = ({
           onChange={(e) => onChange(e.target.value)}
           name={name}
           value={value}
+          checked={value}
           type={isCheckBox ? "checkbox" : "text"}
-          className={`w-full h-[${
+          className={`${isFullWidth ? "w-full" : ""} ${
+            isCheckBox && "ml-5"
+          } h-[${
             size != null ? size : "45px"
           }] rounded-[10px] text-[13px] border-[1px]  border-[#e8e9fa] outline-none px-4 mt-2 ${
             theme.theme === "light" ? "text-[#1e1e2f]" : "text-white"

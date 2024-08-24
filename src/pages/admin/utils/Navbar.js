@@ -15,11 +15,7 @@ const MobileNavbar = () => {
   return (
     <div className="sidebar w-[100%]">
       <div className="flex flex-row justify-between items-center w-[100%]">
-        <SideBarItem
-          open={true}
-          route={"/admin/dashboard"}
-          lable="ABC Company"
-        />
+        <SideBarItem open={true} route={"/admin/dashboard"} lable="" />
         {/* <NavbarIcon
           styles="bg-[#2c2f32] text-[#ffffff] rounded-[10px] my-1"
           name="menu"
@@ -31,6 +27,7 @@ const MobileNavbar = () => {
           icon={"fa-solid fa-bars"}
           styles="w-[55px] h-[55px]"
           customStyle={customStyle}
+          
           handleClick={() => {
             setOpen(!open);
           }}
@@ -38,7 +35,7 @@ const MobileNavbar = () => {
       </div>
       {open && (
         <SideBarItemsContainer
-          open={true && open}
+          open={open}
           setOpen={setOpen}
           isMobileNavbar={true}
         />

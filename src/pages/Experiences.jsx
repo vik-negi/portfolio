@@ -98,7 +98,7 @@ export default function Experiences({ username }) {
   }
   const { data } = useQuery(["experience"], () => getExperience(username), {
     onSuccess: (data) => {
-      setExperiences(data?.data?.data?.experiences);
+      setExperiences(data?.data?.data);
     },
     onError: (error) => {
       setExperiences(MyData.experience.experiences);

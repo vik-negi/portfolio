@@ -13,6 +13,7 @@ export default function AddNew({
   cross,
   width,
   showCancel = true,
+  hideButton = true,
 }) {
   const cancelButtonRef = useRef(null);
   const theme = create();

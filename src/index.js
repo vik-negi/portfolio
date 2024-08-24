@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 const queryClient = new QueryClient();
@@ -25,10 +27,12 @@ setupAxios();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <QueryClientProvider client={queryClient}>
-    <React.StrictMode>
-      <App />
-      <ToastContainer />
-    </React.StrictMode>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+        <ToastContainer />
+      </React.StrictMode>
+    </Provider>
   </QueryClientProvider>
 );
 

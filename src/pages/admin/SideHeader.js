@@ -19,9 +19,11 @@ export const SideBarItem = ({
   lable,
   customStyle = "",
   fontAweson,
+  onClick,
 }) => {
   return (
     <Link
+      onClick={onClick}
       to={route || "#"}
       className={`logo-with-text flex justify-start items-center  hover:bg-[#e8e9fa] hover:bg-opacity-25 
        hover:cursor-pointer rounded-[10px] w-full ${customStyle}`}
@@ -112,6 +114,11 @@ export const SideBarItemsContainer = ({ open, setOpen, isMobileNavbar }) => {
         customStyle={customStyle}
         icon={"fa-solid fa-house"}
         route="/admin/dashboard"
+        onClick={() => {
+          if (isMobileNavbar) {
+            setOpen(!open);
+          }
+        }}
         lable="DASHBOARD"
       />
 
@@ -119,6 +126,11 @@ export const SideBarItemsContainer = ({ open, setOpen, isMobileNavbar }) => {
         open={open}
         customStyle={customStyle}
         route="/admin/about"
+        onClick={() => {
+          if (isMobileNavbar) {
+            setOpen(!open);
+          }
+        }}
         icon="fa-regular fa-address-card"
         // image="/images/app_logo.png"
         lable="ABOUT"
@@ -127,6 +139,11 @@ export const SideBarItemsContainer = ({ open, setOpen, isMobileNavbar }) => {
         open={open}
         customStyle={customStyle}
         route="/admin/experiences"
+        onClick={() => {
+          if (isMobileNavbar) {
+            setOpen(!open);
+          }
+        }}
         icon="fa-solid fa-briefcase"
         // image="/images/app_logo.png"
         lable="EXPERIENCES"
@@ -135,6 +152,11 @@ export const SideBarItemsContainer = ({ open, setOpen, isMobileNavbar }) => {
         open={open}
         customStyle={customStyle}
         route="/admin/projects"
+        onClick={() => {
+          if (isMobileNavbar) {
+            setOpen(!open);
+          }
+        }}
         icon="fa-solid fa-laptop-file"
         // image="/images/app_logo.png"
         lable="PROJECTS"
@@ -142,6 +164,11 @@ export const SideBarItemsContainer = ({ open, setOpen, isMobileNavbar }) => {
       <SideBarItem
         open={open}
         customStyle={customStyle}
+        onClick={() => {
+          if (isMobileNavbar) {
+            setOpen(!open);
+          }
+        }}
         route="/admin/skills"
         icon="fa-solid fa-laptop-code"
         // image="/images/app_logo.png"

@@ -11,15 +11,20 @@ import { currentUser } from "../../../axios/auth";
 
 function WrapperContent({ title, children, headerChild, isOpen }) {
   const { state, updateSideBarOpen } = useContext(AppContext);
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
 
-  const {} = useQuery("currentUser", () => currentUser(), {
+  const {
+    data: user,
+    error,
+    isLoading,
+  } = useQuery("currentUser", currentUser, {
     retry: 1,
     retryDelay: 1,
+    refetchOnWindowFocus: false,
     onError: (error) => {},
     onSuccess: (data) => {
-      console.log("data", data?.data?.data);
-      setUser(data?.data?.data);
+      // console.log("data", data?.data?.data);
+      // setUser(data?.data?.data);
     },
   });
 
@@ -36,38 +41,40 @@ function WrapperContent({ title, children, headerChild, isOpen }) {
       >
         <div className={`main ${!width650 ? "mx-4" : ""}`}>
           <div className=" flex flex-col justify-start items-start">
-            <div
-              className={`flex justify-between items-center h-[50px] 
+            {width650 && (
+              <div
+                className={`flex justify-between items-center h-[50px] 
                 w-full
               `}
-            >
-              <div className="flex">
-                <Link
-                  to="/admin/dashboard"
-                  className="text-[12px] font-semibold"
-                >
-                  Dashboard{" "}
-                </Link>
+              >
+                <div className="flex">
+                  <Link
+                    to="/admin/dashboard"
+                    className="text-[12px] font-semibold"
+                  >
+                    Dashboard{" "}
+                  </Link>
 
-                <p className="text-[12px] font-normal"> &nbsp;/ {title}</p>
-              </div>
-              <div className="rightSide ml-auto">
-                <NavbarOptionsDropdown
-                  image={user?.profilePic}
-                  onClick={() => {
-                    setOpenAddProjectModel(true);
-                  }}
-                  itemsList={[
-                    {
-                      title: "Dashboard",
-                    },
-                  ]}
-                  showLogout={true}
-                />
+                  <p className="text-[12px] font-normal"> &nbsp;/ {title}</p>
+                </div>
+                <div className="rightSide ml-auto">
+                  <NavbarOptionsDropdown
+                    image={user?.profilePic}
+                    onClick={() => {
+                      setOpenAddProjectModel(true);
+                    }}
+                    itemsList={[
+                      {
+                        title: "Dashboard",
+                      },
+                    ]}
+                    showLogout={true}
+                  />
 
-                {headerChild}
+                  {headerChild}
+                </div>
               </div>
-            </div>
+            )}
             {children}
             {/*content */}
           </div>

@@ -139,8 +139,8 @@ export function AddPassionDialog({ onSubmit }) {
               title="Add Passion"
               value={passion}
               name="passion"
-              onChange={(e) => {
-                setPassion(e.target.value);
+              onChange={(val) => {
+                setPassion(val);
               }}
               placeholder="Singing"
             />
