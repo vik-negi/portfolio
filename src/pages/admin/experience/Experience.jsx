@@ -25,6 +25,8 @@ import { getResponseForGivenPrompt } from "../../../axios/gemini";
 import { EditorContent } from "@tiptap/react";
 import CustomEditor from "../../../utils/editor";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@material-tailwind/react";
 
 const lableTextStyle = "text-[#1e1e2f] font-semibold text-[14px]";
 
@@ -407,6 +409,10 @@ function AdminExperience({ isFromCreateProtfolio = false }) {
       addExpMutation.mutate(tempData[i]);
     }
   };
+  const navigate = useNavigate();
+  const handleNext = () => {
+    navigate("/admin/create-portfolio/3");
+  };
 
   return (
     <WrapperContent title="Experience">
@@ -415,6 +421,14 @@ function AdminExperience({ isFromCreateProtfolio = false }) {
       >
         <p className="px-10 text-[20px]">Experience</p>
         <div className="border-4px bg-white-500 flex">
+          <div className="flex w-full flex-col justify-start items-end">
+            <Button
+              className="bg-[#1e1e2f] rounded-[10px] px-5 py-3 text-[#e8e9fa] text-[14px]"
+              onClick={handleNext}
+            >
+              Next
+            </Button>
+          </div>
           {isFromCreateProtfolio && (
             <button
               className="flex justify-center

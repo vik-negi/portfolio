@@ -25,10 +25,11 @@ import { useNavigate } from "react-router-dom";
 import AllTextFields from "../utils/AllTextFields";
 import create from "../../../utils/Theme";
 import LoadingComponent from "../../../utils/loader";
+import { useSelector } from "react-redux";
 
 const lableTextStyle = "text-[#1e1e2f] font-semibold text-[14px]";
 
-const AdminProject = () => {
+const AdminProject = ({ isFromCreateProtfolio = false }) => {
   const [loading, setLoading] = useState(true);
   const { data: projectsData, refetch: refetchProjects } = useQuery(
     "projects",
@@ -43,6 +44,7 @@ const AdminProject = () => {
       onSuccess: (data) => {
         console.log(data.data?.data);
         setLoading(false);
+        if (isFromCreateProtfolio) return;
         setProjects(data?.data?.data);
       },
     }
@@ -56,6 +58,7 @@ const AdminProject = () => {
     onSuccess: (data) => {
       console.log(data.data?.data);
       successMessage("Project Added Successfully");
+      if (isFromCreateProtfolio) return;
       goBack();
       setProjects(data?.data?.data);
     },
@@ -88,6 +91,15 @@ const AdminProject = () => {
     navigate(-1);
   };
 
+  const { createPortfolioData } = useSelector((state) => state.aiResponse);
+
+  const [submitLoading, setSubmitLoading] = useState(false);
+  useEffect(() => {
+    if (createPortfolioData) {
+      setProjects(createPortfolioData?.projects ?? []);
+      console.log("projects", projects);
+    }
+  }, []);
   const [openAddProjectModel, setOpenAddProjectModel] = useState(false);
   const [skillList, setSkillList] = useState([]);
   const [skill, setSkill] = useState("");
@@ -102,6 +114,18 @@ const AdminProject = () => {
   const [image, setImage] = useState([]);
 
   const theme = create();
+
+  const handleAddProject = (idx) => {
+    var formData = new FormData();
+    const data = projects[idx];
+    for (let key in data) {
+      if (data.hasOwnProperty(key)) {
+        formData.set(key, data[key]);
+      }
+    }
+
+    addMutation.mutate(formData);
+  };
 
   const saveProject = () => {
     var formData = new FormData();
@@ -192,10 +216,14 @@ const AdminProject = () => {
                 className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-[6px]"
                 onClick={() => {
                   console.log("update project");
-                  updateProjectFunction(index);
+                  if (isFromCreateProtfolio) {
+                    handleAddProject(index);
+                  } else {
+                    updateProjectFunction(index);
+                  }
                 }}
               >
-                Update
+                {isFromCreateProtfolio ? "ADD" : "Update"}
               </button>
               <div
                 className="items-center gap-5 hover:cursor-pointer
@@ -308,7 +336,7 @@ const AdminProject = () => {
               </div>
             </div>
             <div className="flex flex-row justify-start items-center mt-5 flex-wrap gap-10">
-              {project.image.map((item, index) => (
+              {project?.image?.map((item, index) => (
                 <div
                   className={`flex flex-col justify-start items-center mt-5 relative
                    ${width425 ? "w-[300px] " : "w-full"}`}

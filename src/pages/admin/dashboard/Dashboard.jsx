@@ -294,17 +294,38 @@ I have provided my resume below. Please extract and format the information as a 
       "highlights": [
         "Led the design and implementation of new features based on business requirements."
       ]
-    },
-    {
-      "title": "Software Developer",
-      "company": "Employee Forums",
-      "location": "Mumbai, Maharashtra",
-      "from": "2024-01-01T00:00:00.000Z",
-      "to": "2024-08-01T00:00:00.000Z",
-      "description": "Architected the Employee Forums application, available on the Play Store.",
-      "skills": ["Flutter"]
     }
   ],
+  "projects" : [
+      {
+        "name": "BookMark",
+        "title": "BookMark - Let's make book non disposable",
+        "description":
+          "BookMark is not just an application; it's a movement to redefine our relationship with books. In a world of disposables, ",
+        "level": "Advanced",
+        "order": 2,
+        "tags": [
+          "Python",
+          "Flutter",
+          "MongoDB",
+          "Node.js",
+          "Express",
+          "Django",
+          "Machine Learning",
+          "sqlite"
+        ],
+        "skillsUsed": [
+          "Python",
+          "Flutter",
+          "MongoDB",
+          "Node.js",
+          "Express",
+          "Machine Learning",
+          "Django",
+          "sqlite"
+        ]
+      }
+    ],
   "skills": ["Flutter", "Node.js", "Web Development"],
   "achievements": ["Built 5+ cross-platform mobile apps", "Reduced API response time by 40%"],
   "responsibilities": ["Lead design", "Implement features", "Debug and resolve software defects"],

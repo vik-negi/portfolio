@@ -54,7 +54,9 @@ const AllTextFields = ({
           onChange={(e) => onChange(e)}
           className={`w-full h-[${
             size != null ? size : "45px"
-          }] rounded-[10px] text-[13px] border-[1px]  border-[#e8e9fa] outline-none px-4 mt-2 ${
+          }] rounded-[10px] text-[13px] border-[1px] ${
+            theme.theme === "light" ? "bg-white" : "bg-[#1e1e2f]"
+          } border-[#e8e9fa] outline-none px-4 mt-2 ${
             theme.theme === "light" ? "text-[#1e1e2f]" : "text-white"
           } `}
         >
@@ -64,7 +66,7 @@ const AllTextFields = ({
         </select>
       )}
 
-      {(value || value == "") && !isSelect && (
+      {(value || value == "" || value == null) && !isSelect && (
         <input
           onChange={(e) => onChange(e.target.value)}
           name={name}
