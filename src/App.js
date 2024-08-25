@@ -33,6 +33,7 @@ import AdminExperience from "./pages/admin/experience/Experience";
 import AdminProject from "./pages/admin/project/AdminProjects";
 import AdminSkills from "./pages/admin/skills/components/AdminSkills";
 import CreatePortfolio from "./pages/admin/dashboard/CreatePortfolio";
+import MainDashboard from "./pages/MainDashboard";
 
 function App() {
   // const slowInternet = setTimeout(() => {
@@ -141,12 +142,14 @@ function App() {
             element={
               <LayoutComponent
                 children={
-                  <Home
-                    name={profile.name.split(" ")[0]}
-                    skills={skills}
-                    profile={profile}
-                  />
+                  // <Home
+                  //   name={profile.name.split(" ")[0]}
+                  //   skills={skills}
+                  //   profile={profile}
+                  // />
+                  <MainDashboard />
                 }
+                notShowNavbar={true}
               />
             }
           />

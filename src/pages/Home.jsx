@@ -11,6 +11,7 @@ import { callApi, dashboard, publicInfo } from "../axios/dashboard";
 
 import { useLocation, useParams } from "react-router-dom";
 import { getUsername } from "./admin/utils/auth";
+import MainDashboard from "./MainDashboard";
 
 library.add(faBars, faTimes);
 
@@ -31,6 +32,7 @@ export default function Home(props) {
 
   return (
     <>
+      <MainDashboard />
       <MainSection
         name={props.profile.name.split(" ")[0]}
         profile={props.profile}

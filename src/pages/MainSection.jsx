@@ -5,6 +5,7 @@ import { publicInfo } from "../axios/dashboard";
 import MyData from "../data/MyData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import MainDashboard from "./MainDashboard";
 
 export default function MainSection({ username, profile }) {
   const [userInfo, setUserInfo] = useState();
