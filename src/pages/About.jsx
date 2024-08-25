@@ -9,6 +9,7 @@ import MyData from "../data/MyData.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { parseStyledText } from "../utils/text_parser.jsx";
 
 const About = ({ username, profile }) => {
   const queryClient = useQueryClient();
@@ -110,11 +111,13 @@ const About = ({ username, profile }) => {
           </div>
           <br />
           <p className="aboutLong">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
-            fugiat quos assumenda nulla exercitationem est nisi odit quam amet
-            corrupti officiis inventore aut impedit explicabo id distinctio
-            ullam, libero error rem magni consequuntur provident voluptate! Odio
-            numquam blanditiis fugit minus.
+            {about?.description != null
+              ? parseStyledText(
+                  about?.description.length > 450
+                    ? about?.description.slice(0, 450) + "..."
+                    : about?.description
+                )
+              : ""}
           </p>
           <br />
           <a

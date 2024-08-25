@@ -21,42 +21,10 @@ import {
   getAllSkills,
 } from "../../../../axios/skills";
 import AllTextFields from "../../utils/AllTextFields";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const SkillTextFields = ({
-  value,
-  placeholder,
-  name,
-  image,
-  onChange = () => {},
-}) => {
-  const theme = create();
-
-  return (
-    <div
-      className={`flex w-full  align-middle items-center flex-row justify-start  gap-5 mb-10  relative`}
-    >
-      <div>
-        <img src={image} height={"35px"} width={"50px"} alt="skill" />
-      </div>
-      <input
-        onChange={(e) => onChange(e.target.value)}
-        name={name}
-        value={value}
-        type={"text"}
-        className={`w-full h-[45px] rounded-[10px] text-[13px] border-[1px]  border-[#e8e9fa] outline-none px-4 mt-2  ${
-          theme.theme === "light" ? "text-[#1e1e2f]" : "text-white"
-        } ${theme.theme === "light" ? "bg-white" : "bg-[#1e1e2f]"}`}
-        placeholder={placeholder}
-      />
-
-      <div className="flex flex-row justify-center items-center absolute top-5 right-5 rounded-full p-2 w-[30px] h-[30px] bg-black bg-white-400 cursor-pointer">
-        <FontAwesomeIcon color="white" size="lg" icon="fa-solid fa-xmark" />
-      </div>
-    </div>
-  );
-};
-
-function AdminSkills() {
+function AdminSkills({ isFromCreateProtfolio = false }) {
   const lableTextStyle = "text-[#1e1e2f] font-semibold text-[14px]";
 
   const [openAddskillModel, setOpenAddskillModel] = useState(false);
@@ -66,71 +34,73 @@ function AdminSkills() {
   ] = useState(false);
 
   const [categoryName, setCategoryName] = useState("");
-  const [skillName, setSkillName] = useState("");
+  const [selectedSkill, setSelectedSkill] = useState({});
   const [skillLevel, setSkillLevel] = useState("");
 
   const [allSkills, setAllSkills] = useState([]);
 
-  const [skills, setSkills] = useState([
-    {
-      category: "Frontend",
-      skills: [
-        {
-          skill: {
-            name: "React",
-            image:
-              "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K",
-          },
-          level: "Intermediate",
-        },
-        {
-          skill: {
-            name: "React",
-            image:
-              "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K",
-          },
-          level: "Intermediate",
-        },
-        {
-          skill: {
-            name: "React",
-            image:
-              "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K",
-          },
-          level: "Intermediate",
-        },
-      ],
-    },
-    {
-      category: "Frontend",
-      skills: [
-        {
-          skill: {
-            name: "React",
-            image:
-              "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K",
-          },
-          level: "Intermediate",
-        },
-      ],
-    },
-  ]);
+  const [skills, setSkills] = useState([]);
 
-  const { data: skillsData, refetch: refetchskills } = useQuery(
-    "skills",
-    () => getAllSkills(),
+  const { data: mySkillsData } = useQuery("skills", () => getAllSkills(), {
+    retry: 1,
+    retryDelay: 1,
+    refetchOnWindowFocus: false,
+    onError: (error) => {
+      errorMessage(error?.response?.data?.message);
+    },
+    onSuccess: (data) => {
+      setAllSkills(data?.data?.data);
+    },
+  });
+  const { data, refetch: refetchskills } = useQuery(
+    "my-skills",
+    () => getAdminSkills(),
     {
       retry: 1,
       retryDelay: 1,
+      refetchOnWindowFocus: false,
       onError: (error) => {
         errorMessage(error?.response?.data?.message);
       },
       onSuccess: (data) => {
-        console.log(data.data?.data);
-        setAllSkills(data?.data?.data);
+        if (isFromCreateProtfolio) return;
+        setSkills(data?.data?.skills);
       },
     }
   );
+
+  const navigate = useNavigate();
+  const { skillsData } = useSelector((state) => state.aiResponse);
+
+  const [submitLoading, setSubmitLoading] = useState(false);
+  useEffect(() => {
+    if (skillsData) {
+      console.log("skillsData : ", skillsData);
+      var myskills = skillsData?.skills ?? [];
+
+      const updatedSkills = myskills.map((category) => {
+        return {
+          category:
+            category.category == null || category.category == "null"
+              ? category?.skillCategory ?? "Other"
+              : category.category,
+          skills: category.skills.map((item) => {
+            return {
+              skill: allSkills.find((skill) => {
+                // console.log("item : ", skill, " and ", item);
+                return (
+                  skill?.name?.toLowerCase() == item?.skill.name?.toLowerCase()
+                );
+              }),
+              level: item.level,
+            };
+          }),
+        };
+      });
+      setSkills(updatedSkills);
+      console.log("skills", updatedSkills);
+    }
+  }, []);
 
   const [skillsFromFile, setSkillsFromFile] = useState([]);
 
@@ -160,9 +130,35 @@ function AdminSkills() {
     onSuccess: (data) => {
       console.log(data.data?.data);
       successMessage("skill Added Successfully");
-      // goBack();
+      refetchskills();
     },
   });
+
+  const handleAddAllSkills = () => {
+    console.log("data : ", skills);
+
+    const userSkillsFromResume = [];
+
+    skills.map((skill) => {
+      skill.skills.map((item) => {
+        if (item?.skill?._id == null) return;
+        userSkillsFromResume.push({
+          skillCategory: skill.category,
+          skill: item.skill._id,
+          level: item?.level ?? "Intermediate",
+        });
+      });
+    });
+
+    // console.log("userSkillsFromResume : ", userSkillsFromResume);
+
+    for (let i = 0; i < userSkillsFromResume.length; i++) {
+      addSkillsMutation.mutate(userSkillsFromResume[i]);
+      if (i == userSkillsFromResume.length - 1) {
+        successMessage("All Skills Added Successfully");
+      }
+    }
+  };
 
   const addSkillsMutation = useMutation((data) => addSkill(data), {
     onError: (error) => {
@@ -170,7 +166,12 @@ function AdminSkills() {
     },
     onSuccess: (data) => {
       console.log(data.data?.data);
+      if (!openAddskillModel) {
+        return;
+      }
       successMessage("skill Added Successfully");
+      refetchskills();
+      setOpenAddskillModel(false);
       // goBack();
     },
   });
@@ -180,9 +181,13 @@ function AdminSkills() {
   };
 
   const handleAddSkill = () => {
+    if (selectedSkill == {} || skillLevel == "" || categoryName == "") {
+      errorMessage("Please fill all the fields");
+      return;
+    }
     const data = {
       skillCategory: categoryName,
-      skill: skillName,
+      skill: selectedSkill._id,
       level: skillLevel,
     };
 
@@ -196,6 +201,49 @@ function AdminSkills() {
 
   const theme = create();
   const width425 = useWindowWide(425);
+  const skillCardStyle = `my-5 p-5  bg-[#100F22] rounded-lg shadow-lg flex flex-col  items-start ${
+    theme.theme === "light" && "bg-[#E1EBF5]"
+  }`;
+
+  const [suggesstionCategory, setSuggesstionCategory] = useState([]);
+  const [suggesstionSkills, setSuggesstionSkills] = useState([]);
+  const allCategories = [
+    "Frontend",
+    "Backend",
+    "Database",
+    "DevOps",
+    "Design",
+    "Testing",
+    "Mobile",
+    "App Development",
+    "AI/ML",
+    "Data Science",
+    "Cyber Security",
+    "Cloud Computing",
+    "Web Development",
+    "Game Development",
+    "Blockchain",
+    "IoT",
+    "Networking",
+  ];
+
+  const handleSuggesstion = (value) => {
+    setCategoryName(value);
+    const filtered = allCategories.filter((item) =>
+      item.toLowerCase().includes(value.toLowerCase())
+    );
+    setSuggesstionCategory(filtered);
+  };
+  const handleSkillSuggesstion = (value) => {
+    if (value === "") {
+      setSuggesstionSkills([]);
+      return;
+    }
+    const filtered = allSkills.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setSuggesstionSkills(filtered);
+  };
 
   return (
     <WrapperContent title="skill">
@@ -203,74 +251,78 @@ function AdminSkills() {
         className={` mx-auto max-w-[1100px] rounded-[5px] flex justify-between items-center w-full p-1`}
       >
         <p className="px-10 text-[20px]">Skills</p>
-        <div className="border-4px bg-white-500">
-          <button
-            className="flex justify-center sticky z-5 top-5
+        <div className="flex gap-5">
+          <div className="border-4px bg-white-500">
+            <button
+              className="flex justify-center sticky z-5 top-5
            items-center bg-[#1e1e2f] hover:bg-[#e8e9fa] text-[#e8e9fa] hover:text-[#1e1e2f]  font-semiblod text-[12px] py-4 px-4 rounded-[4px]"
-            onClick={() => {
-              setOpenAddskillModel(true);
-            }}
-          >
-            <FontAwesomeIcon className="mr-2" icon={faPlus} />
-            Add Skill
-          </button>
+              onClick={handleAddAllSkills}
+            >
+              <FontAwesomeIcon className="mr-2" icon={faPlus} />
+              Add All Skills
+            </button>
+          </div>
+          <div className="border-4px bg-white-500">
+            <button
+              className="flex justify-center sticky z-5 top-5
+           items-center bg-[#1e1e2f] hover:bg-[#e8e9fa] text-[#e8e9fa] hover:text-[#1e1e2f]  font-semiblod text-[12px] py-4 px-4 rounded-[4px]"
+              onClick={() => {
+                setOpenAddskillModel(true);
+              }}
+            >
+              <FontAwesomeIcon className="mr-2" icon={faPlus} />
+              Add Skill
+            </button>
+          </div>
         </div>
       </div>
 
       <div
         className={`flex flex-col sm:justify-between justify-start items-start mx-auto w-full max-w-[1100px]`}
       >
-        {skills.length > 0 &&
-          skills.map((skill, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skills.map((skill, index) => (
             <div
-              className={`flex justify-between w-full flex-col items-start mx-auto max-w-[1100px]`}
+              key={`skill-${index}`}
+              className={`max-w-[500px]  border shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:cursor-pointer ${skillCardStyle} hover:bg-transparent hover:shadow-none transition duration-500 ease-in-out hover:border-2 hover:border-blue-500`}
             >
-              <div className="flex flex-row gap-10 justify-between items-center">
-                <AllTextFields
-                  title="Category"
-                  value={skill.category}
-                  placeholder="skill Name"
-                />
-                <div
-                  className="items-center gap-5 hover:cursor-pointer bg-blue-500 hover:bg-blue-700  transform hover:scale-2 transition-transform duration-300
-                text-white font-bold py-2 px-4 rounded-full "
-                  onClick={() => {}}
+              <div className="px-6 py-4 align-top">
+                <h3
+                  className={`text-3xl mb-[20px] ${
+                    theme.theme == "light" ? "text-gray-800" : "text-white"
+                  } font-semibold mb-4  text-center`}
                 >
-                  <FontAwesomeIcon className="" icon={faPlus} />
+                  {skill.category}
+                </h3>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {skill.skills.map((item, index_x) => (
+                    <div
+                      key={`skill-x-${index_x}`}
+                      className={`flex items-center ${
+                        theme.theme !== "light" && "bg-gray-900"
+                      }  border border-gray-400 dark:border-gray-600 rounded-md py-2 px-4 transform hover:rotate-6 hover:scale-110 transition duration-300`}
+                    >
+                      <img
+                        src={item.skill?.image}
+                        alt={item.skill?.name}
+                        className="w-6 h-6 mr-2"
+                      />
+                      <span
+                        className={` ${
+                          theme.theme == "light"
+                            ? "text-grey-900"
+                            : "text-white"
+                        }`}
+                      >
+                        {item.skill?.name}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-                <div
-                  className="items-center gap-5 hover:cursor-pointer bg-red-500 hover:bg-red-700  transform hover:scale-2 transition-transform duration-300
-                text-white font-bold py-2 px-4 rounded-full "
-                  onClick={() => {}}
-                >
-                  <FontAwesomeIcon className="" icon={faTrash} />
-                </div>
-              </div>
-              <div
-                className={`flex flex-wrap w-full flex-row justify-between items-start  mb-5`}
-              >
-                {skill.skills.map((item, index) => (
-                  <div
-                    className={`flex flex-wrap w-full flex-row justify-between items-start  mb-5 max-w-[500px] rounded-[10px] p-10  ${
-                      theme.theme === "light" ? "bg-[#ffffff]" : "bg-[#1e1e2f]"
-                    }`}
-                  >
-                    <SkillTextFields
-                      value={item?.skill.name}
-                      placeholder="skill Title"
-                      image={item?.skill.image}
-                    />
-                    <AllTextFields
-                      title="Level"
-                      value={item.level}
-                      isSelect={true}
-                      placeholder="Select Level"
-                    />
-                  </div>
-                ))}
               </div>
             </div>
           ))}
+        </div>
       </div>
 
       <AddNew
@@ -307,22 +359,67 @@ function AdminSkills() {
               <AllTextFields
                 title="Category"
                 value={categoryName}
-                onChange={(value) => setCategoryName(value)}
+                onChange={(value) => handleSuggesstion(value)}
                 placeholder="skill Name"
               />
+              {suggesstionCategory.length > 0 && (
+                <div className="flex flex-wrap">
+                  {suggesstionCategory.map((item, index) => (
+                    <div
+                      key={`suggesstion-${index}`}
+                      className={`flex flex-row cursor-pointer items-center gap-5 px-6 mr-2 mb-2 rounded-[8px]  py-2 ${
+                        theme.theme === "light"
+                          ? "bg-[#ffffff]"
+                          : "bg-[#77778d]"
+                      }
+                      hover:bg-[#e8e9fa] hover:text-[#1e1e2f] text-[12px]
+                      `}
+                      onClick={() => {
+                        setCategoryName(item);
+                        setSuggesstionCategory([]);
+                      }}
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              )}
               <AllTextFields
                 title="Skill"
-                value={allSkills.find((item) => item._id === skillName)?.name}
+                value={selectedSkill?.name}
                 placeholder="skill Name"
-                options={allSkills.map((item) => item.name)}
-                isSelect={true}
+                // options={allSkills.map((item) => item.name)}
+                // isSelect={true}
                 onChange={(e) => {
-                  const id = allSkills.find(
-                    (item) => item.name === e.target.value
-                  )._id;
-                  setSkillName(id);
+                  const skills = allSkills.find((item) => item.name === e);
+                  setSelectedSkill(skills);
+                  handleSkillSuggesstion(e);
+                  // setSkillName(id);
                 }}
               />
+
+              {suggesstionSkills.length > 0 && (
+                <div className="flex flex-wrap">
+                  {suggesstionSkills.map((item, index) => (
+                    <div
+                      key={`suggesstion-${index}`}
+                      className={`flex flex-row cursor-pointer items-center gap-5 px-6 mr-2 mb-2 rounded-[8px]  py-2 ${
+                        theme.theme === "light"
+                          ? "bg-[#ffffff]"
+                          : "bg-[#77778d]"
+                      }
+                      hover:bg-[#e8e9fa] hover:text-[#1e1e2f] text-[12px]
+                      `}
+                      onClick={() => {
+                        setSelectedSkill(item);
+                        setSuggesstionSkills([]);
+                      }}
+                    >
+                      {item.name}
+                    </div>
+                  ))}
+                </div>
+              )}
               <AllTextFields
                 title="Level"
                 value={skillLevel}

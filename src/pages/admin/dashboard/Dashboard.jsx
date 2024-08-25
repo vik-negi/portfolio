@@ -25,7 +25,9 @@ import { useNavigate } from "react-router-dom";
 import {
   setError,
   setResponseData,
+  setSkillsData,
 } from "../../../redux/admin/CreatePortfolio";
+import LoadingComponent from "../../../utils/loader";
 
 // pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjs;
 export const DashboardDetails = ({
@@ -251,6 +253,58 @@ function Dashboard() {
   const [loading, setLoading] = useState(false);
   const smallScreen = useWindowWide(640);
 
+  const handleGetSkills = async (text) => {
+    try {
+      const prompt = `
+I have provided my resume below. Please extract and format the information as a JSON object. Here's an dummy example structure: please return the data in json format only. add as much skill possible and skill is in captalized form.
+
+{
+    "skills": [
+    {
+      "skills": [
+        {
+          "skillCategory": "Frontend",
+          "skill": {
+            "name": "React Js"
+          }
+        },
+        {
+          "skillCategory": "Backend",
+          "skill": {
+            "name": "Node Js"
+          }
+        }
+      ],
+      "category": "Frontend"
+    }
+  ]
+}
+
+Here is the resume text: ${text} \n strictly Ensure data is in Proper json format.
+`;
+
+      const response = await getResponseForGivenPrompt(prompt);
+      if (response) {
+        console.log("Response from GPT-3: ", response);
+
+        const startIdx = response.indexOf("{");
+        const endIdx = response.lastIndexOf("}");
+        const extractedJson = response.slice(startIdx, endIdx + 1);
+        console.log("Extracted JSON: ", startIdx, endIdx, extractedJson);
+        const jsonData = JSON.parse(extractedJson);
+
+        console.log("data after json : ", jsonData);
+        dispatch(setSkillsData(jsonData));
+      }
+    } catch (e) {
+      console.log(e);
+      dispatch(setError(e.message));
+    } finally {
+      setLoading(false);
+      dispatch(setLoading(false));
+    }
+  };
+
   const handleResumeUpload = async (event) => {
     const file = event.target.files[0];
     console.log(file);
@@ -259,10 +313,11 @@ function Dashboard() {
       alert("Please upload a PDF file.");
       return;
     }
+    setLoading(true);
     try {
       pdfToText(file).then(async (text) => {
         const prompt = `
-I have provided my resume below. Please extract and format the information as a JSON object. Here's an dummy example structure: please return the data in json fomrat only. in experience if present then make current true and else assign end date to to key. make sure date is in IST format (like 2024-01-01T00:00:00.000Z) if not please convert in experience .
+I have provided my resume below. Please extract and format the information as a JSON object. Here's an dummy example structure: please return the data in json fomrat only. in experience if present then make current true and else assign end date to to key. skill is in captalized form. Ensure data is in Proper json format. add as much data possible.
 
 {
   "about": {
@@ -296,6 +351,7 @@ I have provided my resume below. Please extract and format the information as a 
       ]
     }
   ],
+  
   "projects" : [
       {
         "name": "BookMark",
@@ -326,7 +382,6 @@ I have provided my resume below. Please extract and format the information as a 
         ]
       }
     ],
-  "skills": ["Flutter", "Node.js", "Web Development"],
   "achievements": ["Built 5+ cross-platform mobile apps", "Reduced API response time by 40%"],
   "responsibilities": ["Lead design", "Implement features", "Debug and resolve software defects"],
   "hobbies": ["Coding", "Singing"]
@@ -334,7 +389,7 @@ I have provided my resume below. Please extract and format the information as a 
 
 Here is the resume text: ${text}
 `;
-
+        handleGetSkills(text);
         const response = await getResponseForGivenPrompt(prompt);
         if (response) {
           console.log("Response from GPT-3: ", response);
@@ -346,6 +401,7 @@ Here is the resume text: ${text}
       console.log(e);
       dispatch(setError(e.message));
     } finally {
+      setLoading(false);
       dispatch(setLoading(false));
     }
   };
@@ -353,10 +409,8 @@ Here is the resume text: ${text}
   const navigate = useNavigate();
 
   const handleExtractJson = (text) => {
-    console.log("Text: ", text);
     const startIdx = text.indexOf("{");
     const endIdx = text.lastIndexOf("}");
-    console.log("Start Index: ", startIdx);
     const extractedJson = text.slice(startIdx, endIdx + 1);
     console.log("Extracted JSON: ", extractedJson);
     const jsonData = JSON.parse(extractedJson);
@@ -370,6 +424,7 @@ Here is the resume text: ${text}
 
   return (
     <WrapperContent title="Dashboard">
+      {loading && <LoadingComponent width={100} />}
       <div className={`${smallScreen && "px-10"}  flex flex-col w-full`}>
         <div className=" flex flex-wrap justify-start items-start">
           <DashboardDetails

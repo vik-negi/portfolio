@@ -20,6 +20,7 @@ import {
 import AddNew from "../utils/AddNew";
 import AllTextFields from "../utils/AllTextFields";
 import LoadingComponent from "../../../utils/loader";
+import { getResponseForGivenPrompt } from "../../../axios/gemini";
 
 const lableTextStyle = "text-[#1e1e2f] font-semibold text-[20px]";
 
@@ -161,6 +162,7 @@ function AdminAbout() {
     {
       retry: 1,
       retryDelay: 1,
+      refetchOnWindowFocus: false,
       onSuccess: (data) => {
         setAbout(data.data?.data);
         setLoading(false);
@@ -200,6 +202,25 @@ function AdminAbout() {
     editMutation.mutate();
   };
 
+  const handleAboutGenerateDescriptionFromAI = async (id) => {
+    const userData = {
+      name: about?.user?.firstName + " " + about?.user?.lastName,
+      title: about?.title,
+      passion: about?.passion,
+      career: about?.career,
+    };
+    const prompt = `considering you are ${
+      userData.name
+    } Create only 500 character professional description for portfolio that attracts recruiters for yourself. \n\nhere's my details:\n\n ${JSON.stringify(
+      userData
+    )}`;
+
+    const response = await getResponseForGivenPrompt(prompt);
+    if (response) {
+      setAbout({ ...about, description: response });
+    }
+  };
+
   const onPassionSubmit = (val) => {
     if (val == null || val == "") return;
 
@@ -225,7 +246,9 @@ function AdminAbout() {
               title="Title"
               value={about?.title ?? ""}
               name="title"
-              onChange={handleFieldChange}
+              onChange={(val) => {
+                setAbout({ ...about, title: val });
+              }}
               placeholder="About Title"
             />
             <AllTextFields
@@ -234,6 +257,7 @@ function AdminAbout() {
               name="description"
               onChange={handleFieldChange}
               placeholder="About Description"
+              onUseAI={handleAboutGenerateDescriptionFromAI}
             />
             {about?.passion && (
               <label

@@ -26,6 +26,7 @@ import AllTextFields from "../utils/AllTextFields";
 import create from "../../../utils/Theme";
 import LoadingComponent from "../../../utils/loader";
 import { useSelector } from "react-redux";
+import { Button } from "@material-tailwind/react";
 
 const lableTextStyle = "text-[#1e1e2f] font-semibold text-[14px]";
 
@@ -184,6 +185,10 @@ const AdminProject = ({ isFromCreateProtfolio = false }) => {
     });
   };
 
+  const handleNext = () => {
+    navigate("/admin/create-portfolio/4");
+  };
+
   return (
     <WrapperContent title="Project">
       <div
@@ -191,6 +196,13 @@ const AdminProject = ({ isFromCreateProtfolio = false }) => {
       >
         <p className="px-10 text-[20px]">Projects</p>
         <div className="border-4px bg-white-500">
+          <Button
+            className="bg-[#1e1e2f] rounded-[10px] px-5 py-3 text-[#e8e9fa] text-[14px]"
+            onClick={handleNext}
+          >
+            Next
+          </Button>
+
           <button
             className="flex justify-center sticky z-5 top-5
            items-center bg-[#1e1e2f] hover:bg-[#e8e9fa] text-[#e8e9fa] hover:text-[#1e1e2f]  font-semiblod text-[12px] py-4 px-4 rounded-[4px]"

@@ -66,23 +66,25 @@ const AllTextFields = ({
         </select>
       )}
 
-      {(value || value == "" || value == null) && !isSelect && (
-        <input
-          onChange={(e) => onChange(e.target.value)}
-          name={name}
-          value={value}
-          checked={value}
-          type={isCheckBox ? "checkbox" : "text"}
-          className={`${isFullWidth ? "w-full" : ""} ${
-            isCheckBox && "ml-5"
-          } h-[${
-            size != null ? size : "45px"
-          }] rounded-[10px] text-[13px] border-[1px]  border-[#e8e9fa] outline-none px-4 mt-2 ${
-            theme.theme === "light" ? "text-[#1e1e2f]" : "text-white"
-          } ${theme.theme === "light" ? "bg-white" : "bg-[#1e1e2f]"}`}
-          placeholder={placeholder}
-        />
-      )}
+      {(value || value == "" || value == null) &&
+        textArea === undefined &&
+        !isSelect && (
+          <input
+            onChange={(e) => onChange(e.target.value)}
+            name={name}
+            value={value}
+            checked={value}
+            type={isCheckBox ? "checkbox" : "text"}
+            className={`${isFullWidth ? "w-full" : ""} ${
+              isCheckBox && "ml-5"
+            } h-[${
+              size != null ? size : "45px"
+            }] rounded-[10px] text-[13px] border-[1px]  border-[#e8e9fa] outline-none px-4 mt-2 ${
+              theme.theme === "light" ? "text-[#1e1e2f]" : "text-white"
+            } ${theme.theme === "light" ? "bg-white" : "bg-[#1e1e2f]"}`}
+            placeholder={placeholder}
+          />
+        )}
       {textArea != null && (
         <textarea
           type="text"

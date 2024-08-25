@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import CreateAbout from "./create_protfolio_sections/CreateAbout";
 import AdminExperience from "../experience/Experience";
 import AdminProject from "../project/AdminProjects";
+import AdminSkills from "../skills/components/AdminSkills";
 
 const CreatePortfolio = () => {
   const indexNumber = useParams().indexNumber;
@@ -16,6 +17,7 @@ const CreatePortfolio = () => {
       {indexNumber == 1 && <CreateAbout />}
       {indexNumber == 2 && <AdminExperience isFromCreateProtfolio={true} />}
       {indexNumber == 3 && <AdminProject isFromCreateProtfolio={true} />}
+      {indexNumber == 4 && <AdminSkills isFromCreateProtfolio={true} />}
     </div>
   );
 };
