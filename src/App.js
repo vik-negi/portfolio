@@ -13,7 +13,6 @@ import { AppProvider } from "./context/Context";
 import {
   HashRouter,
   Routes,
-  useNavigate,
   Route,
   useLocation,
   matchPath,
