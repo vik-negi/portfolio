@@ -17,6 +17,7 @@ class MyData {
       username: "vikramnegi-9162604468",
       isVerified: false,
       isActive: true,
+      data: "This is a test data",
       location: "New Delhi, India",
       profilePic:
         "http://res.cloudinary.com/dolqf9s3y/image/upload/v1719730400/jy8avmdz8jxfvpgxhnbc.jpg",

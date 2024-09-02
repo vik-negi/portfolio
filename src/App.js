@@ -22,17 +22,6 @@ import Portfolio from "./demo";
 // import { ThemeModeProvider } from "./context/ThemeContext";
 import { themes, StyledComponent } from "./utils/Theme";
 import LayoutComponent from "./utils/TopLayerLayout";
-import Login from "./pages/admin/Login";
-import Dashboard from "./pages/admin/dashboard/Dashboard";
-import LoginWrapper from "./pages/admin/utils/LoginWrapper";
-import { AboutIndex } from "./pages/admin/about";
-import Register from "./pages/admin/Register";
-import VerifyOtp from "./pages/admin/VerifyOtp";
-import AdminExperience from "./pages/admin/experience/Experience";
-import AdminProject from "./pages/admin/project/AdminProjects";
-import AdminSkills from "./pages/admin/skills/components/AdminSkills";
-import CreatePortfolio from "./pages/admin/dashboard/CreatePortfolio";
-import MainDashboard from "./pages/MainDashboard";
 
 function App() {
   return (
