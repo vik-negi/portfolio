@@ -7,26 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import MainDashboard from "./MainDashboard";
 
-export default function MainSection({ username, profile }) {
-  const [userInfo, setUserInfo] = useState();
-  const [isFirstTime, setIsFirstTime] = useState(true);
-  if (
-    username === undefined ||
-    (username === "vikramnegi-9162604468" && isFirstTime)
-  ) {
-    setUserInfo(MyData.publicInfo);
-    setIsFirstTime(false);
-  }
-
-  const { isLoading } = useQuery(["data"], () => publicInfo(username), {
-    onSuccess: (data) => {
-      setUserInfo(data.data?.data);
-    },
-    onError: (error) => {
-      setUserInfo(MyData.publicInfo);
-    },
-  });
-
+export default function MainSection() {
+  const userInfo = MyData.publicInfo;
   return (
     <section
       className="section home-section mt-24 only-bg"
@@ -46,7 +28,7 @@ export default function MainSection({ username, profile }) {
           <p className="aboutShort">{userInfo?.profileDescription}</p>
 
           <button
-            className="button"
+            className={`text-2xl px-8 py-4 mt-4 bg-[#efcf5e]  rounded-full text-black font-semibold hover:bg-[#f0c14b] hover:text-black cursor-pointer`}
             name="about"
             // onClick="scrollToSection(this)"
             tabIndex="2"
@@ -54,32 +36,12 @@ export default function MainSection({ username, profile }) {
             About Me
             {/* <ion-icon name="chevron-forward-outline"></ion-icon> */}
           </button>
-          <a
-            // open in another tab
-            target="_blank"
-            href={MyData.about.resume}
-            download={
-              StringUtils.capitalizeString(userInfo?.user.firstName) +
-              StringUtils.capitalizeString(userInfo?.user.lastName) +
-              "Resume"
-            }
-          >
-            <div
-              className=" bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-2 px-4 border border-sky-500 hover:border-transparent rounded flex items-center justify-center cursor-pointer gap-2"
-              name=""
-              // onClick="scrollToSection(this)"
-              tabIndex="2"
-            >
-              <FontAwesomeIcon icon={faDownload} />
-              Download Resume
-            </div>
-          </a>
         </div>
       )}
       <div className="img_sec">
         <div className={`${"imgDiv"}`}>
           <img
-            src={userInfo?.user?.profilePic ?? profile.image}
+            src={userInfo?.user?.profilePic}
             className={`profile-image ${
               userInfo?.user?.profilePic !== null
                 ? "rounded-full w-[200px] h-[200px]"

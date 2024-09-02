@@ -10,73 +10,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { parseStyledText } from "../utils/text_parser.jsx";
+import StringUtils from "../utils/String.js";
 
-const About = ({ username, profile }) => {
-  const queryClient = useQueryClient();
-  console.log("nikjmi", username);
-
-  if (username === undefined) {
-    username = "vikramnegi-9162604468";
-  }
+const About = () => {
   initTE({ Ripple });
-  const socialLinks = [
-    social.github,
-    social.linkedin && social.linkedin,
-    social.twitter && social.twitter,
-    social.instagram && social.instagram,
-    social.facebook && social.facebook,
-  ];
 
-  const [about, setAbout] = useState();
-  // const { isLoading, isSuccess, isError, error, data } = useQuery(
-  //   ["data"],
-  //   getAbout(props.username)
-  // );
-  // if (data) {
-  //   console.log("about : ", data?.data?.data);
-  // }
-  const [isFirstTime, setIsFirstTime] = useState(true);
-
-  if (username == "vikramnegi-9162604468" && isFirstTime) {
-    setIsFirstTime(false);
-    setAbout(MyData.about);
-  }
-
-  const { data } = useQuery("about", () => getAbout(username), {
-    onSuccess: (data) => {
-      queryClient.invalidateQueries("avatar");
-      setAbout(data?.data?.data);
-    },
-    onError: (error) => {
-      setAbout(MyData.about);
-    },
-  });
-
-  // const mutation = useMutation((id) => getAbout(username), {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries("avatar");
-  //   },
-  //   onError: (error) => {
-  //     setAbout(MyData.about);
-  //   },
-  // });
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await mutation.mutateAsync(); // Use mutateAsync to get data
-  //     setAbout(result?.data?.data);
-  //     console.log("about : ", result?.data?.data?.passion);
-  //   };
-  //   fetchData();
-  // }, []);
-
+  const about = MyData.about;
   const store = create();
 
   return (
     <section id="about" className="section about-section" tabIndex="11">
       {!about && (
         <div className="about-ill">
-          <img src={profile.image} alt="VikramNegi" />
+          <img src={about?.image} alt="VikramNegi" />
         </div>
       )}
 
@@ -121,13 +67,18 @@ const About = ({ username, profile }) => {
           </p>
           <br />
           <a
-            className="button"
+            className="button "
             href={about?.resume}
+            download={
+              StringUtils.capitalizeString(about.user.firstName) +
+              StringUtils.capitalizeString(about?.user.lastName) +
+              "Resume"
+            }
             target="_blank"
             tabIndex="12"
           >
             <FontAwesomeIcon icon={faDownload} />
-            Download Resume
+            <p className="text-[14px]">Download Resume</p>
           </a>
         </div>
       }

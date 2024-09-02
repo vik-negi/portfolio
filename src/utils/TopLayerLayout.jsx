@@ -40,7 +40,7 @@ const LayoutComponent = ({ children, notShowNavbar }) => {
     <div>
       <GlobalStyle theme={themes[theme]} />
       <div>
-        {!notShowNavbar && <Navbar />}
+        <Navbar />
         {children}
       </div>
     </div>

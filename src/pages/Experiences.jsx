@@ -86,24 +86,8 @@ const ExperienceTimeline = ({ experience }) => {
   );
 };
 
-export default function Experiences({ username }) {
-  const [experiences, setExperiences] = useState();
-  const [isFirstTime, setIsFirstTime] = useState(true);
-  if (username === "vikramnegi-9162604468" && isFirstTime) {
-    setIsFirstTime(false);
-    setExperiences(MyData.experience.experiences);
-  }
-  if (username === undefined) {
-    username = "vikramnegi-9162604468";
-  }
-  const { data } = useQuery(["experience"], () => getExperience(username), {
-    onSuccess: (data) => {
-      setExperiences(data?.data?.data);
-    },
-    onError: (error) => {
-      setExperiences(MyData.experience.experiences);
-    },
-  });
+export default function Experiences() {
+  const experiences = MyData.experience.experiences;
 
   // const experiences = [
   //   {

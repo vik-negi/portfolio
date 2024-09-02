@@ -19,6 +19,7 @@ import NavbarOptionsDropdown from "./NavbarOptionsDropdown";
 import { isAutheticated } from "../pages/admin/utils/auth";
 import { currentUser } from "../axios/auth";
 import { useQuery } from "react-query";
+import MyData from "../data/MyData";
 // import useStore from "../store";
 
 const StyledThemeSelector = styled.select`
@@ -68,20 +69,8 @@ const NotificationItems = () => {
 
 export default function Navbar() {
   initTE({ Collapse, Dropdown });
-  const navigate = useNavigate();
-  const { token } = isAutheticated();
 
-  const [user, setUser] = useState({});
-
-  useQuery("currentUser", () => currentUser(), {
-    retry: 1,
-    retryDelay: 1,
-    onError: (error) => {},
-    onSuccess: (data) => {
-      console.log("data", data?.data?.data);
-      setUser(data?.data?.data);
-    },
-  });
+  const user = MyData.about.user;
 
   const [activeSection, setActiveSection] = useState("home");
   const [smStyle, setSmStyle] = useState("right-0");
@@ -275,10 +264,13 @@ export default function Navbar() {
       </div>
       <button
         onClick={() => toggleNav()}
-        className="hover:color-[#c2c2c2] z-500"
+        className="hover:color-[#c2c2c2] z-500 "
       >
         <FontAwesomeIcon
           icon={smStyle === "right-0" ? `bars` : "times"}
+          style={{
+            color: `${store.theme === "light" ? "black" : "white"}`,
+          }}
           className="mobile-nav-icon"
         />
       </button>
@@ -289,7 +281,7 @@ export default function Navbar() {
           }
           className={`${
             store.theme == "light" && "fas fa-moon"
-          } text-[25px] cursor-pointer text-white
+          } text-[25px] cursor-pointer text-black
          
               `}
         >
@@ -297,82 +289,6 @@ export default function Navbar() {
             <img src={Brightness} color="white" alt="" />
           )}
         </i>
-
-        {/* <li className="li-item">
-          <Link
-            className="contactBtn text-white"
-            name="getInTouch"
-            tabIndex="10"
-            to="/contact"
-          >
-            Contact
-          </Link>
-        </li> */}
-        {/* <li className="li-item">
-          <button
-            className={`${""} navbar-link text-white`}
-            name="about"
-            onClick={() =>
-              navigate(token != null ? "/admin/dashboard" : "/admin/login")
-            }
-            tabIndex="5"
-          >
-            {token != null ? "Dashboard" : "Login"}
-          </button>
-        </li> */}
-        <div className="relative flex items-center">
-          <div className="relative" data-te-dropdown-ref>
-            <a
-              className="hidden-arrow mr-4 flex items-center text-neutral-600 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-              href="#"
-              id="dropdownMenuButton1"
-              role="button"
-              data-te-dropdown-toggle-ref
-              aria-expanded="false"
-            >
-              <span className="[&>svg]:w-15">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-10 w-10"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-              <span className="absolute -mt-8 ml-6 rounded-full bg-danger px-2 py-1 text-[1rem] font-bold leading-none text-white">
-                1
-              </span>
-            </a>
-            <ul
-              className="absolute left-auto right-0 z-[1000] float-left m-0 mt-1 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-left text-base shadow-lg dark:bg-neutral-700 [&[data-te-dropdown-show]]:block p-4"
-              aria-labelledby="dropdownMenuButton1"
-              data-te-dropdown-menu-ref
-            >
-              <NotificationItems />
-              <NotificationItems />
-            </ul>
-          </div>
-
-          <NavbarOptionsDropdown
-            image={user?.profilePic}
-            itemsList={[
-              {
-                title: token != null ? "Dashboard" : "Login",
-                to: token != null ? "/admin/dashboard" : "/admin/login",
-              },
-              {
-                title: "Contact",
-                to: "/contact",
-              },
-            ]}
-            showLogout={token != null}
-          />
-        </div>
       </ul>
     </header>
   );

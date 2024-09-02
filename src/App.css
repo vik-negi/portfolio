@@ -356,7 +356,6 @@ a {
   font-weight: 600;
   opacity: 0.8;
   padding: 10px;
-  background-color: #000;
   border-bottom-left-radius: 5px;
 }
 .header .extra-navbar-list .li-item {
@@ -594,7 +593,6 @@ a {
   }
   .header .extra-navbar-list {
     right: 60px;
-    top: 0;
   }
   .header {
     align-items: start;
@@ -764,7 +762,7 @@ a {
   .header {
     height: 53px;
     align-items: center;
-    background-color: #1b1b1b;
+    /* background-color: #1b1b1b; */
   }
 
   .home-section {
@@ -795,6 +793,7 @@ a {
     display: none;
   }
   .header .extra-navbar-list {
+    top: 5px;
     background-color: transparent;
   }
 }
