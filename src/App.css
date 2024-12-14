@@ -683,6 +683,7 @@ a {
     flex-direction: column-reverse;
     justify-content: center;
     text-align: center;
+    height: auto;
     align-items: center;
   }
   .home-section div {
@@ -791,7 +792,7 @@ a {
   }
 
   .home-section {
-    height: 800px;
+    /* height: 800px; */
   }
 
   .home-section h1 {
@@ -829,15 +830,21 @@ a {
 
 @media (max-width: 600px) {
   .home-section {
-    height: 700px;
+    /* height: 700px; */
   }
   .home-section .img_sec {
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
+  }
+  .home-section div h1 {
+    font-size: 4.5rem;
   }
 }
 @media (max-width: 500px) {
   .home-section {
-    height: 800px;
+    /* height: 800px; */
+  }
+  .home-section .img_sec {
+    /* margin-top: 15rem; */
   }
   .section {
     padding: 4rem 2rem;
