@@ -347,6 +347,7 @@ import React, { useState } from "react";
 import { getAdminSkills } from "../axios/skills";
 import { useQuery } from "react-query";
 import MyData from "../data/MyData";
+import { darkBorder, lightBorder } from "../data/constants";
 // import { Tilt } from "react-tilt";
 
 const Skills = () => {
@@ -362,7 +363,7 @@ const Skills = () => {
   return (
     <div
       id="Skills"
-      className="section lg:mb-[100px] lg:sm-[50px] lg:container px-[5%] mx-auto  flex flex-col justify-center items-center relative z-10"
+      className="section lg:container p-3 mx-auto md:mb-[48px] flex flex-col justify-center items-center relative z-10"
     >
       <div className="w-full flex flex-col items-center">
         {/* <h2
@@ -382,11 +383,15 @@ const Skills = () => {
           description="My Skill Set: Developed and Applied Throughout My Journey"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skills.map((skill, index) => (
             <div
               key={`skill-${index}`}
-              className={`max-w-[500px]  border shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:cursor-pointer ${skillCardStyle} hover:bg-transparent hover:shadow-none transition duration-500 ease-in-out hover:border-2 hover:border-blue-500`}
+              className={`max-w-[400px]  ${
+                theme.theme === "light"
+                  ? `border-2 border-[${lightBorder}]`
+                  : `border-2 border-[${darkBorder}]`
+              }  border shadow-lg rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105 hover:cursor-pointer ${skillCardStyle} hover:bg-transparent hover:shadow-none transition duration-500 ease-in-out hover:border-2 hover:border-blue-500`}
             >
               <div className="px-6 py-4 align-top">
                 <h3

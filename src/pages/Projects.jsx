@@ -76,7 +76,10 @@ export default function Project() {
   const width480 = useWindowWide(480);
 
   return (
-    <section className="section main project-section" id="projects">
+    <section
+      className="section main project-section mb-[48px] md:mb-[64px] lg:mb-[128px]"
+      id="projects"
+    >
       <div
         style={{
           width: "100%",

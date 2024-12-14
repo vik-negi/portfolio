@@ -25,6 +25,7 @@ export default function Home(props) {
       <Projects id="projects" />
       <Experiences id="experience" />
       <Contact />
+      <div className="w-full md:h-[120px] sm:h-[48px] h-[24px]"></div>
     </>
   );
 }

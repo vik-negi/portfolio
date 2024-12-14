@@ -19,6 +19,7 @@ class MyData {
       isActive: true,
       data: "This is a test data",
       location: "New Delhi, India",
+      mobileNumber: "918178945004",
       profilePic:
         "http://res.cloudinary.com/dolqf9s3y/image/upload/v1719730400/jy8avmdz8jxfvpgxhnbc.jpg",
       createdAt: "2023-09-09T16:26:04.493Z",
@@ -145,6 +146,25 @@ class MyData {
         "https://drive.google.com/file/d/1kSverE2HoLlEnNMDKrKLfKmhHRDtHDzK/view?usp=sharing",
     },
     {
+      _id: "6522999f09a0abd7b73a9255",
+      name: "Employee Forums",
+      title: "Employee Forums - social media platform for employees",
+      link: "",
+      username: "vikramnegi-9162604468",
+      user: "64fc9c9c0bb5e126429858f7",
+      description:
+        "Employee Forums is a social media platform designed to connect employees within an organization. It provides a space for employees to share ideas, collaborate on projects, and engage in discussions. The platform features a news feed, messaging system, and group chat functionality, enabling employees to stay connected and informed.",
+      image: [
+        "https://res.cloudinary.com/dolqf9s3y/image/upload/v1734056641/portfolio/ef-ss_pwzngx.png",
+      ],
+      level: "Advanced",
+      order: 1,
+      tags: ["Flutter", "Bloc", "Socket IO", "Architecture Design"],
+      skillsUsed: ["Flutter", "Bloc", "Rest API's", "Socket IO"],
+      createdAt: "2023-10-08T11:59:27.382Z",
+      updatedAt: "2023-10-08T11:59:27.382Z",
+    },
+    {
       _id: "65a070aa0945d84853e26297",
       name: "BookMark",
       title: "BookMark - Let's make book non disposable",
@@ -209,8 +229,6 @@ class MyData {
       ],
       createdAt: "2024-02-10T20:37:33.954Z",
       updatedAt: "2024-02-10T20:37:33.954Z",
-      projectDoc:
-        "https://drive.google.com/file/d/1kRLCXfTUECl2vFO4F21juLaYE7U0WRZ7/view?usp=drive_link",
     },
     {
       _id: "65db60c8ce1f845d7834dc19",

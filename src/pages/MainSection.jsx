@@ -6,6 +6,7 @@ import MyData from "../data/MyData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import MainDashboard from "./MainDashboard";
+import { mainProfile } from "../data/constants";
 
 export default function MainSection() {
   const userInfo = MyData.publicInfo;
@@ -13,6 +14,7 @@ export default function MainSection() {
     <section
       className="section home-section mt-24 only-bg"
       id="home"
+      // className="section mt-[120px] px-[12rem] only-bg flex flex-row justify-between items-center w-full"
       tabIndex="42"
     >
       {userInfo && (
@@ -25,8 +27,17 @@ export default function MainSection() {
                 StringUtils.capitalizeString(userInfo?.user.lastName)}
             </span>
           </h1>
-          <p className="aboutShort">{userInfo?.profileDescription}</p>
-
+          <p
+            style={{
+              letterSpacing: "1.3px",
+              fontFamily: "Poppins",
+              lineHeight: "1.6",
+            }}
+            className="aboutShort text-[13px] sm:text-[18px]"
+          >
+            {userInfo?.profileDescription}
+          </p>
+          {/* bg-[#060a2e94] */}
           <button
             className={`text-2xl px-8 py-4 mt-4 bg-[#efcf5e]  rounded-full text-black font-semibold hover:bg-[#f0c14b] hover:text-black cursor-pointer`}
             name="about"
@@ -36,20 +47,45 @@ export default function MainSection() {
             About Me
             {/* <ion-icon name="chevron-forward-outline"></ion-icon> */}
           </button>
+          {/* <a
+            // open in another tab
+            target="_blank"
+            href={MyData.about.resume}
+            download={
+              StringUtils.capitalizeString(userInfo?.user.firstName) +
+              StringUtils.capitalizeString(userInfo?.user.lastName) +
+              "Resume"
+            }
+          >
+            <div
+              className=" bg-transparent hover:bg-sky-500 text-sky-500 font-semibold hover:text-white py-2 px-4 border border-sky-500 hover:border-transparent rounded flex items-center justify-center cursor-pointer gap-2"
+              name=""
+              // onClick="scrollToSection(this)"
+              tabIndex="2"
+            >
+              <FontAwesomeIcon icon={faDownload} />
+              Download Resume
+            </div>
+          </a> */}
         </div>
       )}
       <div className="img_sec">
-        <div className={`${"imgDiv"}`}>
-          <img
-            src={userInfo?.user?.profilePic}
-            className={`profile-image ${
-              userInfo?.user?.profilePic !== null
-                ? "rounded-full w-[200px] h-[200px]"
-                : "rounded-lg"
-            }`}
-            alt="ProfileImage"
-          />
-        </div>
+        <img
+          src={userInfo?.user?.profilePic ?? mainProfile}
+          style={{
+            // width: "40%",
+            height: "350px",
+            objectFit: "cover",
+            objectPosition: "end",
+            filter: "grayscale(0.5)",
+          }}
+          className={`profile-image   shadow-2xl ${
+            userInfo?.user?.profilePic !== null
+              ? "rounded-xl w-[300px] h-[350px]"
+              : "rounded-lg"
+          }`}
+          alt="ProfileImage"
+        />
       </div>
     </section>
   );

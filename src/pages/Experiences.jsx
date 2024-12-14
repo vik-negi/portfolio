@@ -6,83 +6,104 @@ import { Link } from "react-router-dom";
 import create from "../utils/Theme";
 import MyData from "../data/MyData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { getUsername } from "./admin/utils/auth";
 import AddSectionDetailsBtn from "../utils/AddSectionDetailsBtn";
 
-const ExperienceTimeline = ({ experience }) => {
+const ExperienceTimeline = ({ experience, index }) => {
   const theme = create();
   return (
-    <li>
-      <div class={`flex-start md:flex  `}>
-        <div class="-ml-[23px] flex h-[45px] w-[45px] items-center justify-center rounded-full bg-info-100 text-info-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="h-10 w-10"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </div>
-        <div
-          class={`mb-20 ml-6 block max-w-5xl rounded-lg bg-neutral-50 p-6 shadow-md shadow-black/5 dark:bg-[#1e1e2f] light:text-white dark:shadow-black/10 
-        `}
+    <div class={`flex-start md:flex  `}>
+      <div
+        class={`-ml-[23px] flex h-[45px] ${
+          theme.theme == "light" ? "bg-[#FFFFFF]" : "bg-[#0F0E17]"
+        } w-[45px] items-center justify-center rounded-full border border-2  text-info-700`}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="h-10 w-10"
         >
-          <div class="mb-4 flex justify-between items-center">
-            <Link class="text-md text-info transition duration-150 ease-in-out hover:text-info-600 focus:text-info-600 active:text-info-700">
-              {experience.title}
-            </Link>
-            <p className="text-[12px] text-neutral-700 dark:text-neutral-200">
-              {experience.from &&
-                DateTimeFormatter.getFormattedDate(experience.from)}{" "}
-              -{" "}
-              {experience.to != null
-                ? DateTimeFormatter.getFormattedDate(experience.to)
-                : "Present"}
-            </p>
-          </div>
-          <h3 class="mb-4 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
-            {experience.company} | {experience.location}
-          </h3>
-          <div class="mb-4 flex flex-wrap gap-2">
-            {experience.skills.map((skill, index) => {
-              return (
-                <span
-                  key={index}
-                  className="text-white bg-info rounded-full px-4 py-1 text-[10px] font-semibold"
-                >
-                  {skill}
-                </span>
-              );
-            })}
-          </div>
-
-          <p
-            class="mb-6 dark:text-neutral-200 text-[14px]"
-            style={{ color: "white" }}
-            // dangerouslySetInnerHTML={{
-            //   __html: experience.description,
-            // }}
-          >
-            {experience.description}
+          <path
+            fill-rule="evenodd"
+            d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+      <div
+        class={`mb-20 ml-6 block max-w-5xl rounded-lg p-6  light:text-white ${
+          index % 2 ? "" : ""
+        }
+          `}
+      >
+        <div class="mb-4 flex gap-3 items-center">
+          <Link class="text-md text-info transition duration-150 ease-in-out hover:text-info-600 focus:text-info-600 active:text-info-700">
+            {experience.title}
+          </Link>
+          <p className="text-[12px] text-neutral-700 dark:text-neutral-200">
+            {experience.from &&
+              DateTimeFormatter.getFormattedDate(experience.from)}{" "}
+            -{" "}
+            {experience.to != null
+              ? DateTimeFormatter.getFormattedDate(experience.to)
+              : "Present"}
           </p>
+        </div>
+        <h3
+          class={`mb-4 text-2xl font-semibold ${
+            theme.theme == "light" ? "text-neutral-900" : "text-neutral-100"
+          }`}
+        >
+          @{experience.company} | {experience.location}
+        </h3>
+        <div class="mb-4 flex flex-wrap gap-2">
+          {experience.skills.map((skill, index) => {
+            return (
+              <span
+                key={index}
+                className="text-white rounded-2xl border-[#96c4f1] border-[0.8px] px-6 py-2 text-[10px] font-semibold"
+              >
+                {skill}
+              </span>
+            );
+          })}
+        </div>
 
+        <p
+          class="mb-6 dark:text-neutral-200 text-[14px]"
+          style={{ color: "white" }}
+          // dangerouslySetInnerHTML={{
+          //   __html: experience.description,
+          // }}
+        >
+          {experience.description.length > 200
+            ? experience.description.substring(0, 200) + "..."
+            : experience.description}
+        </p>
+        <span>
           <button
             type="button"
-            className="btn btn-primary mr-4 text-[14px] bg-info hover:bg-info-600 focus:bg-info-600 active:bg-info-700 px-4 py-2 rounded-md transition duration-150 ease-in-out text-white"
+            className="btn font-semibold btn-primary mr-4 text-[14px] py-2 rounded-md transition duration-750 ease-in-out text-white group relative overflow-hidden"
             data-te-ripple-init
             data-te-ripple-color="light"
           >
-            Know More
+            View Details{" "}
           </button>
-        </div>
+          <div
+            className={`hidden sm:inline ml-2 ${
+              theme.theme == "light" ? "text-neutral-900" : "text-neutral-100"
+            } transition duration-1000 ease-in-out`}
+          >
+            <FontAwesomeIcon
+              className="icon-move-animation"
+              icon={faArrowRight}
+            />
+          </div>
+        </span>
       </div>
-    </li>
+    </div>
   );
 };
 
@@ -153,7 +174,9 @@ export default function Experiences() {
           ) : (
             <ol class="border-l-2 border-info-100">
               {experiences.map((experience, index) => {
-                return <ExperienceTimeline experience={experience} />;
+                return (
+                  <ExperienceTimeline experience={experience} index={index} />
+                );
               })}
             </ol>
           )
