@@ -357,9 +357,10 @@ const Skills = () => {
 
   const tabTitleStyle = "text-5xl font-bold my-5 font-mono text-blue-500 px-10";
 
-  const skillCardStyle = `my-5 p-5  bg-[#100F22] rounded-lg shadow-lg flex flex-col  items-start ${
-    theme.theme === "light" && "bg-[#E1EBF5]"
+  const skillCardStyle = `my-5 p-5   rounded-3xl flex flex-col  items-start ${
+    theme.theme === "light" ? "bg-[#f0eff0]" : "bg-[#100F22]"
   }`;
+
   return (
     <div
       id="Skills"
@@ -390,8 +391,8 @@ const Skills = () => {
               className={`max-w-[400px]  ${
                 theme.theme === "light"
                   ? `border-2 border-[${lightBorder}]`
-                  : `border-2 border-[${darkBorder}]`
-              }  border shadow-lg rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105 hover:cursor-pointer ${skillCardStyle} hover:bg-transparent hover:shadow-none transition duration-500 ease-in-out hover:border-2 hover:border-blue-500`}
+                  : `border-2 border-[#1c1c1c]`
+              }  border rounded-3xl overflow-hidden transform transition duration-300 hover:scale-105 hover:cursor-pointer ${skillCardStyle} hover:bg-transparent transition duration-500 ease-in-out hover:border-2 hover:border-blue-200`}
             >
               <div className="px-6 py-4 align-top">
                 <h3

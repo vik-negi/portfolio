@@ -42,7 +42,11 @@ const ExperienceTimeline = ({ experience, index }) => {
           <Link class="text-md text-info transition duration-150 ease-in-out hover:text-info-600 focus:text-info-600 active:text-info-700">
             {experience.title}
           </Link>
-          <p className="text-[12px] text-neutral-700 dark:text-neutral-200">
+          <p
+            className={`${
+              theme.theme != "light" ? "text-neutral-700" : "text-neutral-800"
+            } text-[12px]  `}
+          >
             {experience.from &&
               DateTimeFormatter.getFormattedDate(experience.from)}{" "}
             -{" "}
@@ -63,7 +67,9 @@ const ExperienceTimeline = ({ experience, index }) => {
             return (
               <span
                 key={index}
-                className="text-white rounded-2xl border-[#96c4f1] border-[0.8px] px-6 py-2 text-[10px] font-semibold"
+                className={`${
+                  theme.theme != "light" ? "text-[#FFFFFF]" : "text-[#0F0E17]"
+                } rounded-2xl border-[#96c4f1] border-[0.8px] px-6 py-2 text-[10px] font-semibold`}
               >
                 {skill}
               </span>
@@ -72,8 +78,10 @@ const ExperienceTimeline = ({ experience, index }) => {
         </div>
 
         <p
-          class="mb-6 dark:text-neutral-200 text-[14px]"
-          style={{ color: "white" }}
+          class={`${
+            theme.theme != "light" ? "text-[#FFFFFF]" : "text-[#0F0E17]"
+          } mb-6  text-[14px]`}
+
           // dangerouslySetInnerHTML={{
           //   __html: experience.description,
           // }}
@@ -85,7 +93,9 @@ const ExperienceTimeline = ({ experience, index }) => {
         <span>
           <button
             type="button"
-            className="btn font-semibold btn-primary mr-4 text-[14px] py-2 rounded-md transition duration-750 ease-in-out text-white group relative overflow-hidden"
+            className={`${
+              theme.theme !== "light" ? "text-[#FFFFFF]" : "text-[#0F0E17]"
+            } btn font-semibold btn-primary mr-4 text-[14px] py-2 rounded-md transition duration-750 ease-in-out group relative overflow-hidden`}
             data-te-ripple-init
             data-te-ripple-color="light"
           >
