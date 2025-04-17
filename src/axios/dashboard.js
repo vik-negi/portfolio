@@ -1,4 +1,4 @@
-import { getUsername } from "../pages/admin/utils/auth";
+import { getUsername } from "../app/admin/utils/auth";
 import { Axios } from "./axios";
 import axios from "axios";
 

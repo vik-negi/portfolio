@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import create from "zustand";
+import { create } from "zustand";
 // theme.js
 export const themes = {
   light: {

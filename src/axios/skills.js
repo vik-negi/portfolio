@@ -1,4 +1,4 @@
-import { getUsername, isAutheticated } from "../pages/admin/utils/auth";
+import { getUsername, isAutheticated } from "../app/admin/utils/auth";
 import { Axios } from "./axios";
 
 export const getAdminSkills = async () => {

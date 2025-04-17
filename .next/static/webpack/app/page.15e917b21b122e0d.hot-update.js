@@ -1,0 +1,82 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+self["webpackHotUpdate_N_E"]("app/page",{
+
+/***/ "(app-pages-browser)/./src/styles/global.css":
+/*!*******************************!*\
+  !*** ./src/styles/global.css ***!
+  \*******************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (\"212395480c13\");\nif (true) { module.hot.accept() }\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwcC1wYWdlcy1icm93c2VyKS8uL3NyYy9zdHlsZXMvZ2xvYmFsLmNzcyIsIm1hcHBpbmdzIjoiOzs7O0FBQUEsaUVBQWUsY0FBYztBQUM3QixJQUFJLElBQVUsSUFBSSxpQkFBaUIiLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcVklLUkFNXFxEb2N1bWVudHNcXHByb2plY3RzXFxwb3J0Zm9saW9cXHBvcnRmb2xpb1xcc3JjXFxzdHlsZXNcXGdsb2JhbC5jc3MiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgXCIyMTIzOTU0ODBjMTNcIlxuaWYgKG1vZHVsZS5ob3QpIHsgbW9kdWxlLmhvdC5hY2NlcHQoKSB9XG4iXSwibmFtZXMiOltdLCJpZ25vcmVMaXN0IjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(app-pages-browser)/./src/styles/global.css\n"));
+
+/***/ }),
+
+/***/ "(app-pages-browser)/./src/assets/svg/social/facebook.svg":
+/*!********************************************!*\
+  !*** ./src/assets/svg/social/facebook.svg ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\"src\":\"/_next/static/media/facebook.974f61ed.svg\",\"height\":48,\"width\":48,\"blurWidth\":0,\"blurHeight\":0});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwcC1wYWdlcy1icm93c2VyKS8uL3NyYy9hc3NldHMvc3ZnL3NvY2lhbC9mYWNlYm9vay5zdmciLCJtYXBwaW5ncyI6Ijs7OztBQUFBLGlFQUFlLENBQUMsc0dBQXNHIiwic291cmNlcyI6WyJDOlxcVXNlcnNcXFZJS1JBTVxcRG9jdW1lbnRzXFxwcm9qZWN0c1xccG9ydGZvbGlvXFxwb3J0Zm9saW9cXHNyY1xcYXNzZXRzXFxzdmdcXHNvY2lhbFxcZmFjZWJvb2suc3ZnIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IHtcInNyY1wiOlwiL19uZXh0L3N0YXRpYy9tZWRpYS9mYWNlYm9vay45NzRmNjFlZC5zdmdcIixcImhlaWdodFwiOjQ4LFwid2lkdGhcIjo0OCxcImJsdXJXaWR0aFwiOjAsXCJibHVySGVpZ2h0XCI6MH07Il0sIm5hbWVzIjpbXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(app-pages-browser)/./src/assets/svg/social/facebook.svg\n"));
+
+/***/ }),
+
+/***/ "(app-pages-browser)/./src/assets/svg/social/github.svg":
+/*!******************************************!*\
+  !*** ./src/assets/svg/social/github.svg ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\"src\":\"/_next/static/media/github.db8d63f2.svg\",\"height\":48,\"width\":48,\"blurWidth\":0,\"blurHeight\":0});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwcC1wYWdlcy1icm93c2VyKS8uL3NyYy9hc3NldHMvc3ZnL3NvY2lhbC9naXRodWIuc3ZnIiwibWFwcGluZ3MiOiI7Ozs7QUFBQSxpRUFBZSxDQUFDLG9HQUFvRyIsInNvdXJjZXMiOlsiQzpcXFVzZXJzXFxWSUtSQU1cXERvY3VtZW50c1xccHJvamVjdHNcXHBvcnRmb2xpb1xccG9ydGZvbGlvXFxzcmNcXGFzc2V0c1xcc3ZnXFxzb2NpYWxcXGdpdGh1Yi5zdmciXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQge1wic3JjXCI6XCIvX25leHQvc3RhdGljL21lZGlhL2dpdGh1Yi5kYjhkNjNmMi5zdmdcIixcImhlaWdodFwiOjQ4LFwid2lkdGhcIjo0OCxcImJsdXJXaWR0aFwiOjAsXCJibHVySGVpZ2h0XCI6MH07Il0sIm5hbWVzIjpbXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(app-pages-browser)/./src/assets/svg/social/github.svg\n"));
+
+/***/ }),
+
+/***/ "(app-pages-browser)/./src/assets/svg/social/instagram.svg":
+/*!*********************************************!*\
+  !*** ./src/assets/svg/social/instagram.svg ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\"src\":\"/_next/static/media/instagram.79165cff.svg\",\"height\":48,\"width\":48,\"blurWidth\":0,\"blurHeight\":0});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwcC1wYWdlcy1icm93c2VyKS8uL3NyYy9hc3NldHMvc3ZnL3NvY2lhbC9pbnN0YWdyYW0uc3ZnIiwibWFwcGluZ3MiOiI7Ozs7QUFBQSxpRUFBZSxDQUFDLHVHQUF1RyIsInNvdXJjZXMiOlsiQzpcXFVzZXJzXFxWSUtSQU1cXERvY3VtZW50c1xccHJvamVjdHNcXHBvcnRmb2xpb1xccG9ydGZvbGlvXFxzcmNcXGFzc2V0c1xcc3ZnXFxzb2NpYWxcXGluc3RhZ3JhbS5zdmciXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQge1wic3JjXCI6XCIvX25leHQvc3RhdGljL21lZGlhL2luc3RhZ3JhbS43OTE2NWNmZi5zdmdcIixcImhlaWdodFwiOjQ4LFwid2lkdGhcIjo0OCxcImJsdXJXaWR0aFwiOjAsXCJibHVySGVpZ2h0XCI6MH07Il0sIm5hbWVzIjpbXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(app-pages-browser)/./src/assets/svg/social/instagram.svg\n"));
+
+/***/ }),
+
+/***/ "(app-pages-browser)/./src/assets/svg/social/linkedin.svg":
+/*!********************************************!*\
+  !*** ./src/assets/svg/social/linkedin.svg ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\"src\":\"/_next/static/media/linkedin.5924f37b.svg\",\"height\":48,\"width\":48,\"blurWidth\":0,\"blurHeight\":0});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwcC1wYWdlcy1icm93c2VyKS8uL3NyYy9hc3NldHMvc3ZnL3NvY2lhbC9saW5rZWRpbi5zdmciLCJtYXBwaW5ncyI6Ijs7OztBQUFBLGlFQUFlLENBQUMsc0dBQXNHIiwic291cmNlcyI6WyJDOlxcVXNlcnNcXFZJS1JBTVxcRG9jdW1lbnRzXFxwcm9qZWN0c1xccG9ydGZvbGlvXFxwb3J0Zm9saW9cXHNyY1xcYXNzZXRzXFxzdmdcXHNvY2lhbFxcbGlua2VkaW4uc3ZnIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCBkZWZhdWx0IHtcInNyY1wiOlwiL19uZXh0L3N0YXRpYy9tZWRpYS9saW5rZWRpbi41OTI0ZjM3Yi5zdmdcIixcImhlaWdodFwiOjQ4LFwid2lkdGhcIjo0OCxcImJsdXJXaWR0aFwiOjAsXCJibHVySGVpZ2h0XCI6MH07Il0sIm5hbWVzIjpbXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(app-pages-browser)/./src/assets/svg/social/linkedin.svg\n"));
+
+/***/ }),
+
+/***/ "(app-pages-browser)/./src/assets/svg/social/twitter.svg":
+/*!*******************************************!*\
+  !*** ./src/assets/svg/social/twitter.svg ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\"src\":\"/_next/static/media/twitter.060f0873.svg\",\"height\":48,\"width\":48,\"blurWidth\":0,\"blurHeight\":0});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwcC1wYWdlcy1icm93c2VyKS8uL3NyYy9hc3NldHMvc3ZnL3NvY2lhbC90d2l0dGVyLnN2ZyIsIm1hcHBpbmdzIjoiOzs7O0FBQUEsaUVBQWUsQ0FBQyxxR0FBcUciLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcVklLUkFNXFxEb2N1bWVudHNcXHByb2plY3RzXFxwb3J0Zm9saW9cXHBvcnRmb2xpb1xcc3JjXFxhc3NldHNcXHN2Z1xcc29jaWFsXFx0d2l0dGVyLnN2ZyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCB7XCJzcmNcIjpcIi9fbmV4dC9zdGF0aWMvbWVkaWEvdHdpdHRlci4wNjBmMDg3My5zdmdcIixcImhlaWdodFwiOjQ4LFwid2lkdGhcIjo0OCxcImJsdXJXaWR0aFwiOjAsXCJibHVySGVpZ2h0XCI6MH07Il0sIm5hbWVzIjpbXSwiaWdub3JlTGlzdCI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(app-pages-browser)/./src/assets/svg/social/twitter.svg\n"));
+
+/***/ }),
+
+/***/ "(app-pages-browser)/./src/assets/svg/social/index.js":
+/*!****************************************!*\
+  !*** ./src/assets/svg/social/index.js ***!
+  \****************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   social: () => (/* binding */ social)\n/* harmony export */ });\n/* harmony import */ var _assets_svg_social_github_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/assets/svg/social/github.svg */ \"(app-pages-browser)/./src/assets/svg/social/github.svg\");\n/* harmony import */ var _assets_svg_social_linkedin_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/assets/svg/social/linkedin.svg */ \"(app-pages-browser)/./src/assets/svg/social/linkedin.svg\");\n/* harmony import */ var _assets_svg_social_twitter_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/assets/svg/social/twitter.svg */ \"(app-pages-browser)/./src/assets/svg/social/twitter.svg\");\n/* harmony import */ var _assets_svg_social_instagram_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/assets/svg/social/instagram.svg */ \"(app-pages-browser)/./src/assets/svg/social/instagram.svg\");\n/* harmony import */ var _assets_svg_social_facebook_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/assets/svg/social/facebook.svg */ \"(app-pages-browser)/./src/assets/svg/social/facebook.svg\");\n\n\n\n\n\nvar social = {\n    github: _assets_svg_social_github_svg__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n    linkedin: _assets_svg_social_linkedin_svg__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n    twitter: _assets_svg_social_twitter_svg__WEBPACK_IMPORTED_MODULE_2__[\"default\"],\n    instagram: _assets_svg_social_instagram_svg__WEBPACK_IMPORTED_MODULE_3__[\"default\"],\n    facebook: _assets_svg_social_facebook_svg__WEBPACK_IMPORTED_MODULE_4__[\"default\"]\n};\n\n\n;\n    // Wrapped in an IIFE to avoid polluting the global scope\n    ;\n    (function () {\n        var _a, _b;\n        // Legacy CSS implementations will `eval` browser code in a Node.js context\n        // to extract CSS. For backwards compatibility, we need to check we're in a\n        // browser context before continuing.\n        if (typeof self !== 'undefined' &&\n            // AMP / No-JS mode does not inject these helpers:\n            '$RefreshHelpers$' in self) {\n            // @ts-ignore __webpack_module__ is global\n            var currentExports = module.exports;\n            // @ts-ignore __webpack_module__ is global\n            var prevSignature = (_b = (_a = module.hot.data) === null || _a === void 0 ? void 0 : _a.prevSignature) !== null && _b !== void 0 ? _b : null;\n            // This cannot happen in MainTemplate because the exports mismatch between\n            // templating and execution.\n            self.$RefreshHelpers$.registerExportsForReactRefresh(currentExports, module.id);\n            // A module can be accepted automatically based on its exports, e.g. when\n            // it is a Refresh Boundary.\n            if (self.$RefreshHelpers$.isReactRefreshBoundary(currentExports)) {\n                // Save the previous exports signature on update so we can compare the boundary\n                // signatures. We avoid saving exports themselves since it causes memory leaks (https://github.com/vercel/next.js/pull/53797)\n                module.hot.dispose(function (data) {\n                    data.prevSignature =\n                        self.$RefreshHelpers$.getRefreshBoundarySignature(currentExports);\n                });\n                // Unconditionally accept an update to this module, we'll check if it's\n                // still a Refresh Boundary later.\n                // @ts-ignore importMeta is replaced in the loader\n                module.hot.accept();\n                // This field is set when the previous version of this module was a\n                // Refresh Boundary, letting us know we need to check for invalidation or\n                // enqueue an update.\n                if (prevSignature !== null) {\n                    // A boundary can become ineligible if its exports are incompatible\n                    // with the previous exports.\n                    //\n                    // For example, if you add/remove/change exports, we'll want to\n                    // re-execute the importing modules, and force those components to\n                    // re-render. Similarly, if you convert a class component to a\n                    // function, we want to invalidate the boundary.\n                    if (self.$RefreshHelpers$.shouldInvalidateReactRefreshBoundary(prevSignature, self.$RefreshHelpers$.getRefreshBoundarySignature(currentExports))) {\n                        module.hot.invalidate();\n                    }\n                    else {\n                        self.$RefreshHelpers$.scheduleUpdate();\n                    }\n                }\n            }\n            else {\n                // Since we just executed the code for the module, it's possible that the\n                // new exports made it ineligible for being a boundary.\n                // We only care about the case when we were _previously_ a boundary,\n                // because we already accepted this update (accidental side effect).\n                var isNoLongerABoundary = prevSignature !== null;\n                if (isNoLongerABoundary) {\n                    module.hot.invalidate();\n                }\n            }\n        }\n    })();\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwcC1wYWdlcy1icm93c2VyKS8uL3NyYy9hc3NldHMvc3ZnL3NvY2lhbC9pbmRleC5qcyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBb0Q7QUFDSTtBQUNGO0FBQ0k7QUFDRjtBQUVqRCxJQUFNSyxTQUFTO0lBQ3BCTCxRQUFBQSxxRUFBTUE7SUFDTkMsVUFBQUEsdUVBQVFBO0lBQ1JDLFNBQUFBLHNFQUFPQTtJQUNQQyxXQUFBQSx3RUFBU0E7SUFDVEMsVUFBQUEsdUVBQVFBO0FBQ1YsRUFBRSIsInNvdXJjZXMiOlsiQzpcXFVzZXJzXFxWSUtSQU1cXERvY3VtZW50c1xccHJvamVjdHNcXHBvcnRmb2xpb1xccG9ydGZvbGlvXFxzcmNcXGFzc2V0c1xcc3ZnXFxzb2NpYWxcXGluZGV4LmpzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBnaXRodWIgZnJvbSBcIkAvYXNzZXRzL3N2Zy9zb2NpYWwvZ2l0aHViLnN2Z1wiO1xyXG5pbXBvcnQgbGlua2VkaW4gZnJvbSBcIkAvYXNzZXRzL3N2Zy9zb2NpYWwvbGlua2VkaW4uc3ZnXCI7XHJcbmltcG9ydCB0d2l0dGVyIGZyb20gXCJAL2Fzc2V0cy9zdmcvc29jaWFsL3R3aXR0ZXIuc3ZnXCI7XHJcbmltcG9ydCBpbnN0YWdyYW0gZnJvbSBcIkAvYXNzZXRzL3N2Zy9zb2NpYWwvaW5zdGFncmFtLnN2Z1wiO1xyXG5pbXBvcnQgZmFjZWJvb2sgZnJvbSBcIkAvYXNzZXRzL3N2Zy9zb2NpYWwvZmFjZWJvb2suc3ZnXCI7XHJcblxyXG5leHBvcnQgY29uc3Qgc29jaWFsID0ge1xyXG4gIGdpdGh1YixcclxuICBsaW5rZWRpbixcclxuICB0d2l0dGVyLFxyXG4gIGluc3RhZ3JhbSxcclxuICBmYWNlYm9vayxcclxufTtcclxuIl0sIm5hbWVzIjpbImdpdGh1YiIsImxpbmtlZGluIiwidHdpdHRlciIsImluc3RhZ3JhbSIsImZhY2Vib29rIiwic29jaWFsIl0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(app-pages-browser)/./src/assets/svg/social/index.js\n"));
+
+/***/ })
+
+});

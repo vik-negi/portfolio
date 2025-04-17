@@ -2,7 +2,7 @@
 
 //HEADER TOGGLE FUNCTION
 
-const header = document.querySelector(".header");
+// const header = document.querySelector(".header");
 
 //HEADER ANIMATION FUNCTION
 

@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import Brightness from "../assets/svg/brightness.svg";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,7 +14,6 @@ import { useThemeMode } from "../context/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import create, { themes } from "../utils/Theme";
-import { Collapse, Dropdown, initTE } from "tw-elements";
 import NavbarOptionsDropdown from "./NavbarOptionsDropdown";
 import { isAutheticated } from "../pages/admin/utils/auth";
 import { currentUser } from "../axios/auth";
@@ -68,8 +67,6 @@ const NotificationItems = () => {
 };
 
 export default function Navbar() {
-  initTE({ Collapse, Dropdown });
-
   const user = MyData.about.user;
 
   const [activeSection, setActiveSection] = useState("home");
@@ -124,7 +121,7 @@ export default function Navbar() {
             <Link
               className={`${activeSection === "home" && "active"} navbar-link`}
               name="home"
-              to="/"
+              href="/"
               onClick={() => handleSectionClick("home")}
               tabIndex="4"
             >
@@ -154,7 +151,7 @@ export default function Navbar() {
               name="skills"
               onClick={() => handleSectionClick("skills")}
               tabIndex="6"
-              to="/skills"
+              href="/skills"
             >
               <div
                 style={{
@@ -181,7 +178,7 @@ export default function Navbar() {
               name="projects"
               onClick={() => handleSectionClick("projects")}
               tabIndex="7"
-              to="/projects"
+              href="/projects"
             >
               <div
                 style={{
@@ -206,7 +203,7 @@ export default function Navbar() {
                 activeSection === "education" && "active"
               } navbar-link`}
               name="education"
-              to="/"
+              href="/"
               onClick={() => handleSectionClick("education")}
               tabIndex="8"
             >
@@ -233,7 +230,7 @@ export default function Navbar() {
                 activeSection === "experience" && "active"
               } navbar-link`}
               name="experience"
-              to="/experiences"
+              href="/experiences"
               onClick={() => handleSectionClick("experience")}
               tabIndex="9"
             >

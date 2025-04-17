@@ -1,8 +1,8 @@
-import github from "./github.svg";
-import linkedin from "./linkedin.svg";
-import twitter from "./twitter.svg";
-import instagram from "./instagram.svg";
-import facebook from "./facebook.svg";
+import github from "@/assets/svg/social/github.svg";
+import linkedin from "@/assets/svg/social/linkedin.svg";
+import twitter from "@/assets/svg/social/twitter.svg";
+import instagram from "@/assets/svg/social/instagram.svg";
+import facebook from "@/assets/svg/social/facebook.svg";
 
 export const social = {
   github,

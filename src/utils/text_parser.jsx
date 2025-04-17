@@ -6,7 +6,7 @@ export function parseStyledText(text) {
     { regex: /~(.*?)~/g, tag: "del" }, // Strikethrough: ~text~
   ];
 
-  return text.split("\n").map((line, index) => {
+  return (text ?? "").split("\n").map((line, index) => {
     let parsedLine = line;
     rules.forEach((rule) => {
       parsedLine = parsedLine.replace(rule.regex, (match, p1) => {
@@ -14,6 +14,6 @@ export function parseStyledText(text) {
       });
     });
 
-    return <div key={index} dangerouslySetInnerHTML={{ __html: parsedLine }} />;
+    return <p key={index} dangerouslySetInnerHTML={{ __html: parsedLine }} />;
   });
 }
