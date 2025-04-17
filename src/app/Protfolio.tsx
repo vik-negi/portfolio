@@ -2,8 +2,8 @@
 
 import React from "react";
 
-export default function Protfolio(props) {
-  const compaines = [];
+export default function Protfolio() {
+  const compaines: any[] = [];
   return (
     <section className="section experience-section" id="experience">
       <div
@@ -43,7 +43,7 @@ export default function Protfolio(props) {
                     alignContent: "center",
                   }}
                 >
-                  {compaine.workedOn.map((work) => {
+                  {compaine.workedOn.map((work: any) => {
                     return (
                       <span
                         className="tags"

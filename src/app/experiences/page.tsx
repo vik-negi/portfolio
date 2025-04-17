@@ -6,13 +6,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import DateTimeFormatter from "../../utils/dateTime_functionality";
 import Link from "next/link";
-import create from "../../utils/Theme";
 import MyData from "../../data/MyData";
 import AddSectionDetailsBtn from "../../utils/AddSectionDetailsBtn";
 
-const ExperienceTimeline = ({ experience, index }) => {
-  const theme = create();
-
+const ExperienceTimeline = ({
+  experience,
+  index,
+}: {
+  experience: any;
+  index: number;
+}) => {
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -103,7 +106,7 @@ const ExperienceTimeline = ({ experience, index }) => {
           @{experience.company} | {experience.location}
         </h3>
         <div className="mb-4 flex flex-wrap gap-2">
-          {experience.skills.map((skill, index_x) => {
+          {experience.skills.map((skill: string, index_x: number) => {
             return (
               <motion.span
                 key={index_x}
@@ -164,7 +167,7 @@ const ExperienceTimeline = ({ experience, index }) => {
 export default function Experiences() {
   const experiences = MyData.experience.experiences;
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, threshold: 0.1 });
+  const isInView = useInView(ref, { once: true });
 
   // Animation variants
   const titleVariants = {

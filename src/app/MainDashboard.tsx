@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import create from "../utils/Theme";
 import Link from "next/link";
 
-const NavBarTitle = ({ title, toRoute = "" }) => {
+const NavBarTitle: React.FC<{ title: string; toRoute?: string }> = ({
+  title,
+  toRoute = "",
+}) => {
   const theme = create();
   return (
     <Link

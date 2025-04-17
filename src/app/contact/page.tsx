@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { faEnvelope, faMapLocation } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useWindowWide } from "../../utils/useWindowWide"
-import create from "../../utils/Theme"
-import MyData from "../../data/MyData"
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { faEnvelope, faMapLocation } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useWindowWide } from "../../utils/useWindowWide";
+import create from "../../utils/Theme";
+import MyData from "../../data/MyData";
 
 const Contact = () => {
-  const theme = create()
-  const publicProfile = MyData.about.user
-  const above650 = useWindowWide(650)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, threshold: 0.2 })
+  const theme = create();
+  const publicProfile = MyData.about.user;
+  const above650 = useWindowWide(650);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
-  if (publicProfile == null) return <></>
+  if (publicProfile == null) return <></>;
 
   // Animation variants
   const containerVariants = {
@@ -27,7 +27,7 @@ const Contact = () => {
         delayChildren: 0.3,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -36,13 +36,15 @@ const Contact = () => {
       opacity: 1,
       transition: { duration: 0.6, ease: "easeOut" },
     },
-  }
+  };
 
   return (
     <section
       id="contact"
       ref={ref}
-      className={`section sm:mt-[4px] mt-[24px] lg:mt-[128px] ${!above650 && "p-10"} relative`}
+      className={`section sm:mt-[4px] mt-[24px] lg:mt-[128px] ${
+        !above650 && "p-10"
+      } relative`}
     >
       <motion.div
         className="w-full max-w-[1024px] mx-auto"
@@ -58,7 +60,9 @@ const Contact = () => {
           >
             Get In Touch
           </motion.div>
-          <h3 className="mt-2 text-4xl font-bold text-white mb-10">Don't be shy! Hit me up! 👇</h3>
+          <h3 className="mt-2 text-4xl font-bold text-white mb-10">
+            Don't be shy! Hit me up! 👇
+          </h3>
         </motion.div>
 
         <motion.div className={`flex flex-wrap gap-8`}>
@@ -72,15 +76,23 @@ const Contact = () => {
               className="rounded-full bg-gradient-to-br from-slate-800 to-slate-900 h-[55px] w-[55px] flex items-center justify-center mr-5 shadow-lg border border-slate-700/50"
               whileHover={{
                 boxShadow: "0 0 15px rgba(251, 191, 36, 0.3)",
-                background: "linear-gradient(to bottom right, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2))",
+                background:
+                  "linear-gradient(to bottom right, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2))",
                 borderColor: "rgba(251, 191, 36, 0.5)",
               }}
             >
-              <FontAwesomeIcon className="text-amber-400 h-10" icon={faMapLocation} width="55px" height="55px" />
+              <FontAwesomeIcon
+                className="text-amber-400 h-10"
+                icon={faMapLocation}
+                width="55px"
+                height="55px"
+              />
             </motion.span>
             <div className="contact__info">
               <h3 className="text-2xl font-semibold text-white">Location</h3>
-              <p className="text-slate-400">{publicProfile?.location ?? "Remote"}</p>
+              <p className="text-slate-400">
+                {publicProfile?.location ?? "Remote"}
+              </p>
             </div>
           </motion.div>
 
@@ -94,11 +106,17 @@ const Contact = () => {
               className="rounded-full bg-gradient-to-br from-slate-800 to-slate-900 h-[55px] w-[55px] flex items-center justify-center mr-5 shadow-lg border border-slate-700/50"
               whileHover={{
                 boxShadow: "0 0 15px rgba(251, 191, 36, 0.3)",
-                background: "linear-gradient(to bottom right, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2))",
+                background:
+                  "linear-gradient(to bottom right, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2))",
                 borderColor: "rgba(251, 191, 36, 0.5)",
               }}
             >
-              <FontAwesomeIcon className="text-amber-400 h-10" icon={faEnvelope} width="55px" height="55px" />
+              <FontAwesomeIcon
+                className="text-amber-400 h-10"
+                icon={faEnvelope}
+                width="55px"
+                height="55px"
+              />
             </motion.span>
             <div className="contact__info">
               <h3 className="text-2xl font-semibold text-white">Mail</h3>
@@ -108,7 +126,9 @@ const Contact = () => {
 
           <motion.div
             className="flex mb-10 mr-[5rem] hover:cursor-pointer"
-            onClick={() => window.open(`https://wa.me/${publicProfile.mobileNumber}`)}
+            onClick={() =>
+              window.open(`https://wa.me/${publicProfile.mobileNumber}`)
+            }
             variants={itemVariants}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
@@ -117,7 +137,8 @@ const Contact = () => {
               className="rounded-full bg-gradient-to-br from-slate-800 to-slate-900 h-[55px] w-[55px] flex items-center justify-center mr-5 shadow-lg border border-slate-700/50"
               whileHover={{
                 boxShadow: "0 0 15px rgba(251, 191, 36, 0.3)",
-                background: "linear-gradient(to bottom right, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2))",
+                background:
+                  "linear-gradient(to bottom right, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2))",
                 borderColor: "rgba(251, 191, 36, 0.5)",
               }}
             >
@@ -155,7 +176,7 @@ const Contact = () => {
         </motion.div>
       </motion.div>
     </section>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

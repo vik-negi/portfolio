@@ -128,10 +128,13 @@ class MyData {
     {
       _id: "6522999f09a0abd7b73a9252",
       name: "Evika",
+      platform: "Android, Web, iOS",
       title: "Evika - Event and Awareness Application",
       link: "https://evika.vercel.app/",
       username: "vikramnegi-9162604468",
       user: "64fc9c9c0bb5e126429858f7",
+      duration: "1 month",
+      status: "Completed",
       description:
         "Evika is an event managing and awareness application primarily built on Flutter. It is available in both Android and web platforms, leveraging machine learning to enhance functionality and user experiences.",
       image: [
@@ -140,6 +143,7 @@ class MyData {
       level: "Advanced",
       order: 1,
       tags: ["Python", "Flutter", "MongoDB", "Node.js", "Express"],
+      github: "https://github.com/vik-negi/mini-project",
       skillsUsed: ["Python", "Flutter", "MongoDB", "Node.js", "Express"],
       createdAt: "2023-10-08T11:59:27.382Z",
       updatedAt: "2023-10-08T11:59:27.382Z",
@@ -149,8 +153,10 @@ class MyData {
     {
       _id: "6522999f09a0abd7b73a9255",
       name: "Employee Forums",
+      platform: "Android, Web, iOS",
       title: "Employee Forums - social media platform for employees",
       link: "",
+      status: "ongoing",
       username: "vikramnegi-9162604468",
       user: "64fc9c9c0bb5e126429858f7",
       description:
@@ -168,6 +174,8 @@ class MyData {
     {
       _id: "65a070aa0945d84853e26297",
       name: "BookMark",
+      status: "Completed",
+      platform: "Android, iOS",
       title: "BookMark - Let's make book non disposable",
       username: "vikramnegi-9162604468",
       user: "64fc9c9c0bb5e126429858f7",
@@ -205,6 +213,8 @@ class MyData {
     {
       _id: "65c7de8df0a139be7e2f9972",
       name: "Incandescents",
+      status: "Completed",
+      platform: "Android, Web, iOS",
       title: "Incandescents - A Flutter Bootcamp",
       link: "https://incandescents.vercel.app/",
       username: "vikramnegi-9162604468",
@@ -234,6 +244,8 @@ class MyData {
     {
       _id: "65db60c8ce1f845d7834dc19",
       name: "Crowdfundings",
+      status: "Completed",
+      platform: "Web",
       title:
         "Blockchain Crowdfunding: Empowering Impact with Transparency and Security",
       link: "https://crowdfundings.vercel.app",

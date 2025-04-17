@@ -320,7 +320,7 @@ export default function Project() {
     "images"
   );
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, threshold: 0.1 });
+  const isInView = useInView(ref, { once: true });
   const controls = useAnimation();
 
   useEffect(() => {
@@ -519,7 +519,7 @@ export default function Project() {
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              layoutId={`project-card-${selectedProject.id}`}
+              layoutId={`project-card-${selectedProject._id}`}
               className="w-full max-w-6xl max-h-[90vh] bg-slate-900 rounded-xl shadow-lg overflow-hidden border border-slate-800"
               onClick={(e) => e.stopPropagation()}
             >
@@ -580,7 +580,7 @@ export default function Project() {
                     {activeTab === "images" && (
                       <ImageCarousel images={selectedProject.image} />
                     )}
-                    {activeTab === "live" && (
+                    {activeTab === "live" && selectedProject.link && (
                       <LiveWebsitePreview
                         url={selectedProject.link}
                         title={selectedProject.title}
@@ -680,7 +680,7 @@ export default function Project() {
                             Duration
                           </p>
                           <p className="text-sm text-slate-400">
-                            {selectedProject.duration}
+                            {selectedProject?.duration ?? "1 month"}
                           </p>
                         </div>
                       </motion.div>
@@ -712,7 +712,7 @@ export default function Project() {
                             Platform
                           </p>
                           <p className="text-sm text-slate-400">
-                            {selectedProject.platform}
+                            {selectedProject.platform || "Web"}
                           </p>
                         </div>
                       </motion.div>
