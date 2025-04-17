@@ -29,6 +29,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/blogs/[id]"
-  ],
+, "src/assets/svg/social/index.js"  ],
   "exclude": ["node_modules"]
 }

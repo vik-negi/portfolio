@@ -6,7 +6,7 @@ import { useRef, useEffect } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import { social } from "@/assets/svg/social/index.ts";
+import { social } from "@/assets/svg/social/index.js";
 import create from "../../utils/Theme.jsx";
 import MyData from "../../data/MyData.jsx";
 import { parseStyledText } from "../../utils/text_parser.jsx";
