@@ -15,7 +15,8 @@
 /build
 /.env
 *.env
-
+.next
+/.next
 
 # misc
 .DS_Store

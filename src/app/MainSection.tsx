@@ -8,6 +8,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import StringUtils from "../utils/String";
+import profileImage from "@/assets/images/vikram.jpg";
 import MyData from "../data/MyData";
 import { mainProfile } from "../data/constants";
 import { useRef } from "react";
@@ -189,7 +190,8 @@ export default function MainSection() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <img
-                src={userInfo?.user?.profilePic ?? mainProfile}
+                // src={userInfo?.user?.profilePic ?? mainProfile}
+                src={profileImage.src}
                 className="w-[280px] h-[350px] object-cover rounded-2xl shadow-2xl z-10 relative"
                 style={{
                   objectPosition: "center",

@@ -6,7 +6,7 @@ import { useRef, useEffect } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
-import { social } from "../../assets/svg/social/index.js";
+import { social } from "@/assets/svg/social/index.ts";
 import create from "../../utils/Theme.jsx";
 import MyData from "../../data/MyData.jsx";
 import { parseStyledText } from "../../utils/text_parser.jsx";
@@ -130,19 +130,19 @@ const About = () => {
   const socialLinks = {
     github: {
       url: about?.social_links.github,
-      icon: social.github,
+      icon: social.github.src,
     },
     linkedin: {
       url: about?.social_links.linkedin,
-      icon: social.linkedin,
+      icon: social.linkedin.src,
     },
     twitter: {
       url: about?.social_links.twitter,
-      icon: social.twitter,
+      icon: social.twitter.src,
     },
     facebook: {
       url: about?.social_links.facebook,
-      icon: social.facebook,
+      icon: social.facebook.src,
     },
   };
 
@@ -279,11 +279,11 @@ const About = () => {
               <motion.button
                 key={index}
                 custom={index}
-                variants={socialVariants}
+                // variants={socialVariants}
                 whileHover={{ scale: 1.15, rotate: 5 }}
                 whileTap={{ scale: 0.9 }}
                 type="button"
-                className="p-3 rounded-full transition-all bg-slate-800 shadow-md shadow-black/20 hover:bg-slate-700 border border-slate-700/50"
+                className="p-3 cursor-pointer rounded-full transition-all bg-slate-800 shadow-md shadow-black/20 hover:bg-slate-700 border border-slate-700/50"
               >
                 <img
                   className="h-6 w-6"
