@@ -17,7 +17,7 @@ const Contact = () => {
 
   if (publicProfile == null) return <></>;
 
-  // Animation variants
+  // Animation variants -1
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
