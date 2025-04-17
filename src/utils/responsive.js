@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 export const useWindowWide = (size) => {
   const [width, setWidth] = useState(0);
 
@@ -15,5 +17,5 @@ export const useWindowWide = (size) => {
     };
   }, [setWidth]);
 
-  return useWindowWidth > size;
+  return width > size;
 };
