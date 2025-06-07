@@ -69,6 +69,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.17",
+    "@types/lodash": "^4.17.17",
     "autoprefixer": "^10.4.21",
     "gh-pages": "^5.0.0",
     "postcss": "^8.5.3",

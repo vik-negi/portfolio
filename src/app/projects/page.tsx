@@ -245,13 +245,21 @@ const PDFViewer = ({ pdfURL }: { pdfURL: string }) => {
 };
 
 // Live website preview component with animations
-const LiveWebsitePreview = ({ url, title }: { url: string; title: string }) => {
+const LiveWebsitePreview = ({
+  url,
+  title,
+  personalProject,
+}: {
+  url: string;
+  title: string;
+  personalProject?: boolean;
+}) => {
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
-      className="relative w-full h-full min-h-[500px] overflow-hidden rounded-lg border"
+      className="relative w-full h-full min-h-[500px] overflow-hidden rounded-lg border z-100"
       whileHover={{ scale: 1.02 }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
@@ -283,7 +291,9 @@ const LiveWebsitePreview = ({ url, title }: { url: string; title: string }) => {
       <AnimatePresence>
         {hovered && (
           <motion.div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center"
+            className={`absolute ${
+              personalProject != null ? "inset-0 px-10" : "top-0"
+            }  w-full bg-black/60 backdrop-blur-sm  flex-col gap-4 flex items-center justify-center`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -293,7 +303,7 @@ const LiveWebsitePreview = ({ url, title }: { url: string; title: string }) => {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 bg-amber-500 rounded-full text-slate-900 font-medium"
+              className="flex w-full items-center justify-center gap-2 px-6 py-3 bg-amber-500  text-slate-900 font-medium"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
@@ -303,6 +313,16 @@ const LiveWebsitePreview = ({ url, title }: { url: string; title: string }) => {
               <ExternalLink className="w-5 h-5" />
               Visit Live Website
             </motion.a>
+            {personalProject != null && (
+              <motion.p
+                className="transform-translate-x-1/2 text-sm text-slate-300"
+                initial={{ opacity: 0, y: 1 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 100 }}
+              >
+                Please visit the live website to preview professional projects.
+              </motion.p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -584,6 +604,7 @@ export default function Project() {
                       <LiveWebsitePreview
                         url={selectedProject.link}
                         title={selectedProject.title}
+                        personalProject={selectedProject.personalProject}
                       />
                     )}
                     {activeTab === "doc" && selectedProject.projectDoc && (
@@ -598,6 +619,12 @@ export default function Project() {
                       <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-1 text-white">
                         {selectedProject.title}
                       </h2>
+                      {selectedProject.personalProject != null && (
+                        <p className="text-sm md:text-md font-medium tracking-tight mb-1 text-[#f2f2f2]">
+                          {" "}
+                          This project isn't owned my me.
+                        </p>
+                      )}
                       <div className="flex items-center justify-between">
                         <p className="text-xl font-medium text-amber-400">
                           {selectedProject.name}

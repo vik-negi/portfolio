@@ -19,7 +19,7 @@ library.add(faBars, faTimes);
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const controls = useAnimation();
-  const containerRef = useRef(null);
+  // const containerRef = useRef(null);
 
   useEffect(() => {
     // Animate sections as they come into view
@@ -34,20 +34,17 @@ export default function Home() {
   return (
     <div
       className="relative bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
-      ref={containerRef}
+      // ref={containerRef}
     >
       {/* Progress bar */}
-      <motion.div
+      {/* <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 z-50 origin-left"
-        style={{ scaleX: scrollYProgress }}
-      />
+        // style={{ scaleX: scrollYProgress }}
+      /> */}
 
-      {/* Common background elements that persist across the entire page */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        {/* Main gradient background */}
+      {/* <div className="fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
 
-        {/* Animated gradient orbs */}
         <motion.div
           className="absolute top-[10%] right-[15%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-amber-500/10 to-amber-700/5 blur-3xl"
           animate={{
@@ -56,7 +53,8 @@ export default function Home() {
           }}
           transition={{
             duration: 15,
-            repeat: Number.POSITIVE_INFINITY,
+            repeat: 0,
+            // Number.POSITIVE_INFINITY,
             repeatType: "reverse",
           }}
         />
@@ -75,12 +73,10 @@ export default function Home() {
           }}
         />
 
-        {/* Grid pattern overlay */}
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-repeat opacity-[0.015]" />
 
-        {/* Subtle noise texture */}
         <div className="absolute inset-0 bg-[url('/noise.png')] bg-repeat opacity-[0.02]" />
-      </div>
+      </div> */}
 
       <MainSection />
 

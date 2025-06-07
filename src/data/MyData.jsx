@@ -30,18 +30,14 @@ class MyData {
         "http://res.cloudinary.com/dolqf9s3y/image/upload/v1719723274/fptc8xtb3qfdgnwir28o.jpg",
     },
     username: "vikramnegi-9162604468",
-    passion: [
-      "Web Developer",
-      "Coder",
-      "Machine Learning Enthusiast",
-      "singing",
-    ],
+    passion: ["Coding", "ML Enthusiast", "Innovation", "Challenging Barriers"],
     career: [],
     title: "Vikram Negi",
     resume:
       "https://drive.google.com/file/d/1u_24BpiWK92aiXUO43i5Bv41Spt3nqRQ/view?usp=drive_link",
-    description:
-      "Seasoned Developer with a passion for crafting user-centric software solutions and pushing the boundaries of machine learning. Expertise in full-stack web development, from conception to deployment, leveraging cutting-edge technologies to empower businesses and meet their evolving needs. Committed to continuous learning and staying abreast of emerging trends to deliver exceptional results.",
+    description: `Hi, I’m a software developer with experience in building full-stack web and mobile applications using Flutter, React.js, Node.js, and MongoDB. I enjoy creating clean, scalable, and user-focused solutions.
+      
+      Alongside app development, I have hands-on experience with machine learning and AI — from working with Python-based ML models to integrating intelligent features into real-world applications. I'm always eager to learn new technologies and apply them to solve meaningful problems.`,
     createdAt: "2023-09-10T04:29:09.948Z",
     updatedAt: "2024-01-14T15:36:39.713Z",
     __v: 0,
@@ -153,9 +149,10 @@ class MyData {
     {
       _id: "6522999f09a0abd7b73a9255",
       name: "Employee Forums",
+      personalProject: false,
       platform: "Android, Web, iOS",
       title: "Employee Forums - social media platform for employees",
-      link: "",
+      link: "https://employee-forums.web.app",
       status: "ongoing",
       username: "vikramnegi-9162604468",
       user: "64fc9c9c0bb5e126429858f7",
