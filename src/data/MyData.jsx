@@ -284,7 +284,7 @@ class MyData {
     },
     username: "vikramnegi-9162604468",
     profileDescription:
-      "I'm a skilled Software Engineer and Developer based in New Delhi, India. With expertise in Flutter, web development, databases, and machine learning, passionate about solving real-world problems through technology. Has practical experience as a Software Engineer Intern and as a freelancer.",
+      "I'm a skilled Software Engineer based in New Delhi, India. With expertise in Flutter, web development, databases, and machine learning, passionate about solving real-world problems through technology. Has practical experience as a Software Engineer and as a freelancer.",
     social_links: {
       facebook: "https://facebook.com",
       others: [],
