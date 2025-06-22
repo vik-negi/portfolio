@@ -10,13 +10,13 @@ const Skills = () => {
   const skills = MyData.skills;
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const controls = useAnimation();
+  // const controls = useAnimation();
 
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
+  // useEffect(() => {
+  //   if (isInView) {
+  //     controls.start("visible");
+  //   }
+  // }, [isInView, controls]);
 
   // Animation variants
   const containerVariants = {
@@ -115,8 +115,8 @@ const Skills = () => {
 
         <motion.div
           variants={containerVariants}
-          initial="hidden"
-          animate={controls}
+          // initial="hidden"
+          // animate={controls}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
         >
           {skills.map((skill, index) => (
