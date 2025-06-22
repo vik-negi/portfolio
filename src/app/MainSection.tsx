@@ -33,11 +33,7 @@ export default React.memo(function MainSection() {
     isMobile ? [1, 0] : [1, 0]
   );
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const y = useTransform(
-    scrollYProgress,
-    [0, 0.5],
-    isMobile ? [0, 50] : [0, 100]
-  );
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
 
   const scrollToNextSection = () => {
     const aboutSection = document.getElementById("about");
