@@ -30,13 +30,9 @@ export default React.memo(function MainSection() {
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.5],
-    isMobile ? [1, 0.75] : [1, 0]
+    isMobile ? [1, 0] : [1, 0]
   );
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.5],
-    isMobile ? [1, 0.9] : [1, 0.9]
-  );
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
   const y = useTransform(
     scrollYProgress,
     [0, 0.5],
