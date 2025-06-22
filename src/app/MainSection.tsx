@@ -43,14 +43,6 @@ export default React.memo(function MainSection() {
     isMobile ? [0, 0] : [0, 100]
   );
 
-  const fullName = useMemo(
-    () =>
-      StringUtils.capitalizeString(userInfo?.user.firstName) +
-      " " +
-      StringUtils.capitalizeString(userInfo?.user.lastName),
-    [userInfo]
-  );
-
   const scrollToNextSection = () => {
     const aboutSection = document.getElementById("about");
     if (aboutSection) {
@@ -63,8 +55,8 @@ export default React.memo(function MainSection() {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-center px-6 py-16 relative"
-      id="home"
+      className={`min-h-screen flex flex-col items-center justify-center px-6 ${isMobile ? "py-6":"py-16"} relative"
+      id="home`}
     >
       {userInfo && (
         // (isMobile ? (
@@ -129,17 +121,17 @@ export default React.memo(function MainSection() {
               >
                 Welcome to my portfolio
               </motion.div>
-              <motion.h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              <motion.h1 className="text-4xl md:text-5xl lg:text-6xl text-left font-bold text-white leading-tight">
                 Hey, I'm{" "}
                 <motion.span
-                  className="text-amber-400 inline-block"
+                  className="text-amber-400  inline-block "
                   style={{
                     backgroundSize: "200% 200%",
                     WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
+                    // WebkitTextFillColor: "transparent",
                   }}
                 >
-                  {fullName}
+                  {userInfo?.user.firstName + " " + userInfo?.user.lastName}
                 </motion.span>
               </motion.h1>
             </motion.div>
