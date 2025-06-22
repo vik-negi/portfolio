@@ -30,17 +30,17 @@ export default React.memo(function MainSection() {
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.5],
-    isMobile ? [1, 1] : [1, 0]
+    isMobile ? [1, 0.75] : [1, 0]
   );
   const scale = useTransform(
     scrollYProgress,
     [0, 0.5],
-    isMobile ? [1, 1] : [1, 0.9]
+    isMobile ? [1, 0.9] : [1, 0.9]
   );
   const y = useTransform(
     scrollYProgress,
     [0, 0.5],
-    isMobile ? [0, 0] : [0, 100]
+    isMobile ? [0, 50] : [0, 100]
   );
 
   const scrollToNextSection = () => {
@@ -55,7 +55,9 @@ export default React.memo(function MainSection() {
   return (
     <section
       ref={sectionRef}
-      className={`min-h-screen flex flex-col items-center justify-center px-6 ${isMobile ? "py-6":"py-16"} relative"
+      className={`min-h-screen flex flex-col items-center justify-center px-6 ${
+        isMobile ? "py-6" : "py-16"
+      } relative"
       id="home`}
     >
       {userInfo && (
