@@ -23,71 +23,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import MyData from "@/data/MyData";
-
-// Mock data structure - replace with your actual data import
-const MyDatadu = {
-  projects: [
-    {
-      id: "1",
-      title: "E-Commerce Platform",
-      name: "ShopEase",
-      description:
-        "A full-featured e-commerce platform with product management, cart functionality, payment processing, and order tracking. Built with React, Node.js, and MongoDB.",
-      image: [
-        "/placeholder.svg?height=400&width=600",
-        "/placeholder.svg?height=400&width=600",
-      ],
-      link: "https://example.com",
-      github: "https://github.com/username/project",
-      level: "Advanced",
-      skillsUsed: ["React", "Node.js", "MongoDB", "Express", "Redux"],
-      projectDoc: null,
-      duration: "3 months",
-      status: "Completed",
-      platform: "Vercel",
-    },
-    {
-      id: "2",
-      title: "Task Management App",
-      name: "TaskFlow",
-      description:
-        "A collaborative task management application with real-time updates, team workspaces, and progress tracking. Features include drag-and-drop task organization and priority management.",
-      image: [
-        "/placeholder.svg?height=400&width=600",
-        "/placeholder.svg?height=400&width=600",
-      ],
-      link: "https://example.com",
-      github: "https://github.com/username/project",
-      level: "Intermediate",
-      skillsUsed: ["React", "Firebase", "Tailwind CSS", "Context API"],
-      projectDoc: "https://drive.google.com/file/d/example/view",
-      duration: "2 months",
-      status: "Completed",
-      platform: "Netlify",
-    },
-    {
-      id: "3",
-      title: "AI Content Generator",
-      name: "ContentGenius",
-      description:
-        "An AI-powered content generation tool that creates blog posts, social media content, and marketing copy based on user prompts and preferences.",
-      image: [
-        "/placeholder.svg?height=400&width=600",
-        "/placeholder.svg?height=400&width=600",
-      ],
-      link: "https://example.com",
-      github: "https://github.com/username/project",
-      level: "Advanced",
-      skillsUsed: ["Next.js", "OpenAI API", "TypeScript", "Prisma"],
-      projectDoc: null,
-      duration: "4 months",
-      status: "Completed",
-      platform: "AWS",
-    },
-  ],
-};
 
 // Enhanced carousel component with improved animations
 const ImageCarousel = ({ images }: { images: string[] }) => {
@@ -114,14 +51,14 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   // Animation variants for slide transitions
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
+      x: direction > 0 ? "100%" : "-100%",
       opacity: 0,
-      scale: 0.9,
+      scale: 0.95,
     }),
     center: {
       x: 0,
@@ -129,26 +66,25 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
       scale: 1,
       transition: {
         duration: 0.5,
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
+        ease: [0.32, 0.72, 0, 1],
       },
     },
     exit: (direction: number) => ({
-      x: direction > 0 ? -300 : 300,
+      x: direction > 0 ? "-100%" : "100%",
       opacity: 0,
-      scale: 0.9,
+      scale: 0.95,
       transition: {
         duration: 0.5,
+        ease: [0.32, 0.72, 0, 1],
       },
     }),
   };
 
   return (
-    <div className="relative w-full h-full overflow-hidden rounded-xl">
+    <div className="relative w-full h-full overflow-hidden bg-slate-900/50 group">
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted/20">
-          <Skeleton className="w-full h-full" />
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
+          <Skeleton className="w-full h-full bg-slate-800" />
         </div>
       )}
 
@@ -160,7 +96,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
           initial="enter"
           animate="center"
           exit="exit"
-          className="absolute top-0 left-0 w-full h-full"
+          className="absolute inset-0 w-full h-full"
         >
           <img
             src={images[currentIndex] || "/placeholder.svg"}
@@ -168,9 +104,8 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
             className="w-full h-full object-cover"
             onLoad={() => setIsLoading(false)}
           />
-
-          {/* Image overlay with gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60"></div>
+          {/* Subtle gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-60" />
         </motion.div>
       </AnimatePresence>
 
@@ -179,29 +114,30 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
           <Button
             variant="ghost"
             size="icon"
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm rounded-full h-8 w-8 shadow-lg"
-            onClick={prevSlide}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-md text-white border border-white/10 hover:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-8 w-8 rounded-full"
+            onClick={(e) => { e.stopPropagation(); prevSlide(); }}
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <Button
             variant="ghost"
             size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm rounded-full h-8 w-8 shadow-lg"
-            onClick={nextSlide}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-md text-white border border-white/10 hover:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-8 w-8 rounded-full"
+            onClick={(e) => { e.stopPropagation(); nextSlide(); }}
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
 
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
             {images.map((_, index) => (
               <button
                 key={index}
                 className={cn(
-                  "w-2 h-2 rounded-full transition-all duration-300",
-                  index === currentIndex ? "bg-amber-500 w-4" : "bg-muted"
+                  "w-1.5 h-1.5 rounded-full transition-all duration-300",
+                  index === currentIndex ? "bg-white w-4" : "bg-white/40 hover:bg-white/60"
                 )}
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   setDirection(index > currentIndex ? 1 : -1);
                   setCurrentIndex(index);
                 }}
@@ -220,12 +156,12 @@ const PDFViewer = ({ pdfURL }: { pdfURL: string }) => {
   const driveViewerUrl = pdfURL.split("view");
 
   return (
-    <div className="relative w-full h-full min-h-[500px]">
+    <div className="relative w-full h-full min-h-[500px] bg-slate-900 rounded-lg overflow-hidden border border-white/10">
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="flex flex-col items-center gap-2">
-            <div className="h-10 w-10 rounded-full border-4 border-muted border-t-amber-500 animate-spin" />
-            <p className="text-sm text-muted-foreground">Loading document...</p>
+            <div className="h-8 w-8 rounded-full border-2 border-slate-700 border-t-amber-500 animate-spin" />
+            <p className="text-sm text-slate-400">Loading document...</p>
           </div>
         </div>
       )}
@@ -235,7 +171,7 @@ const PDFViewer = ({ pdfURL }: { pdfURL: string }) => {
         width="100%"
         height="500px"
         className={cn(
-          "rounded-lg border",
+          "width-full height-full",
           loading ? "opacity-0" : "opacity-100"
         )}
         allow="autoplay"
@@ -259,17 +195,16 @@ const LiveWebsitePreview = ({
 
   return (
     <motion.div
-      className="relative w-full h-full min-h-[500px] overflow-hidden rounded-lg border z-100"
-      whileHover={{ scale: 1.02 }}
+      className="relative w-full h-full min-h-[500px] overflow-hidden rounded-lg border border-white/10 bg-slate-900"
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
     >
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted/20">
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
           <div className="flex flex-col items-center gap-2">
-            <div className="h-10 w-10 rounded-full border-4 border-muted border-t-amber-500 animate-spin" />
-            <p className="text-sm text-muted-foreground">
-              Loading website preview...
+            <div className="h-8 w-8 rounded-full border-2 border-slate-700 border-t-amber-500 animate-spin" />
+            <p className="text-sm text-slate-400">
+              Loading preview...
             </p>
           </div>
         </div>
@@ -291,9 +226,7 @@ const LiveWebsitePreview = ({
       <AnimatePresence>
         {hovered && (
           <motion.div
-            className={`absolute ${
-              personalProject != null ? "inset-0 px-10" : "top-0"
-            }  w-full bg-black/60 backdrop-blur-sm  flex-col gap-4 flex items-center justify-center`}
+            className={`absolute inset-0 bg-slate-950/80 backdrop-blur-sm flex flex-col gap-4 items-center justify-center`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -303,25 +236,18 @@ const LiveWebsitePreview = ({
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-full items-center justify-center gap-2 px-6 py-3 bg-amber-500  text-slate-900 font-medium"
-              initial={{ scale: 0.8, opacity: 0 }}
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 text-slate-950 font-semibold rounded-full hover:bg-amber-400 transition-colors"
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              exit={{ scale: 0.9, opacity: 0 }}
             >
-              <ExternalLink className="w-5 h-5" />
+              <ExternalLink className="w-4 h-4" />
               Visit Live Website
             </motion.a>
             {personalProject != null && (
-              <motion.p
-                className="transform-translate-x-1/2 text-sm text-slate-300"
-                initial={{ opacity: 0, y: 1 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 100 }}
-              >
-                Please visit the live website to preview professional projects.
-              </motion.p>
+              <p className="text-sm text-slate-400 max-w-xs text-center px-4">
+                Note: This is a professional project representation.
+              </p>
             )}
           </motion.div>
         )}
@@ -335,33 +261,15 @@ export default function Project() {
   const [selectedProject, setSelectedProject] = useState<
     (typeof Projects)[0] | null
   >(null);
-  const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState<"images" | "live" | "doc">(
     "images"
   );
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const controls = useAnimation();
 
+  // Reset tab when project changes
   useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
+    setActiveTab("images");
+  }, [selectedProject]);
 
-  // Check if screen is mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -373,73 +281,46 @@ export default function Project() {
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12,
-      },
-    },
-    hover: {
-      y: -5,
-      boxShadow:
-        "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10,
-      },
+      transition: { duration: 0.5, ease: "easeOut" },
     },
   };
 
   return (
     <section
-      className="py-16 md:py-24 lg:py-32 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative "
+      className="py-20 px-4 md:px-8 max-w-7xl mx-auto relative z-10"
       id="projects"
-      ref={ref}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-3xl mx-auto text-center mb-16"
-      >
-        <motion.div
-          className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-4 bg-amber-500/10 text-amber-400 border border-amber-500/20"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+      <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
+        <div
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium border border-emerald-500/20"
         >
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           Portfolio
-        </motion.div>
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4 text-white">
-          My Recent Work
+        </div>
+        <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
+          Featured Work
         </h2>
         <p className="text-lg text-slate-400">
-          Here are a few past projects I've worked on. Want to see more?{" "}
-          <a
-            href="mailto:example@gmail.com"
-            className="text-amber-400 hover:underline font-medium"
-          >
-            Email me
-          </a>
+          A collection of projects that showcase my passion for building.
         </p>
-      </motion.div>
+      </div>
 
       {Projects?.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-muted-foreground mb-4">
+          <p className="text-slate-500 mb-4">
             No projects to display yet.
           </p>
-          <Button>Add Projects</Button>
         </div>
       ) : (
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={controls}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {Projects.map((project, i) => (
@@ -447,329 +328,236 @@ export default function Project() {
               key={project._id}
               layoutId={`project-card-${project._id}`}
               variants={itemVariants}
-              whileHover="hover"
-              className="group"
+              className="group h-full"
             >
-              <Card className="h-full overflow-hidden border border-slate-800/50 bg-slate-900/30 backdrop-blur-sm transition-all duration-300 hover:border-amber-500/20">
-                <div className="h-48 overflow-hidden">
-                  <ImageCarousel images={project.image} />
-                </div>
-                <CardContent className="p-6">
-                  <motion.div layout className="space-y-4">
-                    <motion.h3
-                      layout
-                      className="text-xl font-semibold tracking-tight text-white"
-                    >
-                      {project.title}
-                    </motion.h3>
-                    <motion.p layout className="text-slate-400 line-clamp-3">
-                      {project.description}
-                    </motion.p>
+              <div className="h-full flex flex-col bg-slate-900/40 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-white/10 hover:shadow-2xl hover:shadow-emerald-900/10 transition-all duration-300">
 
-                    <motion.div layout className="flex flex-wrap gap-2 pt-2">
-                      {project.skillsUsed.slice(0, 3).map((skill, i) => (
-                        <Badge
-                          key={i}
-                          variant="secondary"
-                          className="font-normal bg-slate-800 text-slate-200 hover:bg-slate-700"
-                        >
+                {/* Image Section */}
+                <div className="relative h-56 overflow-hidden cursor-pointer" onClick={() => setSelectedProject(project)}>
+                  <div className="absolute inset-0 bg-slate-800 animate-pulse" /> {/* Placeholder */}
+                  <img
+                    src={project.image[0] || "/placeholder.svg"}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
+
+                  <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                    <div className="flex gap-2">
+                      {project.skillsUsed.slice(0, 2).map((skill, i) => (
+                        <span key={i} className="px-2 py-1 text-xs font-medium rounded-md bg-white/10 text-white backdrop-blur-md border border-white/10">
                           {skill}
-                        </Badge>
+                        </span>
                       ))}
-                      {project.skillsUsed.length > 3 && (
-                        <Badge
-                          variant="outline"
-                          className="font-normal text-slate-400 border-slate-700"
-                        >
-                          +{project.skillsUsed.length - 3}
-                        </Badge>
+                      {project.skillsUsed.length > 2 && (
+                        <span className="px-2 py-1 text-xs font-medium rounded-md bg-white/10 text-white backdrop-blur-md border border-white/10">
+                          +{project.skillsUsed.length - 2}
+                        </span>
                       )}
-                    </motion.div>
+                    </div>
+                  </div>
+                </div>
 
-                    <motion.div
-                      layout
-                      className="flex items-center justify-between pt-4"
-                    >
-                      <Button
-                        variant="default"
-                        size="sm"
-                        className="group-hover:translate-x-1 transition-transform bg-amber-500 text-slate-900 hover:bg-amber-400"
-                        onClick={() => setSelectedProject(project)}
-                      >
-                        View Details
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-
-                      <div className="flex items-center space-x-2">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-9 w-9 rounded-full text-slate-400 hover:text-white hover:bg-slate-800"
-                          onClick={() => window.open(project.github, "_blank")}
-                        >
-                          <Github className="h-5 w-5" />
-                          <span className="sr-only">GitHub</span>
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-9 w-9 rounded-full text-slate-400 hover:text-white hover:bg-slate-800"
-                          onClick={() => window.open(project.link, "_blank")}
-                        >
-                          <Globe className="h-5 w-5" />
-                          <span className="sr-only">Website</span>
-                        </Button>
+                {/* Content Section */}
+                <div className="p-6 flex-1 flex flex-col space-y-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                        {project.title}
+                      </h3>
+                      <div className="p-1.5 rounded-full bg-white/5 text-slate-400 group-hover:bg-emerald-500/20 group-hover:text-emerald-400 transition-colors">
+                        <ArrowRight className="w-4 h-4 -rotate-45 group-hover:rotate-0 transition-transform" />
                       </div>
-                    </motion.div>
-                  </motion.div>
-                </CardContent>
-              </Card>
+                    </div>
+                    <p className="text-sm font-medium text-emerald-500/80">
+                      {project.name}
+                    </p>
+                  </div>
+
+                  <p className="text-slate-400 text-sm line-clamp-3 leading-relaxed flex-1">
+                    {project.description}
+                  </p>
+
+                  <div className="pt-4 flex items-center justify-between border-t border-white/5">
+                    <Badge variant="outline" className="text-xs font-normal text-slate-500 border-slate-700">
+                      {project.level}
+                    </Badge>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={(e) => { e.stopPropagation(); window.open(project.github, "_blank"); }}
+                        className="text-slate-400 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-full"
+                      >
+                        <Github className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); window.open(project.link, "_blank"); }}
+                        className="text-slate-400 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-full"
+                      >
+                        <Globe className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Click handler overlay for the whole card */}
+                <button
+                  className="absolute inset-0 z-0 focus:outline-none"
+                  onClick={() => setSelectedProject(project)}
+                  aria-label={`View details for ${project.title}`}
+                />
+              </div>
             </motion.div>
           ))}
         </motion.div>
       )}
 
+      {/* Modal / Dialog */}
       <AnimatePresence>
         {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm"
-            onClick={() => setSelectedProject(null)}
-          >
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" style={{ zIndex: 100 }}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-slate-950/90 backdrop-blur-sm"
+              onClick={() => setSelectedProject(null)}
+            />
+
             <motion.div
               layoutId={`project-card-${selectedProject._id}`}
-              className="w-full max-w-6xl max-h-[90vh] bg-slate-900 rounded-xl shadow-lg overflow-hidden border border-slate-800"
+              className="w-full max-w-6xl max-h-[90vh] bg-slate-900 rounded-3xl shadow-2xl overflow-hidden border border-slate-800 relative z-10 flex flex-col md:flex-row"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative flex flex-col md:flex-row h-full max-h-[90vh]">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-4 top-4 z-10 rounded-full bg-slate-800/80 backdrop-blur-sm text-slate-400 hover:text-white hover:bg-slate-700"
-                  onClick={() => setSelectedProject(null)}
-                >
-                  <X className="h-5 w-5" />
-                </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-4 top-4 z-50 rounded-full bg-black/50 backdrop-blur-md text-white border border-white/10 hover:bg-red-500/50 hover:border-red-500/50 transition-all"
+                onClick={() => setSelectedProject(null)}
+              >
+                <X className="h-5 w-5" />
+              </Button>
 
-                <div className="md:w-1/2 h-[300px] md:h-auto overflow-hidden bg-slate-800">
-                  {/* Tabs for different content types */}
-                  <div className="flex items-center justify-center gap-2 p-2 bg-slate-800/80 backdrop-blur-sm">
-                    <Button
-                      variant={activeTab === "images" ? "default" : "ghost"}
-                      size="sm"
-                      onClick={() => setActiveTab("images")}
-                      className={`rounded-full ${
-                        activeTab === "images"
-                          ? "bg-amber-500 text-slate-900"
-                          : "text-slate-300"
-                      }`}
-                    >
-                      Images
-                    </Button>
-                    <Button
-                      variant={activeTab === "live" ? "default" : "ghost"}
-                      size="sm"
-                      onClick={() => setActiveTab("live")}
-                      className={`rounded-full ${
-                        activeTab === "live"
-                          ? "bg-amber-500 text-slate-900"
-                          : "text-slate-300"
-                      }`}
-                    >
-                      Live Preview
-                    </Button>
-                    {selectedProject.projectDoc && (
-                      <Button
-                        variant={activeTab === "doc" ? "default" : "ghost"}
-                        size="sm"
-                        onClick={() => setActiveTab("doc")}
-                        className={`rounded-full ${
-                          activeTab === "doc"
-                            ? "bg-amber-500 text-slate-900"
-                            : "text-slate-300"
-                        }`}
-                      >
-                        Documentation
-                      </Button>
-                    )}
-                  </div>
-
-                  <div className="h-full">
-                    {activeTab === "images" && (
-                      <ImageCarousel images={selectedProject.image} />
-                    )}
-                    {activeTab === "live" && selectedProject.link && (
-                      <LiveWebsitePreview
-                        url={selectedProject.link}
-                        title={selectedProject.title}
-                        personalProject={selectedProject.personalProject}
-                      />
-                    )}
-                    {activeTab === "doc" && selectedProject.projectDoc && (
-                      <PDFViewer pdfURL={selectedProject.projectDoc} />
-                    )}
-                  </div>
+              {/* Left Panel - Media (Slideshow/Preview) */}
+              <div className="w-full md:w-[55%] h-[300px] md:h-auto bg-black relative flex flex-col">
+                <div className="flex-1 overflow-hidden relative">
+                  {activeTab === "images" && <ImageCarousel images={selectedProject.image} />}
+                  {activeTab === "live" && selectedProject.link && (
+                    <LiveWebsitePreview
+                      url={selectedProject.link}
+                      title={selectedProject.title}
+                      personalProject={selectedProject.personalProject}
+                    />
+                  )}
+                  {activeTab === "doc" && selectedProject.projectDoc && (
+                    <PDFViewer pdfURL={selectedProject.projectDoc} />
+                  )}
                 </div>
 
-                <div className="md:w-1/2 p-6 md:p-8 overflow-y-auto">
-                  <div className="space-y-6">
-                    <div>
-                      <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-1 text-white">
-                        {selectedProject.title}
-                      </h2>
-                      {selectedProject.personalProject != null && (
-                        <p className="text-sm md:text-md font-medium tracking-tight mb-1 text-[#f2f2f2]">
-                          {" "}
-                          This project isn't owned my me.
-                        </p>
+                {/* Media Tabs */}
+                <div className="flex items-center justify-center gap-2 p-4 bg-slate-900 border-t border-slate-800">
+                  <Button
+                    variant={activeTab === "images" ? "secondary" : "ghost"}
+                    size="sm"
+                    onClick={() => setActiveTab("images")}
+                    className={cn("rounded-full text-xs", activeTab === "images" ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400" : "text-slate-400")}
+                  >
+                    Images
+                  </Button>
+                  <Button
+                    variant={activeTab === "live" ? "secondary" : "ghost"}
+                    size="sm"
+                    onClick={() => setActiveTab("live")}
+                    className={cn("rounded-full text-xs", activeTab === "live" ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400" : "text-slate-400")}
+                  >
+                    Live Preview
+                  </Button>
+                  {selectedProject.projectDoc && (
+                    <Button
+                      variant={activeTab === "doc" ? "secondary" : "ghost"}
+                      size="sm"
+                      onClick={() => setActiveTab("doc")}
+                      className={cn("rounded-full text-xs", activeTab === "doc" ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400" : "text-slate-400")}
+                    >
+                      Review Doc
+                    </Button>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Panel - Details */}
+              <div className="w-full md:w-[45%] p-6 md:p-10 overflow-y-auto bg-slate-900 border-l border-slate-800/50 min-h-[400px]">
+                <div className="space-y-8">
+                  <div>
+                    <div className="flex items-center gap-3 mb-2">
+                      <h2 className="text-3xl font-bold text-white">{selectedProject.title}</h2>
+                      {selectedProject.personalProject && (
+                        <Badge variant="outline" className="border-amber-500/50 text-amber-500">Private</Badge>
                       )}
-                      <div className="flex items-center justify-between">
-                        <p className="text-xl font-medium text-amber-400">
-                          {selectedProject.name}
-                        </p>
-                        <div className="flex items-center space-x-2">
-                          <motion.a
-                            href={selectedProject.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 transition-colors text-slate-400 hover:text-white"
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            whileTap={{ scale: 0.9 }}
-                          >
-                            <Github className="h-5 w-5" />
-                            <span className="sr-only">GitHub</span>
-                          </motion.a>
-                          <motion.a
-                            href={selectedProject.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-full bg-slate-800/80 hover:bg-slate-700 transition-colors text-slate-400 hover:text-white"
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            whileTap={{ scale: 0.9 }}
-                          >
-                            <Globe className="h-5 w-5" />
-                            <span className="sr-only">Website</span>
-                          </motion.a>
-                        </div>
-                      </div>
                     </div>
+                    <p className="text-emerald-400 font-medium text-lg">{selectedProject.name}</p>
+                  </div>
 
-                    <div className="flex items-center">
-                      <Badge
-                        variant="outline"
-                        className="text-sm font-normal text-amber-400 border-amber-500/30"
+                  <div className="flex gap-3">
+                    {selectedProject.github && (
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        className="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors flex items-center gap-2 text-sm font-medium border border-slate-700"
                       >
-                        {selectedProject.level} Level
-                      </Badge>
+                        <Github className="w-4 h-4" /> Code
+                      </a>
+                    )}
+                    {selectedProject.link && (
+                      <a
+                        href={selectedProject.link}
+                        target="_blank"
+                        className="px-4 py-2 rounded-lg bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-colors flex items-center gap-2 text-sm font-semibold shadow-lg shadow-emerald-900/20"
+                      >
+                        <Globe className="w-4 h-4" /> Live Site
+                      </a>
+                    )}
+                  </div>
+
+                  <div className="prose prose-invert prose-sm">
+                    <h3 className="text-slate-200 font-semibold mb-2">About The Project</h3>
+                    <p className="text-slate-400 leading-relaxed">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-slate-200 font-semibold mb-3">Technologies</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.skillsUsed.map((skill, i) => (
+                        <Badge key={i} variant="secondary" className="bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700/50">
+                          {skill}
+                        </Badge>
+                      ))}
                     </div>
+                  </div>
 
-                    <div className="prose prose-sm prose-invert  max-w-none text-slate-300">
-                      <p className="text-[12px]">
-                        {selectedProject.description}
-                      </p>
+                  <div className="grid grid-cols-2 gap-4 pt-6 border-t border-slate-800">
+                    <div className="space-y-1">
+                      <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Duration</p>
+                      <p className="text-slate-300 flex items-center gap-2"><Calendar className="w-4 h-4 text-emerald-500" /> {selectedProject.duration || "N/A"}</p>
                     </div>
-
-                    <div>
-                      <h3 className="text-lg font-medium mb-3 text-white">
-                        Technologies Used
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedProject.skillsUsed.map((skill, i) => (
-                          <motion.div
-                            key={i}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: i * 0.05 }}
-                          >
-                            <Badge
-                              variant="secondary"
-                              className="font-normal bg-slate-800 text-slate-200 hover:bg-slate-700"
-                            >
-                              {skill}
-                            </Badge>
-                          </motion.div>
-                        ))}
-                      </div>
+                    <div className="space-y-1">
+                      <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Status</p>
+                      <p className="text-slate-300 flex items-center gap-2"><CheckCircle className="w-4 h-4 text-emerald-500" /> {selectedProject.status || "Completed"}</p>
                     </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                      <motion.div
-                        className="flex items-center space-x-2"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                      >
-                        <Calendar className="h-4 w-4 text-amber-400" />
-                        <div>
-                          <p className="text-sm font-medium text-white">
-                            Duration
-                          </p>
-                          <p className="text-sm text-slate-400">
-                            {selectedProject?.duration ?? "1 month"}
-                          </p>
-                        </div>
-                      </motion.div>
-                      <motion.div
-                        className="flex items-center space-x-2"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        <CheckCircle className="h-4 w-4 text-amber-400" />
-                        <div>
-                          <p className="text-sm font-medium text-white">
-                            Status
-                          </p>
-                          <p className="text-sm text-slate-400">
-                            {selectedProject.status}
-                          </p>
-                        </div>
-                      </motion.div>
-                      <motion.div
-                        className="flex items-center space-x-2"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                      >
-                        <Server className="h-4 w-4 text-amber-400" />
-                        <div>
-                          <p className="text-sm font-medium text-white">
-                            Platform
-                          </p>
-                          <p className="text-sm text-slate-400">
-                            {selectedProject.platform || "Web"}
-                          </p>
-                        </div>
-                      </motion.div>
+                    <div className="space-y-1">
+                      <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Level</p>
+                      <p className="text-slate-300">{selectedProject.level}</p>
                     </div>
-
-                    <div className="pt-4">
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                      >
-                        <Button
-                          className="w-full sm:w-auto relative overflow-hidden group bg-amber-500 text-slate-900 hover:bg-amber-400"
-                          onClick={() =>
-                            window.open(selectedProject.link, "_blank")
-                          }
-                        >
-                          <span className="relative z-10 flex items-center">
-                            Visit Project
-                            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                          </span>
-                          <span className="absolute inset-0 bg-gradient-to-r from-amber-400 to-amber-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        </Button>
-                      </motion.div>
+                    <div className="space-y-1">
+                      <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Platform</p>
+                      <p className="text-slate-300 flex items-center gap-2"><Server className="w-4 h-4 text-emerald-500" /> {selectedProject.platform || "Web"}</p>
                     </div>
                   </div>
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </section>

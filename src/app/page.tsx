@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useRef } from "react";
-import { motion, useAnimation, useScroll } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import "../App.css";
 import "../styles/global.css";
 import "../index.css";
@@ -13,119 +13,58 @@ import Experiences from "@/app/experiences/page";
 import Contact from "@/app/contact/page";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
 
 library.add(faBars, faTimes);
 
-export default function Home() {
-  const { scrollYProgress } = useScroll();
-  const controls = useAnimation();
-  // const containerRef = useRef(null);
-
-  useEffect(() => {
-    // Animate sections as they come into view
-    const handleScroll = () => {
-      controls.start({ opacity: 1, y: 0 });
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [controls]);
-
+const SectionWrapper = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
   return (
-    <div
-      className="relative bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
-      // ref={containerRef}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, delay, ease: "easeOut" }}
+      className="relative z-10 w-full"
     >
-      {/* Progress bar */}
-      {/* <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 z-50 origin-left"
-        // style={{ scaleX: scrollYProgress }}
-      /> */}
+      {children}
+    </motion.div>
+  );
+};
 
-      {/* <div className="fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
+export default function Home() {
+  return (
+    <div className="relative min-h-screen bg-slate-950 overflow-hidden">
+      {/* Modern Dynamic Background */}
+      <BackgroundBeams className="opacity-30" />
 
-        <motion.div
-          className="absolute top-[10%] right-[15%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-amber-500/10 to-amber-700/5 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.2, 0.3],
-          }}
-          transition={{
-            duration: 15,
-            repeat: 0,
-            // Number.POSITIVE_INFINITY,
-            repeatType: "reverse",
-          }}
-        />
+      {/* Subtle persistent gradient overlay */}
+      <div className="fixed inset-0 bg-gradient-to-tr from-slate-950 via-transparent to-slate-950 pointer-events-none z-0" />
 
-        <motion.div
-          className="absolute bottom-[20%] left-[10%] w-[35vw] h-[35vw] rounded-full bg-gradient-to-tr from-blue-500/10 to-indigo-700/5 blur-3xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Number.POSITIVE_INFINITY,
-            repeatType: "reverse",
-            delay: 2,
-          }}
-        />
+      <div className="relative z-10 space-y-24 pb-24 -mt-12 md:-mt-20">
+        <MainSection />
 
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-repeat opacity-[0.015]" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+          <SectionWrapper delay={0.1}>
+            <About />
+          </SectionWrapper>
 
-        <div className="absolute inset-0 bg-[url('/noise.png')] bg-repeat opacity-[0.02]" />
-      </div> */}
+          <SectionWrapper delay={0.1}>
+            <Skills />
+          </SectionWrapper>
 
-      <MainSection />
+          <SectionWrapper delay={0.1}>
+            <Projects />
+          </SectionWrapper>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="relative z-10"
-      >
-        <About />
-      </motion.div>
+          <SectionWrapper delay={0.1}>
+            <Experiences />
+          </SectionWrapper>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        className="relative z-10"
-      >
-        <Skills />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="relative z-10"
-      >
-        <Projects />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        transition={{ duration: 0.5, delay: 0.5 }}
-        className="relative z-10"
-      >
-        <Experiences />
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        transition={{ duration: 0.5, delay: 0.6 }}
-        className="relative z-10"
-      >
-        <Contact />
-      </motion.div>
-
-      <div className="w-full md:h-[120px] sm:h-[48px] h-[24px]"></div>
+          <SectionWrapper delay={0.1}>
+            <Contact />
+          </SectionWrapper>
+        </div>
+      </div>
     </div>
   );
 }

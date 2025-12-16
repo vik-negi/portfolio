@@ -3,30 +3,16 @@
 import { useRef, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import DateTimeFormatter from "../../utils/dateTime_functionality";
 import Link from "next/link";
 import MyData from "../../data/MyData";
 import AddSectionDetailsBtn from "../../utils/AddSectionDetailsBtn";
 import React from "react";
-
-const TimelineIcon = React.memo(() => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className="h-10 w-10"
-  >
-    <path
-      fillRule="evenodd"
-      d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z"
-      clipRule="evenodd"
-    />
-  </svg>
-));
+import { cn } from "@/utils/cn";
 
 const ExperienceTimeline = React.memo(
-  ({ experience, index }: { experience: any; index: number }) => {
+  ({ experience, index, isLast }: { experience: any; index: number; isLast: boolean }) => {
     const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
     // Memoize date formatting
@@ -43,180 +29,85 @@ const ExperienceTimeline = React.memo(
       [experience.to]
     );
 
-    // Animation variants
-    const containerVariants = {
-      hidden: { opacity: 0, y: isMobile ? 0 : 20 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          duration: isMobile ? 0.3 : 0.6,
-          ease: "easeOut",
-          delay: isMobile ? 0 : index * 0.2,
-        },
-      },
-    };
-
-    const iconVariants = {
-      hidden: { scale: 0, opacity: 0 },
-      visible: {
-        scale: 1,
-        opacity: 1,
-        transition: {
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-          delay: isMobile ? 0 : index * 0.2 + 0.3,
-        },
-      },
-    };
-
-    const contentVariants = {
-      hidden: { opacity: 0, x: isMobile ? 0 : -20 },
-      visible: {
-        opacity: 1,
-        x: 0,
-        transition: {
-          duration: isMobile ? 0.3 : 0.5,
-          delay: isMobile ? 0 : index * 0.2 + 0.5,
-        },
-      },
-    };
-
-    if (isMobile) {
-      return (
-        <div className="flex-start mb-10">
-          <div className="relative -ml-[23px] flex h-[45px] w-[65px] items-center justify-center rounded-full border border-2 bg-slate-900 text-amber-400 z-10">
-            <TimelineIcon />
-          </div>
-          <div className="ml-6 block max-w-5xl rounded-lg p-6 bg-slate-900/30">
-            <div className="mb-4 flex gap-3 items-center">
-              <Link href="#" className="text-md text-amber-400">
-                {experience.title}
-              </Link>
-              <p className="text-[12px] text-slate-400">
-                {formattedFrom} - {formattedTo}
-              </p>
-            </div>
-            <h3 className="mb-4 text-2xl font-semibold text-white">
-              @{experience.company} | {experience.location}
-            </h3>
-            <div className="mb-4 flex flex-wrap gap-2">
-              {experience.skills.map((skill: string, index_x: number) => (
-                <span
-                  key={index_x}
-                  className="rounded-2xl border px-6 py-2 text-[10px] font-semibold text-white"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-            <p className="mb-6 text-[14px] text-slate-300">
-              {experience.description.length > 200
-                ? experience.description.substring(0, 200) + "..."
-                : experience.description}
-            </p>
-            <button
-              type="button"
-              className="btn btn-primary mr-4 rounded-md py-2 text-[14px] font-semibold text-white bg-amber-500 hover:bg-amber-400"
-            >
-              View Details
-            </button>
-          </div>
-        </div>
-      );
-    }
-
     return (
-      <motion.div
-        className="flex-start md:flex"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-      >
+      <div className="relative pl-8 md:pl-0">
+        {/* Timeline Line */}
+        <div
+          className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-slate-800"
+          style={{
+            background: "linear-gradient(to bottom, transparent, rgba(51, 65, 85, 0.5) 10%, rgba(51, 65, 85, 0.5) 90%, transparent)"
+          }}
+        />
+        <div className="md:hidden absolute left-0 top-0 bottom-0 w-px bg-slate-800" />
+
         <motion.div
-          className="relative -ml-[23px] flex h-[45px] w-[45px] px-4 items-center justify-center rounded-full border border-2 border-amber-500/30 bg-slate-900 text-amber-400 z-10"
-          variants={iconVariants}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          className={cn(
+            "md:flex items-center justify-between w-full mb-12",
+            index % 2 === 0 ? "md:flex-row-reverse" : ""
+          )}
         >
-          <TimelineIcon />
-        </motion.div>
-        <motion.div
-          className="mb-20 ml-6 block max-w-5xl rounded-lg p-6 backdrop-blur-sm border border-slate-800/50 bg-slate-900/30"
-          variants={contentVariants}
-        >
-          <div className="mb-4 flex gap-3 items-center">
-            <Link
-              href="#"
-              className="text-md text-amber-400 transition duration-150 ease-in-out hover:text-amber-300"
-            >
-              {experience.title}
-            </Link>
-            <p className="text-[12px] text-slate-400">
-              {formattedFrom} - {formattedTo}
-            </p>
+          <div className="hidden md:block w-[45%]" />
+
+          {/* Center Icon */}
+          <div className="absolute left-0 md:left-1/2 -translate-x-1/2 md:-translate-x-1/2 flex items-center justify-center w-4 h-4 rounded-full bg-slate-900 border-2 border-emerald-500 z-10 shadow-lg shadow-emerald-500/20">
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
           </div>
-          <h3 className="mb-4 text-2xl font-semibold text-white">
-            @{experience.company} | {experience.location}
-          </h3>
-          <motion.div
-            className="mb-4 flex flex-wrap gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            {experience.skills.map((skill: string, index_x: number) => (
-              <motion.span
-                key={index_x}
-                className="rounded-2xl border border-amber-500/30 px-6 py-2 text-[10px] font-semibold text-white"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.8 + index_x * 0.1 }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 4px 12px rgba(251, 191, 36, 0.2)",
-                  borderColor: "rgba(251, 191, 36, 0.5)",
-                }}
-              >
-                {skill}
-              </motion.span>
-            ))}
-          </motion.div>
-          <p className="mb-6 text-[14px] text-slate-300">
-            {experience.description.length > 200
-              ? experience.description.substring(0, 200) + "..."
-              : experience.description}
-          </p>
-          <motion.span
-            whileHover={{ x: 5 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            <button
-              type="button"
-              className="btn btn-primary mr-4 rounded-md py-2 text-[14px] font-semibold text-white relative overflow-hidden group"
-              data-te-ripple-init
-              data-te-ripple-color="light"
+
+          {/* Content Card */}
+          <div className="w-full md:w-[45%]">
+            <div
+              className={cn(
+                "relative p-6 rounded-2xl border border-white/5 bg-slate-900/40 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/20 hover:bg-slate-900/60 group",
+                "before:absolute before:inset-0 before:bg-gradient-to-br before:from-emerald-500/5 before:to-transparent before:opacity-0 before:transition-opacity before:duration-500 hover:before:opacity-100 before:rounded-2xl"
+              )}
             >
-              <span className="relative z-10">View Details</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-amber-500 to-amber-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md"></span>
-            </button>
-            <motion.div
-              className="hidden sm:inline ml-2 text-amber-400"
-              animate={{ x: [0, 5, 0] }}
-              transition={{
-                duration: 1.5,
-                repeat: 2,
-                repeatType: "reverse",
-              }}
-            >
-              <FontAwesomeIcon
-                className="icon-move-animation"
-                icon={faArrowRight}
-              />
-            </motion.div>
-          </motion.span>
+              <div className="relative z-10">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                  <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                    {experience.title}
+                  </h3>
+                  <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700/50 whitespace-nowrap w-fit">
+                    {formattedFrom} — {formattedTo}
+                  </span>
+                </div>
+
+                <div className="mb-4">
+                  <p className="text-emerald-500 font-medium text-sm flex items-center gap-2">
+                    <FontAwesomeIcon icon={faBriefcase} className="w-3 h-3" />
+                    {experience.company}
+                    <span className="text-slate-600 px-1">•</span>
+                    <span className="text-slate-400 font-normal">{experience.location}</span>
+                  </p>
+                </div>
+
+                <p className="text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
+                  {experience.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  {experience.skills.slice(0, 4).map((skill: string, idx: number) => (
+                    <span
+                      key={idx}
+                      className="text-xs px-2.5 py-1 rounded-md bg-white/5 text-slate-300 border border-white/5 group-hover:border-emerald-500/10 transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                  {experience.skills.length > 4 && (
+                    <span className="text-xs px-2.5 py-1 rounded-md bg-white/5 text-slate-400 border border-white/5">
+                      +{experience.skills.length - 4}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
     );
   }
 );
@@ -224,70 +115,47 @@ const ExperienceTimeline = React.memo(
 export default function Experiences() {
   const experiences = MyData.experience.experiences;
   const ref = useRef(null);
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-  const isInView = useInView(ref, {
-    once: true,
-    margin: isMobile ? "-50px" : "-100px",
-  });
-
-  // Animation variants
-  const titleVariants = {
-    hidden: { opacity: 0, y: isMobile ? 0 : -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: isMobile ? 0.3 : 0.6 },
-    },
-  };
 
   return (
     <section
-      className="section experience-section py-16 md:py-24 lg:py-32 container mx-auto px-4 sm:px-6 lg:px-8 relative"
+      className="py-16 md:py-24 lg:py-32 relative z-10"
       id="experience"
       ref={ref}
     >
-      <div
-        style={{
-          width: "100%",
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <motion.div
-          variants={titleVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="mb-16 text-center"
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          className="flex flex-col items-center mb-16 space-y-4 text-center"
         >
-          <motion.div
-            className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-4 bg-amber-500/10 text-amber-400 border border-amber-500/20"
-            whileHover={{ scale: isMobile ? 1 : 1.05 }}
-            whileTap={{ scale: isMobile ? 1 : 0.95 }}
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 text-violet-400 text-sm font-medium border border-violet-500/20"
           >
-            Work History
-          </motion.div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl mb-4 text-white">
-            Experience
+            <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse"></span>
+            My Journey
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight">
+            Work Experience
           </h2>
-          <p className="text-lg text-slate-400">
-            These are the experiences where I've previously worked.
+          <p className="text-lg text-slate-400 max-w-2xl">
+            My professional path and the companies I've had the privilege to work with.
           </p>
-        </motion.div>
+        </div>
 
-        {experiences == null ? (
-          <AddSectionDetailsBtn title={"Add Experience"} route={undefined} />
-        ) : (
-          <ol className="border-l-2 border-amber-500/30">
-            {experiences.map((experience, index) => (
-              <ExperienceTimeline
-                key={experience._id + index}
-                experience={experience}
-                index={index}
-              />
-            ))}
-          </ol>
-        )}
+        <div className="max-w-4xl mx-auto">
+          {experiences == null ? (
+            <AddSectionDetailsBtn title={"Add Experience"} route={undefined} />
+          ) : (
+            <div className="relative space-y-8 md:space-y-0">
+              {experiences.map((experience, index) => (
+                <ExperienceTimeline
+                  key={experience._id + index}
+                  experience={experience}
+                  index={index}
+                  isLast={index === experiences.length - 1}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
