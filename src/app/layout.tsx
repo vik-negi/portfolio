@@ -1,27 +1,46 @@
-// layout.tsx
 import "../styles/global.css";
-import dynamic from "next/dynamic";
+import type { Metadata } from "next";
+import { Inter, Fraunces } from "next/font/google";
+import { profile } from "@/data/portfolio";
+import { CustomCursor } from "@/components/CustomCursor";
 
-// export const metadata: Metadata = {
-//   title: "M37Labs AI",
-//   description:
-//     "Implement Innovative Next-Gen AI Frameworks Embed Augmented Growth Intelligence to accelerate revenues",
-//   openGraph: {
-//     type: "website",
-//     url: "https://www.m37labs.com/",
-//     title: "M37Labs AI",
-//     description:
-//       "Implement Innovative Next-Gen AI Frameworks Embed Augmented Growth Intelligence to accelerate revenues",
-//     images: [
-//       {
-//         url: "/images/logo.png",
-//         width: 1200,
-//         height: 630,
-//         alt: "M37Labs Logo",
-//       },
-//     ],
-//   },
-// };
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  style: ["normal", "italic"],
+});
+
+const title = `${profile.name} — Software Developer`;
+const description = `${profile.bio.split("\n\n")[0]} Based in ${profile.location}.`;
+
+export const metadata: Metadata = {
+  title,
+  description,
+  keywords: ["Vikram Negi", "Software Developer", "Flutter Developer", "React Developer", "Node.js", "Full Stack Developer", "System Design", "Backend Architecture"],
+  authors: [{ name: profile.name }],
+  openGraph: {
+    type: "website",
+    title,
+    description,
+    siteName: title,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default function RootLayout({
   children,
@@ -29,11 +48,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="canonical" href="https://www.m37labs.com/" />
-      </head>
-      <body>{children}</body>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+      <body>
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }
