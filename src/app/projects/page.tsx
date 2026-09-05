@@ -16,6 +16,8 @@ import {
   CheckCircle,
   Server,
   ExternalLink,
+  ChevronDown,
+  Code2,
 } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
@@ -262,10 +264,12 @@ export default function Projects() {
   const [activeTab, setActiveTab] = useState<"images" | "live" | "doc">(
     "images"
   );
+  const [showEngineering, setShowEngineering] = useState(false);
 
   // Reset tab when project changes
   useEffect(() => {
     setActiveTab("images");
+    setShowEngineering(false);
   }, [selectedProject]);
 
   return (
@@ -327,11 +331,22 @@ export default function Projects() {
                   </h3>
                   <ArrowRight className="w-4 h-4 text-ink-muted -rotate-45 group-hover:rotate-0 group-hover:text-accent transition-transform shrink-0" />
                 </div>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2 text-xs">
+                  {project.year && (
+                    <span className="text-ink-muted tabular-nums">{project.year}</span>
+                  )}
+                  {project.personalProject === false && (
+                    <span className="text-accent border border-accent/40 rounded-full px-2 py-0.5">
+                      Client work
+                    </span>
+                  )}
+                  <span className="text-ink-muted">{project.status}</span>
+                </div>
                 <p className="text-xs text-accent mb-3">
                   {project.skillsUsed.join(" · ")}
                 </p>
                 <p className="text-ink-muted text-sm md:text-base leading-relaxed max-w-2xl line-clamp-2">
-                  {project.description}
+                  {project.outcome ?? project.description}
                 </p>
               </div>
             </motion.button>
@@ -431,6 +446,11 @@ export default function Projects() {
                       )}
                     </div>
                     <p className="text-accent font-medium text-lg">{selectedProject.name}</p>
+                    {selectedProject.outcome && (
+                      <p className="text-ink-muted leading-relaxed mt-4">
+                        {selectedProject.outcome}
+                      </p>
+                    )}
                   </div>
 
                   <div className="flex gap-3">
@@ -454,12 +474,98 @@ export default function Projects() {
                     )}
                   </div>
 
-                  <div className="prose prose-sm">
-                    <h3 className="text-ink font-semibold mb-2">About The Project</h3>
-                    <p className="text-ink-muted leading-relaxed">
+                  {selectedProject.role && (
+                    <div className="rounded border border-border bg-bg px-4 py-3">
+                      <p className="text-ink-muted uppercase tracking-wider text-[11px] mb-1">
+                        My role
+                      </p>
+                      <p className="text-ink text-sm leading-relaxed">
+                        {selectedProject.role}
+                      </p>
+                    </div>
+                  )}
+
+                  {selectedProject.metrics && selectedProject.metrics.length > 0 && (
+                    <div className="grid grid-cols-2 gap-3">
+                      {selectedProject.metrics.map((metric, i) => (
+                        <div key={i} className="rounded border border-border bg-bg px-4 py-3">
+                          <p className="font-serif text-2xl text-accent tabular-nums">
+                            {metric.value}
+                          </p>
+                          <p className="text-ink-muted text-xs mt-0.5">{metric.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {selectedProject.problem && (
+                    <div>
+                      <h3 className="text-ink font-semibold mb-2">The problem</h3>
+                      <p className="text-ink-muted leading-relaxed text-sm">
+                        {selectedProject.problem}
+                      </p>
+                    </div>
+                  )}
+
+                  <div>
+                    <h3 className="text-ink font-semibold mb-2">What it does</h3>
+                    <p className="text-ink-muted leading-relaxed text-sm">
                       {selectedProject.description}
                     </p>
+                    {selectedProject.highlights && (
+                      <ul className="mt-4 space-y-2">
+                        {selectedProject.highlights.map((item, i) => (
+                          <li key={i} className="flex gap-2.5 text-sm text-ink-muted leading-relaxed">
+                            <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
+
+                  {selectedProject.engineering && selectedProject.engineering.length > 0 && (
+                    <div className="border border-border rounded overflow-hidden">
+                      <button
+                        onClick={() => setShowEngineering((v) => !v)}
+                        className="w-full flex items-center justify-between gap-2 px-4 py-3 bg-bg text-left hover:bg-surface transition-colors"
+                        aria-expanded={showEngineering}
+                      >
+                        <span className="flex items-center gap-2 text-ink font-semibold text-sm">
+                          <Code2 className="w-4 h-4 text-accent" />
+                          Under the hood
+                        </span>
+                        <ChevronDown
+                          className={cn(
+                            "w-4 h-4 text-ink-muted transition-transform",
+                            showEngineering && "rotate-180"
+                          )}
+                        />
+                      </button>
+                      <AnimatePresence initial={false}>
+                        {showEngineering && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <ul className="px-4 py-4 space-y-3 border-t border-border">
+                              {selectedProject.engineering.map((item, i) => (
+                                <li
+                                  key={i}
+                                  className="text-sm text-ink-muted leading-relaxed pl-4 border-l-2 border-accent/30"
+                                >
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  )}
 
                   <div>
                     <h3 className="text-ink font-semibold mb-3">Technologies</h3>

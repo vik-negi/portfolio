@@ -28,6 +28,12 @@ export interface Experience {
   skills: string[];
 }
 
+export interface ProjectMetric {
+  /** Short, scannable figure — "500+", "40%", "12k". */
+  value: string;
+  label: string;
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -36,7 +42,23 @@ export interface Project {
   duration?: string;
   status: string;
   level: string;
+  /** Year shipped, used for ordering and the timeline label. */
+  year?: string;
+  /** Pins the project to the top of the list and the home page. */
+  featured?: boolean;
+  /** What you personally owned — the first thing a hiring manager looks for. */
+  role?: string;
+  /** Outcome-first one-liner for clients: what this did for whom. */
+  outcome?: string;
+  /** The situation the project existed to fix. */
+  problem?: string;
   description: string;
+  /** Hard numbers. Only ever populate these with figures you can defend. */
+  metrics?: ProjectMetric[];
+  /** Shipped capabilities, in plain language. Client-facing. */
+  highlights?: string[];
+  /** Architecture and tradeoff notes. Engineer-facing. */
+  engineering?: string[];
   image: string[];
   skillsUsed: string[];
   link?: string;
@@ -127,82 +149,213 @@ export const experiences: Experience[] = [
 
 export const projects: Project[] = [
   {
-    id: "evika",
-    name: "Evika",
-    platform: "Android, Web, iOS",
-    title: "Evika — Event and Awareness Application",
-    link: "https://evika.vercel.app/",
-    duration: "1 month",
-    status: "Completed",
+    id: "beacon",
+    name: "Beacon",
+    featured: true,
+    year: "2026",
+    platform: "Web",
+    title: "Beacon — Uptime Monitoring and Status Pages",
+    status: "Live",
     level: "Advanced",
+    role: "Sole engineer — schema, worker tier, caching, billing, and deployment",
+    outcome:
+      "A multi-tenant monitoring service: teams add the URLs they care about, Beacon checks them on a schedule, and a public status page shows customers what is happening during an outage.",
+    problem:
+      "Most monitoring side-projects stop at fetching a URL on a timer. The real problems start after that — several workers sharing one queue without double-checking the same monitor, and a status page that gets its heaviest traffic exactly when the system behind it is already degraded.",
     description:
-      "Cross-platform event management app built in Flutter for Android and web, with an ML-assisted layer for surfacing relevant events to users.",
-    image: [],
-    github: "https://github.com/vik-negi/mini-project",
-    skillsUsed: ["Python", "Flutter", "MongoDB", "Node.js", "Express"],
-    projectDoc:
-      "https://drive.google.com/file/d/1kSverE2HoLlEnNMDKrKLfKmhHRDtHDzK/view?usp=sharing",
+      "Multi-tenant uptime monitoring built on Next.js, Postgres, and Redis, with a separately deployed worker pool. Workers claim due monitors using SELECT … FOR UPDATE SKIP LOCKED, so running more of them partitions the work automatically — no external queue and no leader election.",
+    metrics: [
+      { value: "3×", label: "workers, zero overlap (verified)" },
+      { value: "60s", label: "cached uptime aggregates" },
+      { value: "13", label: "unit tests, green in CI" },
+    ],
+    highlights: [
+      "Public status page with 90-day uptime history, p95 latency, and live incident banners",
+      "Incidents open only after repeated failures, so a single blip never raises a false alarm",
+      "Per-organization plans with monitor limits and check frequency enforced server-side",
+      "Runs from a single docker compose up, seeded with 90 days of history",
+    ],
+    engineering: [
+      "Workers claim work with SELECT … FOR UPDATE SKIP LOCKED and stamp the claim in the same statement, so concurrent workers get disjoint sets and a monitor stops being due the moment it is handed out — a repo script proves 3 workers claim 60 monitors with zero overlap",
+      "Uptime is aggregated in Postgres (percentile_disc, filtered counts) and cached read-through in Redis; the cache fails open, so a Redis outage costs latency rather than correctness",
+      "Stripe events are claimed by primary key inside the same transaction as the subscription change, so at-least-once webhook redelivery becomes a no-op instead of a double-applied upgrade",
+      "Session cookies carry a random token while the database stores only its SHA-256, and expiry is enforced in the query — a dump of the sessions table yields no usable cookies",
+      "Every organization-scoped route resolves access through one requireOrgAccess() gate with ranked roles, so a route cannot forget its tenant filter",
+    ],
+    image: ["/projects/beacon-status.png"],
+    github: "https://github.com/vik-negi/beacon",
+    skillsUsed: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Redis",
+      "Drizzle ORM",
+      "Stripe",
+      "Docker",
+      "Vitest",
+    ],
   },
   {
     id: "employee-forums",
     name: "Employee Forums",
     personalProject: false,
-    platform: "Android, Web, iOS",
-    title: "Employee Forums — Social Platform for Employees",
+    featured: true,
+    year: "2023",
+    platform: "Android, iOS, Web",
+    title: "Employee Forums — Internal Social Platform",
     link: "https://employee-forums.web.app",
-    status: "Ongoing",
+    status: "Shipped to production",
     level: "Advanced",
+    role: "Founding engineer — architecture, backend integration, and full app build",
+    outcome:
+      "Took an organisation's internal communication tool from an empty repository to a live Play Store release, as the engineer who owned the roadmap end to end.",
+    problem:
+      "The client needed employees spread across locations to talk to each other in one place — feed, direct messages, and group discussion — without paying per-seat for a third-party workspace tool.",
     description:
-      "Internal social platform for organizations, built with Flutter on a Bloc-based architecture. Supports a real-time news feed, direct messaging, and group chat via Socket IO — architected and shipped end to end.",
+      "Internal social platform for organizations, built with Flutter on a Bloc-based architecture. Supports a real-time news feed, direct messaging, and group chat over Socket.IO — architected and shipped end to end.",
+    highlights: [
+      "Real-time news feed, one-to-one messaging, and group chat in a single app",
+      "Published to the Play Store and running for the client's full employee base",
+      "Feature roadmap owned end to end — requirements, build, defect resolution, and third-party integrations",
+    ],
+    engineering: [
+      "Bloc state management to keep the real-time feed and chat streams predictable as screens compose and dispose",
+      "Socket.IO event layer for live message delivery, separated from the REST layer used for durable reads",
+      "Third-party service integrations sit behind an internal interface, so a vendor swap does not reach UI code",
+    ],
     image: [],
-    skillsUsed: ["Flutter", "Bloc", "REST APIs", "Socket IO"],
+    skillsUsed: ["Flutter", "Bloc", "Socket.IO", "REST APIs", "Node.js"],
   },
   {
-    id: "bookmark",
-    name: "BookMark",
-    status: "Completed",
-    platform: "Android, iOS",
+    id: "evika",
+    name: "Evika",
+    featured: true,
+    year: "2024",
+    platform: "Android, iOS, Web",
+    title: "Evika — Event Discovery with ML Recommendations",
+    link: "https://evika.vercel.app/",
+    duration: "1 month",
+    status: "Live",
     level: "Advanced",
-    title: "BookMark — Let's Make Books Non-Disposable",
+    role: "Sole engineer — Flutter client, Node.js API, and Python recommendation service",
+    outcome:
+      "A cross-platform event platform where the recommendation layer, not a search box, is what surfaces the right event to each user.",
+    problem:
+      "Event apps bury relevant local events under generic listings. Evika ranks events against a user's stated preferences and location instead of making them dig.",
     description:
-      "Marketplace app for sharing, renting, and donating books, built with Flutter on a Django/Node.js backend, with a Python ML component for matching books to interested readers.",
-    image: [],
-    skillsUsed: [
-      "Python",
-      "Flutter",
-      "MongoDB",
-      "Node.js",
-      "Express",
-      "Machine Learning",
-      "Django",
-      "SQLite",
+      "Cross-platform event management app built in Flutter for Android, iOS, and web, backed by a Node.js/Express and MongoDB API, with a separately deployed Python service that generates preference- and location-aware event suggestions.",
+    metrics: [
+      { value: "3", label: "platforms from one codebase" },
+      { value: "1 mo", label: "spec to live deployment" },
     ],
+    highlights: [
+      "Plan, manage, and discover events from Android, iOS, or the web",
+      "Personalised suggestions driven by stated preferences and location",
+      "Live and publicly reachable, with a written project document",
+    ],
+    engineering: [
+      "Three-tier split: Flutter client, Node/Express + MongoDB API, and an independently deployed Python ML service, so the model can be retrained and redeployed without shipping an app update",
+      "MongoDB document schemas shaped around the app's actual read patterns rather than normalised tables",
+      "Recommendation service kept behind an HTTP boundary, which keeps the Node API free of Python runtime concerns",
+    ],
+    image: [],
+    github: "https://github.com/vik-negi/mini-project",
+    skillsUsed: ["Flutter", "Node.js", "Express", "MongoDB", "Python", "Machine Learning"],
+    projectDoc:
+      "https://drive.google.com/file/d/1kSverE2HoLlEnNMDKrKLfKmhHRDtHDzK/view?usp=sharing",
   },
   {
     id: "incandescents",
     name: "Incandescents",
-    status: "Completed",
-    platform: "Android, Web, iOS",
+    featured: true,
+    year: "2023",
+    status: "Live",
+    platform: "Web, Android, iOS",
     level: "Advanced",
-    title: "Incandescents — A Flutter Bootcamp",
+    title: "Incandescents — Flutter Bootcamp Platform",
     link: "https://incandescents.vercel.app/",
+    role: "Sole engineer — platform architecture, real-time layer, and delivery",
+    outcome:
+      "A teaching platform that carries a cohort through registration, assignment submission, and a portfolio they can show at the end.",
+    problem:
+      "Bootcamp cohorts were being run across scattered chat threads and spreadsheets, with no single place for submissions, shared resources, or student work.",
     description:
-      "Bootcamp platform for Flutter students to register, submit assignments, share resources, and build a portfolio — built end to end with Flutter, Node.js, and Socket.io for the real-time features.",
+      "Bootcamp platform for Flutter students to register, submit assignments, share resources, and build a portfolio — built end to end with Flutter, Node.js, and Socket.IO for the real-time features.",
+    highlights: [
+      "Cohort registration, assignment submission, and resource sharing in one place",
+      "Each student accumulates a portfolio as they progress through the programme",
+      "Live real-time updates rather than manual refresh",
+    ],
+    engineering: [
+      "Socket.IO drives live submission and resource updates; REST handles the durable record",
+      "Express API over MongoDB, deployed on Vercel alongside the web client",
+      "Shared Flutter codebase targets web and mobile from one source of truth",
+    ],
     image: [],
-    skillsUsed: ["Flutter", "Node.js", "Socket.IO", "Express", "MongoDB", "Vercel"],
+    skillsUsed: ["Flutter", "Node.js", "Express", "Socket.IO", "MongoDB", "Vercel"],
   },
   {
     id: "crowdfundings",
     name: "Crowdfundings",
-    status: "Completed",
+    year: "2023",
+    status: "Live",
     platform: "Web",
     level: "Advanced",
-    title: "Blockchain Crowdfunding — Transparency and Security",
+    title: "Blockchain Crowdfunding — Verifiable Donations",
     link: "https://crowdfundings.vercel.app",
+    role: "Sole engineer — smart contract integration and front end",
+    outcome:
+      "A crowdfunding site where donors can verify on-chain that their money reached the campaign, instead of trusting a dashboard number.",
+    problem:
+      "Conventional crowdfunding asks donors to trust a platform's own reporting. Recording contributions on-chain makes the ledger independently checkable.",
     description:
-      "Blockchain crowdfunding platform built with React, Vite, and Tailwind, integrated with Ethereum via Metamask. Donations are recorded on-chain for full transparency, with campaigns auto-closing and progress tracked in real time.",
+      "Blockchain crowdfunding platform built with React, Vite, and Tailwind, integrated with Ethereum via MetaMask. Donations are recorded on-chain for transparency, with campaigns auto-closing and progress tracked in real time.",
+    highlights: [
+      "Donations written on-chain and independently verifiable by anyone",
+      "Campaigns close automatically when their deadline or goal is reached",
+      "Wallet-native flow — connect MetaMask and contribute, no account signup",
+    ],
+    engineering: [
+      "MetaMask provider bridges the React client to Ethereum; on-chain state is the source of truth, not a server database",
+      "Campaign progress is read back from chain state so the UI cannot drift from the ledger",
+      "Vite build kept lean so first paint is not blocked on the web3 bundle",
+    ],
     image: [],
-    skillsUsed: ["Blockchain", "Tailwind", "React", "Vite", "Metamask"],
+    skillsUsed: ["React", "Vite", "Tailwind", "Blockchain", "Ethereum", "MetaMask"],
+  },
+  {
+    id: "bookmark",
+    name: "BookMark",
+    year: "2023",
+    status: "Completed",
+    platform: "Android, iOS",
+    level: "Advanced",
+    title: "BookMark — Book Sharing Marketplace",
+    role: "Sole engineer — Flutter client, backend, and recommendation model",
+    outcome:
+      "A marketplace that keeps books in circulation — shared, rented, or donated — rather than sitting unused on a shelf.",
+    problem:
+      "Textbooks and read-once books go dead after a single owner. BookMark matches an idle book to a reader who actually wants it.",
+    description:
+      "Marketplace app for sharing, renting, and donating books, built with Flutter on a Django and Node.js backend, with a Python model that matches books to interested readers.",
+    highlights: [
+      "Three ways to move a book: share, rent, or donate",
+      "Readers matched to available books rather than browsing a flat catalogue",
+    ],
+    engineering: [
+      "Python matching model trained in notebooks, then served behind the application backend",
+      "Mixed Django and Node.js backend, with SQLite for relational catalogue data and MongoDB for document-shaped records",
+    ],
+    image: [],
+    skillsUsed: [
+      "Flutter",
+      "Python",
+      "Machine Learning",
+      "Django",
+      "Node.js",
+      "MongoDB",
+      "SQLite",
+    ],
   },
 ];
 
