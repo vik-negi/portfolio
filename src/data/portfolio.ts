@@ -149,6 +149,58 @@ export const experiences: Experience[] = [
 
 export const projects: Project[] = [
   {
+    id: "tandem",
+    name: "Tandem",
+    featured: true,
+    year: "2026",
+    platform: "Web",
+    title: "Tandem — Collaborative Documents That Work Offline",
+    status: "Live",
+    level: "Advanced",
+    role: "Sole engineer — CRDT data model, sync protocol, storage, and client",
+    outcome:
+      "Documents several people can edit at once, including with the network off. Two people typing in the same paragraph both keep their text, and edits made on a plane merge when the connection returns — no merge dialog, because there is no conflict to resolve.",
+    problem:
+      "Real-time editing looks like a WebSocket and a broadcast until two edits cross in flight. Last-write-wins then silently destroys one person's typing and never tells them. Sending the whole textarea on every keystroke clobbers concurrent edits and resets everyone's cursor.",
+    description:
+      "Collaborative editor built on Yjs CRDTs, split into a stateless Next.js app and a stateful WebSocket sync server. Updates are appended to a log and periodically compacted into snapshots, so opening a document never replays its whole history, and each client keeps an IndexedDB copy so it stays editable offline.",
+    metrics: [
+      { value: "400→0", label: "update rows after compaction" },
+      { value: "3.6×", label: "faster document load" },
+      { value: "30", label: "tests, green in CI" },
+    ],
+    highlights: [
+      "Concurrent edits converge with neither side losing text",
+      "Keeps working offline and reconciles on reconnect, with no merge prompt",
+      "Live presence showing who else has the document open",
+      "Per-document sharing with read-only access enforced on the server",
+    ],
+    engineering: [
+      "Editing applies an operation, not a value: a textarea hands over the whole string, so a diff recovers the real insert/delete and maps the caret across remote edits — writing the string back would destroy concurrent edits. The prefix and suffix scans are bounded so 'aa' → 'aaa' cannot double-count the middle character",
+      "Compaction writes the snapshot before deleting the updates it covers, bounded by the exact sequence recorded. A crash between the two replays updates the snapshot already holds, which is harmless because Yjs updates are idempotent — the reverse order would lose data permanently",
+      "Found and fixed a real race: authentication needs a database round trip, so the client's opening sync step arrived before any message listener existed and was silently dropped, leaving the document blank for the client that just connected. Measured 0 chars on 3/3 runs before the fix, 513 on 3/3 after",
+      "Rooms batch updates for 800ms and persist the merged result, since every keystroke is its own update; Y.mergeUpdates collapses overwritten operations, so a burst of typing costs one small row rather than a hundred",
+      "Read-only is enforced on the server — a viewer's socket may request state but never supply it — and a document you cannot see returns the same response as one that does not exist, so ids cannot be enumerated",
+      "Two scripts prove the headline claims end to end rather than asserting them: verify-sync.ts converges two real WebSocket clients and reads the result back from Postgres, verify-compaction.ts collapses a 400-update log and checks the document is byte-identical. CI runs both",
+    ],
+    image: [
+      "/projects/tandem-editor.png",
+      "/projects/tandem-home.png",
+      "/projects/tandem-docs.png",
+    ],
+    github: "https://github.com/vik-negi/tandem",
+    skillsUsed: [
+      "Next.js",
+      "TypeScript",
+      "Yjs / CRDT",
+      "WebSockets",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "IndexedDB",
+      "Vitest",
+    ],
+  },
+  {
     id: "beacon",
     name: "Beacon",
     featured: true,
