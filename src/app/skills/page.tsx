@@ -9,9 +9,8 @@ const Skills = () => {
   const ref = useRef(null);
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.08,
       },
@@ -19,9 +18,8 @@ const Skills = () => {
   };
 
   const rowVariants = {
-    hidden: { opacity: 0, y: 12 },
+    hidden: { y: 12 },
     visible: {
-      opacity: 1,
       y: 0,
       transition: { duration: 0.4, ease: "easeOut" },
     },
@@ -30,7 +28,7 @@ const Skills = () => {
   return (
     <div id="skills" className="py-16 relative z-10" ref={ref}>
       <div className="mb-12 border-t border-border pt-6">
-        <p className="text-sm text-ink-muted uppercase tracking-wide mb-3">02 / Skills</p>
+        <p className="text-sm text-ink-muted uppercase tracking-wide mb-3">04 / Skills</p>
         <h2 className="font-serif text-3xl md:text-5xl text-ink tracking-tight">
           Skills &amp; Technologies
         </h2>

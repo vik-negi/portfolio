@@ -23,7 +23,7 @@ const About = () => {
   return (
     <section id="about" className="relative py-12">
       <div className="mb-12 border-t border-border pt-6">
-        <p className="text-sm text-ink-muted uppercase tracking-wide mb-3">01 / About</p>
+        <p className="text-sm text-ink-muted uppercase tracking-wide mb-3">03 / About</p>
         <h2 className="font-serif text-3xl md:text-5xl text-ink tracking-tight">
           A Glimpse Into My World
         </h2>
@@ -31,8 +31,8 @@ const About = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 md:gap-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5 }}
         >
@@ -50,8 +50,8 @@ const About = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="space-y-6"

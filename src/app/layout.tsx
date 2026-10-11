@@ -17,13 +17,14 @@ const fraunces = Fraunces({
   style: ["normal", "italic"],
 });
 
-const title = `${profile.name} — Software Developer`;
+const title = `${profile.name} — ${profile.role}`;
 const description = `${profile.bio.split("\n\n")[0]} Based in ${profile.location}.`;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(profile.siteUrl),
   title,
   description,
-  keywords: ["Vikram Negi", "Software Developer", "Flutter Developer", "React Developer", "Node.js", "Full Stack Developer", "System Design", "Backend Architecture"],
+  keywords: ["Vikram Negi", "Full-Stack Engineer", "Software Developer", "Flutter Developer", "React Developer", "Node.js", "Full Stack Developer", "System Design", "Backend Architecture"],
   authors: [{ name: profile.name }],
   openGraph: {
     type: "website",

@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 import { Magnetic } from "@/components/Magnetic";
 
 const LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Work" },
   { href: "#experience", label: "Experience" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
 ];
 
 export default function Nav() {

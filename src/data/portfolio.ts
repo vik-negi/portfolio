@@ -10,6 +10,8 @@ export interface Profile {
   tagline: string;
   location: string;
   email: string;
+  /** Canonical origin; absolute URLs in metadata, the sitemap and link previews resolve against it. */
+  siteUrl: string;
   whatsapp: string;
   resumeUrl: string;
   bio: string;
@@ -24,6 +26,8 @@ export interface Experience {
   from: string;
   to: string | null;
   current: boolean;
+  /** One scannable figure for the hero's "currently" line, e.g. user scale. */
+  highlight?: string;
   description: string;
   skills: string[];
 }
@@ -62,6 +66,8 @@ export interface Project {
   image: string[];
   skillsUsed: string[];
   link?: string;
+  /** False when the live site refuses framing (X-Frame-Options), which would leave the Live Preview tab blank. */
+  embeddable?: boolean;
   github?: string;
   projectDoc?: string;
   personalProject?: boolean;
@@ -69,11 +75,13 @@ export interface Project {
 
 export type SkillIcon =
   | "react" | "redux" | "nextjs" | "html5" | "css3" | "javascript"
+  | "typescript" | "tailwind"
   | "bootstrap" | "mui" | "flutter" | "nodejs" | "express" | "graphql"
   | "python" | "flask" | "django" | "mysql" | "postgresql" | "mongodb"
-  | "firebase" | "aws" | "docker" | "java" | "androidstudio"
+  | "redis" | "drizzle" | "crdt" | "websockets"
+  | "firebase" | "aws" | "docker" | "vercel" | "vitest" | "playwright" | "java" | "androidstudio"
   | "tensorflow" | "jupyter" | "googlecolab" | "scikitlearn"
-  | "git" | "github" | "netlify" | "vscode" | "postman" | "figma"
+  | "git" | "github" | "figma"
   | "kafka" | "socketio" | "caching" | "pubsub" | "sharding"
   | "platformchannels" | "nativemobile" | "animations";
 
@@ -84,13 +92,14 @@ export interface SkillCategory {
 
 export const profile: Profile = {
   name: "Vikram Negi",
-  role: "Software Developer",
+  role: "Full-Stack Engineer",
   tagline: "I take products from spec to production — owning system design, backend architecture, and UI end to end, across Flutter, React, and Node.js.",
   location: "New Delhi, India",
   email: "vikramnegi175@gmail.com",
+  siteUrl: "https://vikramnegi.vercel.app",
   whatsapp: "918178945004",
-  resumeUrl:
-    "https://drive.google.com/file/d/1u_24BpiWK92aiXUO43i5Bv41Spt3nqRQ/view?usp=drive_link",
+  /** Served from public/ so it cannot rot the way the old Drive link did. */
+  resumeUrl: "/Vikram_Negi_Resume.pdf",
   bio: "I'm a software engineer with 4 years of experience shipping full-stack web and mobile products end to end — from system architecture and API design to the interfaces people actually use. My core stack is Flutter, React, Node.js, and MongoDB, and I go past the API and UI layer: caching strategies, Kafka-based message queues, pub/sub architectures, and database sharding are all part of how I design backend systems, not an afterthought.\n\nOn the mobile side, I go past the framework surface too — writing native platform-channel code and custom animations when Flutter alone isn't enough. I've also worked across machine learning, integrating Python-based models into production applications. I look for the solution that scales cleanly, not the one that looks impressive in a demo — and I work just as well solo on a client build as embedded in a larger engineering team.",
   passions: ["Coding", "System Design", "ML Enthusiast", "Challenging Barriers"],
   social: {
@@ -108,8 +117,9 @@ export const experiences: Experience[] = [
     from: "2024-01-01",
     to: null,
     current: true,
+    highlight: "300K+ users, 55K+ daily active",
     description:
-      "Own feature development and performance work on the Kosiqua Flutter app, partnering directly with product and design to ship reliably. Act as the primary engineer for diagnosing and resolving production issues, keeping the app stable for its full user base.",
+      "Lead development of the Koshiqa mobile app, which has grown to 300K+ users and 55K+ daily actives. Own feature development and performance work across e-commerce, the community feed and chat, profiles, and leaderboards, partnering directly with product and design to ship reliably. Act as the primary engineer for diagnosing and resolving production issues, keeping the app stable for its full user base.",
     skills: ["Flutter", "REST APIs", "Node.js"],
   },
   {
@@ -154,50 +164,59 @@ export const projects: Project[] = [
     featured: true,
     year: "2026",
     platform: "Web",
-    title: "Tandem — Collaborative Documents That Work Offline",
+    title: "Tandem — Collaborative Rich-Text Documents That Work Offline",
     status: "Live",
     level: "Advanced",
-    role: "Sole engineer — CRDT data model, sync protocol, storage, and client",
+    role: "Sole engineer — CRDT data model, sync server, storage, editor, and deployment",
     outcome:
-      "Documents several people can edit at once, including with the network off. Two people typing in the same paragraph both keep their text, and edits made on a plane merge when the connection returns — no merge dialog, because there is no conflict to resolve.",
+      "A Google Docs–style workspace several people can edit at once, including with the network off. Two people typing in the same paragraph both keep their text, edits made on a plane merge when the connection returns, and the editor only says \"Saved\" once the server has actually committed the change.",
     problem:
-      "Real-time editing looks like a WebSocket and a broadcast until two edits cross in flight. Last-write-wins then silently destroys one person's typing and never tells them. Sending the whole textarea on every keystroke clobbers concurrent edits and resets everyone's cursor.",
+      "Real-time editing looks like a WebSocket and a broadcast until two edits cross in flight. Last-write-wins then silently destroys one person's typing and never tells them, and a \"saved\" badge that only means \"sent\" lies the moment the server restarts.",
     description:
-      "Collaborative editor built on Yjs CRDTs, split into a stateless Next.js app and a stateful WebSocket sync server. Updates are appended to a log and periodically compacted into snapshots, so opening a document never replays its whole history, and each client keeps an IndexedDB copy so it stays editable offline.",
+      "Collaborative rich-text editor built on Tiptap and Yjs CRDTs, split into a stateless Next.js app on Vercel and a stateful WebSocket sync server on Render, sharing one Postgres. Updates are appended to a log and compacted into snapshots, each client keeps an IndexedDB copy so it stays editable offline, and CI migrates the database and deploys both tiers only after the tests pass.",
     metrics: [
       { value: "400→0", label: "update rows after compaction" },
-      { value: "3.6×", label: "faster document load" },
-      { value: "30", label: "tests, green in CI" },
+      { value: "3.5×", label: "faster document load" },
+      { value: "84 + 7", label: "unit and browser tests in CI" },
     ],
     highlights: [
-      "Concurrent edits converge with neither side losing text",
-      "Keeps working offline and reconciles on reconnect, with no merge prompt",
-      "Live presence showing who else has the document open",
-      "Per-document sharing with read-only access enforced on the server",
+      "Rich text: headings, fonts, colours, highlights, links, lists, tables, zoom and print",
+      "Concurrent edits converge with neither side losing text, and keep working offline",
+      "Named carets and selections, so you can see where everyone else is typing",
+      "Comments anchored to text that stay attached as the document changes around them",
+      "Named versions with preview and restore — a backup is taken before every restore",
+      "Share by email or link as viewer or editor; removing access takes effect on open sessions",
+      "Workspace with search, favourites, grid/list views, outline, find & replace and recoverable trash",
     ],
     engineering: [
-      "Editing applies an operation, not a value: a textarea hands over the whole string, so a diff recovers the real insert/delete and maps the caret across remote edits — writing the string back would destroy concurrent edits. The prefix and suffix scans are bounded so 'aa' → 'aaa' cannot double-count the middle character",
-      "Compaction writes the snapshot before deleting the updates it covers, bounded by the exact sequence recorded. A crash between the two replays updates the snapshot already holds, which is harmless because Yjs updates are idempotent — the reverse order would lose data permanently",
-      "Found and fixed a real race: authentication needs a database round trip, so the client's opening sync step arrived before any message listener existed and was silently dropped, leaving the document blank for the client that just connected. Measured 0 chars on 3/3 runs before the fix, 513 on 3/3 after",
-      "Rooms batch updates for 800ms and persist the merged result, since every keystroke is its own update; Y.mergeUpdates collapses overwritten operations, so a burst of typing costs one small row rather than a hundred",
-      "Read-only is enforced on the server — a viewer's socket may request state but never supply it — and a document you cannot see returns the same response as one that does not exist, so ids cannot be enumerated",
-      "Two scripts prove the headline claims end to end rather than asserting them: verify-sync.ts converges two real WebSocket clients and reads the result back from Postgres, verify-compaction.ts collapses a 400-update log and checks the document is byte-identical. CI runs both",
+      "\"Saved\" means durable, not sent: an ordered revision barrier acknowledges each edit only after it commits to Postgres. A Yjs state vector alone cannot acknowledge delete-only edits, so the barrier tracks revisions instead",
+      "Storage is append-then-compact. Snapshot insert and deletion of the updates it covers commit in one transaction; appends and compaction serialize per document on a Postgres advisory lock, and loaders read snapshot and tail in one repeatable-read transaction, so compaction can never race a loader",
+      "Found and fixed a real race: authentication needs a database round trip, so the client's opening sync step arrived before any message listener existed and was silently dropped, leaving the document blank. Measured 0 chars on 3/3 runs before the fix, 513 on 3/3 after",
+      "Rooms batch updates for 800ms and persist the merged result; a failed write keeps its batch and retries with bounded backoff, and a dirty room is never evicted until it has flushed",
+      "Permissions are re-checked on every sync message and refreshed on idle sockets, so a downgraded or removed collaborator loses access mid-session. Viewers may request state but never supply it, and an inaccessible document is indistinguishable from a missing one",
+      "Plain-text documents from the first version migrate to rich text once, on the server, before any client binds; the original text is kept, and edits from a stale offline tab surface in a recovery panel rather than being merged blindly",
+      "The sync tier is hardened for the open internet — capped message sizes, pre-auth buffers, per-connection rate and queue limits — and exposes health, readiness and Prometheus metrics",
+      "Scripts prove the headline claims end to end: two real WebSocket clients converge and are read back from Postgres, and a 400-update log compacts to a byte-identical document. Playwright covers formatting, carets, offline reconnect, comments, versions and viewer enforcement",
     ],
     image: [
       "/projects/tandem-editor.png",
       "/projects/tandem-home.png",
       "/projects/tandem-docs.png",
     ],
+    link: "https://tandem-ten-fawn.vercel.app",
+    embeddable: false,
     github: "https://github.com/vik-negi/tandem",
     skillsUsed: [
       "Next.js",
       "TypeScript",
+      "Tiptap / ProseMirror",
       "Yjs / CRDT",
       "WebSockets",
       "PostgreSQL",
       "Drizzle ORM",
       "IndexedDB",
       "Vitest",
+      "Playwright",
     ],
   },
   {
@@ -426,7 +445,9 @@ export const skills: SkillCategory[] = [
       { name: "Next.js", icon: "nextjs" },
       { name: "HTML5", icon: "html5" },
       { name: "CSS3", icon: "css3" },
+      { name: "TypeScript", icon: "typescript" },
       { name: "JavaScript", icon: "javascript" },
+      { name: "Tailwind CSS", icon: "tailwind" },
       { name: "Bootstrap", icon: "bootstrap" },
       { name: "Material UI", icon: "mui" },
     ],
@@ -441,6 +462,8 @@ export const skills: SkillCategory[] = [
       { name: "Django", icon: "django" },
       { name: "MySQL", icon: "mysql" },
       { name: "PostgreSQL", icon: "postgresql" },
+      { name: "Redis", icon: "redis" },
+      { name: "Drizzle ORM", icon: "drizzle" },
       { name: "MongoDB", icon: "mongodb" },
       { name: "Firebase", icon: "firebase" },
     ],
@@ -448,6 +471,8 @@ export const skills: SkillCategory[] = [
   {
     category: "System Design & Architecture",
     skills: [
+      { name: "CRDTs (Yjs)", icon: "crdt" },
+      { name: "WebSockets", icon: "websockets" },
       { name: "Kafka", icon: "kafka" },
       { name: "Socket.IO", icon: "socketio" },
       { name: "Caching", icon: "caching" },
@@ -456,10 +481,13 @@ export const skills: SkillCategory[] = [
     ],
   },
   {
-    category: "DevOps",
+    category: "DevOps & Testing",
     skills: [
       { name: "AWS", icon: "aws" },
       { name: "Docker", icon: "docker" },
+      { name: "Vercel", icon: "vercel" },
+      { name: "Vitest", icon: "vitest" },
+      { name: "Playwright", icon: "playwright" },
     ],
   },
   {
@@ -489,9 +517,6 @@ export const skills: SkillCategory[] = [
     skills: [
       { name: "Git", icon: "git" },
       { name: "GitHub", icon: "github" },
-      { name: "Netlify", icon: "netlify" },
-      { name: "VS Code", icon: "vscode" },
-      { name: "Postman", icon: "postman" },
       { name: "Figma", icon: "figma" },
     ],
   },

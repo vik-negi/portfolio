@@ -23,8 +23,8 @@ const ExperienceRow = ({ experience, index }: { experience: Experience; index: n
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 16 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
       className="py-8 border-b border-border group"
@@ -62,7 +62,7 @@ export default function Experiences() {
   return (
     <section className="py-16 md:py-24 relative z-10" id="experience" ref={ref}>
       <div className="mb-12 border-t border-border pt-6">
-        <p className="text-sm text-ink-muted uppercase tracking-wide mb-3">04 / Experience</p>
+        <p className="text-sm text-ink-muted uppercase tracking-wide mb-3">02 / Experience</p>
         <h2 className="font-serif text-3xl md:text-5xl text-ink tracking-tight">
           Work Experience
         </h2>

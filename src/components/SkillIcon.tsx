@@ -5,6 +5,12 @@ import {
   SiHtml5,
   SiCss,
   SiJavascript,
+  SiTypescript,
+  SiTailwindcss,
+  SiRedis,
+  SiDrizzle,
+  SiVercel,
+  SiVitest,
   SiBootstrap,
   SiMui,
   SiFlutter,
@@ -26,15 +32,12 @@ import {
   SiScikitlearn,
   SiGit,
   SiGithub,
-  SiNetlify,
-  SiPostman,
   SiFigma,
   SiApachekafka,
   SiSocketdotio,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa6";
-import { DiVisualstudio } from "react-icons/di";
-import { Cloud, Layers, Radio, Split, Plug, Smartphone, Sparkles } from "lucide-react";
+import { Cloud, Layers, Radio, Split, Plug, Smartphone, Sparkles, GitMerge, Cable, FlaskConical } from "lucide-react";
 import type { IconType } from "react-icons";
 import type { SkillIcon } from "@/data/portfolio";
 
@@ -45,6 +48,15 @@ const ICONS: Record<SkillIcon, IconType> = {
   html5: SiHtml5,
   css3: SiCss,
   javascript: SiJavascript,
+  typescript: SiTypescript,
+  tailwind: SiTailwindcss,
+  redis: SiRedis,
+  drizzle: SiDrizzle,
+  crdt: GitMerge,
+  websockets: Cable,
+  vercel: SiVercel,
+  vitest: SiVitest,
+  playwright: FlaskConical,
   bootstrap: SiBootstrap,
   mui: SiMui,
   flutter: SiFlutter,
@@ -68,9 +80,6 @@ const ICONS: Record<SkillIcon, IconType> = {
   scikitlearn: SiScikitlearn,
   git: SiGit,
   github: SiGithub,
-  netlify: SiNetlify,
-  vscode: DiVisualstudio,
-  postman: SiPostman,
   figma: SiFigma,
   kafka: SiApachekafka,
   socketio: SiSocketdotio,

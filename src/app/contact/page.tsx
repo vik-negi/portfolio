@@ -9,9 +9,8 @@ const Contact = () => {
   const ref = useRef(null);
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.1,
       },
@@ -19,10 +18,9 @@ const Contact = () => {
   };
 
   const itemVariants = {
-    hidden: { y: 12, opacity: 0 },
+    hidden: { y: 12 },
     visible: {
       y: 0,
-      opacity: 1,
       transition: { duration: 0.4, ease: "easeOut" },
     },
   };
